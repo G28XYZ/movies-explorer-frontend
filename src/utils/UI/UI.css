@@ -3,12 +3,16 @@
   color: black !important;
 }
 
-.color_background {
-  background-color: #272727;
+.color_secondary {
+  background-color: #303030;
 }
 
-.color_button {
-  background-color: #303030;
+.color_text {
+  color: rgba(139, 139, 139, 1);
+}
+
+.color_background {
+  background-color: #272727;
 }
 
 .text {

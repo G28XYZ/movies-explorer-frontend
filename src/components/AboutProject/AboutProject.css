@@ -25,6 +25,32 @@
 .project__about {
   display: flex;
   gap: 10px;
-  padding-top: 70px;
-  padding-bottom: 110px;
+  padding: 70px 0 110px 0;
+  list-style-type: none;
+}
+
+.project__about-title {
+  padding-bottom: 25px;
+}
+
+.project__duration {
+  display: flex;
+  width: 100%;
+}
+
+.project__duration-area {
+  width: 100%;
+  text-align: center;
+}
+
+.project__duration-area:nth-child(1) {
+  width: 20%;
+}
+
+.project__duration-time {
+  padding: 10px 0;
+}
+
+.project__duration-name {
+  padding-top: 14px;
 }
