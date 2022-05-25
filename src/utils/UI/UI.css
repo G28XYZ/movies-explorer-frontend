@@ -25,6 +25,28 @@
 .text_title {
   margin: 0;
   font-weight: 400;
+  font-size: 50px;
+  line-height: calc(58 / 50);
+}
+
+.text_subtitle {
+  margin: 0;
+  font-weight: 400;
   font-size: 20px;
   line-height: calc(24 / 20);
+}
+
+.underline-p25 {
+  position: relative;
+  padding-bottom: 25px;
+}
+
+.underline-p25::after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 1px;
+  background-color: rgba(218, 218, 218, 1);
+  bottom: 0;
+  left: 0;
 }

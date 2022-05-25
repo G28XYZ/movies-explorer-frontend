@@ -7,19 +7,7 @@
 }
 
 .project__title {
-  position: relative;
   width: 100%;
-  padding-bottom: 23px;
-}
-
-.project__title::after {
-  position: absolute;
-  content: "";
-  width: 100%;
-  height: 1px;
-  background-color: white;
-  bottom: 0;
-  left: 0;
 }
 
 .project__about {
