@@ -6,3 +6,13 @@
 .color_background {
   background-color: #272727;
 }
+
+.color_button {
+  background-color: #303030;
+}
+
+.text {
+  font-weight: 400;
+  font-size: 12px;
+  line-height: calc(18 / 12);
+}
