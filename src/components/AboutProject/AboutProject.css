@@ -1,0 +1,30 @@
+.project {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 110px 70px;
+  box-sizing: border-box;
+}
+
+.project__title {
+  position: relative;
+  width: 100%;
+  padding-bottom: 23px;
+}
+
+.project__title::after {
+  position: absolute;
+  content: "";
+  width: 100%;
+  height: 1px;
+  background-color: white;
+  bottom: 0;
+  left: 0;
+}
+
+.project__about {
+  display: flex;
+  gap: 10px;
+  padding-top: 70px;
+  padding-bottom: 110px;
+}
