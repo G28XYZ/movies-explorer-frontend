@@ -1,0 +1,32 @@
+.about {
+  padding: 110px 70px 125px 70px;
+}
+
+.about__info {
+  display: flex;
+  padding-top: 65px;
+}
+
+.about__info-image {
+  width: 270px;
+  height: 327px;
+}
+
+.about__info-description {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  align-content: stretch;
+}
+
+.about__links {
+  display: flex;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.about__link {
+  text-decoration: none;
+  color: white;
+}
