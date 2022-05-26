@@ -25,3 +25,9 @@
     padding: 0 50px 90px 50px;
   }
 }
+
+@media screen and (max-width: 375px) {
+  .portfolio {
+    padding: 0 14px 70px 14px;
+  }
+}

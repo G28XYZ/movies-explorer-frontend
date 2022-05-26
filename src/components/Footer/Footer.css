@@ -29,3 +29,21 @@
     padding: 80px 50px 20px 50px;
   }
 }
+
+@media screen and (max-width: 375px) {
+  .footer {
+    padding: 80px 10px 10px 10px;
+  }
+
+  .footer__row {
+    align-items: center;
+    flex-direction: column-reverse;
+    gap: 30px;
+  }
+
+  .footer__list {
+    align-items: center;
+    flex-direction: column;
+    gap: 12px;
+  }
+}

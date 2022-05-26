@@ -15,7 +15,9 @@
   display: flex;
   list-style-type: none;
   gap: 10px;
+  padding: 0;
   padding-bottom: 30px;
+  margin: 0;
 }
 
 .promo__list-item {
@@ -40,5 +42,21 @@
   }
   .promo__title {
     padding: 320px 20px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .promo {
+    margin: 14px 14px 0 14px;
+  }
+  .promo__title {
+    padding: 220px 0;
+  }
+  .promo__list {
+    padding-bottom: 17px;
+  }
+  .promo__list-item {
+    width: 82px;
+    padding: 5px 0;
   }
 }

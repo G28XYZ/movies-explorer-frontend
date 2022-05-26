@@ -36,3 +36,9 @@
     padding: 18px 30px;
   }
 }
+
+@media screen and (max-width: 375px) {
+  .header {
+    padding: 18px 14px;
+  }
+}

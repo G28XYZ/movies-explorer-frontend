@@ -15,13 +15,14 @@
 
 .techs__list {
   display: flex;
+  flex-wrap: wrap;
   align-self: center;
   list-style-type: none;
   gap: 10px;
   text-align: center;
   padding: 0;
   margin: 0;
-  flex-wrap: wrap;
+  justify-content: center;
 }
 
 .techs__list-item {
@@ -35,7 +36,14 @@
   .techs {
     padding: 90px 50px;
   }
+
   .techs__list-item {
     width: 84px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .techs {
+    padding: 70px 18px;
   }
 }
