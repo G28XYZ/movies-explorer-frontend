@@ -14,15 +14,15 @@
 }
 
 .techs__list {
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(84px, 1fr));
   align-self: center;
   list-style-type: none;
   gap: 10px;
   text-align: center;
   padding: 0;
   margin: 0;
-  justify-content: center;
+  width: 70%;
 }
 
 .techs__list-item {

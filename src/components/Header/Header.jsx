@@ -5,7 +5,7 @@ function Header() {
   return (
     <header className="header">
       <img src={logo} alt="Логотип" />
-      <nav className="header__links">
+      <nav className="header__links text">
         <Link to="/sign-up" className="header__link">
           Регистрация
         </Link>

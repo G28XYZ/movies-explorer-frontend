@@ -24,11 +24,6 @@
   color: inherit;
   text-align: center;
   box-sizing: border-box;
-  transition: opacity 0.6s;
-}
-
-.header__link:hover {
-  opacity: 0.6;
 }
 
 @media screen and (max-width: 768px) {
@@ -40,5 +35,12 @@
 @media screen and (max-width: 375px) {
   .header {
     padding: 18px 14px;
+  }
+  .header__link {
+    min-width: 54px;
+    padding: 5px 0;
+  }
+  .header__links {
+    gap: 14px;
   }
 }
