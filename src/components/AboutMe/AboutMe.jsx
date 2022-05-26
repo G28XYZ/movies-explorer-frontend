@@ -11,14 +11,14 @@ function AboutMe() {
             есть кот. Увлекаюсь футболом. Нравится решать задачи по программированию. Учусь в
             Яндекс.Практикуме на веб-разработчика.
           </p>
-          <ul className="about__links">
+          <ul className="about__links text">
             <li>
-              <a href="/#" className="about__link text">
+              <a href="/#" className="about__link">
                 ВКонтакте
               </a>
             </li>
             <li>
-              <a href="/#" className="about__link text">
+              <a href="/#" className="about__link">
                 Github
               </a>
             </li>

@@ -1,5 +1,6 @@
 import AboutMe from "../AboutMe";
 import AboutProject from "../AboutProject";
+import Portfolio from "../Portfolio";
 import Promo from "../Promo";
 import Techs from "../Techs";
 
@@ -10,6 +11,7 @@ function Main() {
       <AboutProject />
       <Techs />
       <AboutMe />
+      <Portfolio />
     </main>
   );
 }

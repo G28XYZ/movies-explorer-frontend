@@ -15,15 +15,24 @@
 .about__info-description {
   display: flex;
   flex-direction: column;
-  height: 100%;
   align-content: stretch;
 }
-
+.about__info-subtitle {
+  margin: 0;
+  font-size: 18px;
+  line-height: calc(20 / 18);
+  font-weight: 500;
+  padding-top: 18px;
+  padding-bottom: 26px;
+}
 .about__links {
   display: flex;
   list-style-type: none;
   padding: 0;
   margin: 0;
+  height: 100%;
+  align-items: end;
+  gap: 20px;
 }
 
 .about__link {
