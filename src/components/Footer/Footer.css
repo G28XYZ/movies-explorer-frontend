@@ -1,0 +1,26 @@
+.footer {
+  padding: 80px 70px 20px 70px;
+}
+
+.footer__title {
+  text-align: center;
+}
+
+.footer__row {
+  display: flex;
+  justify-content: space-between;
+  padding-top: 40px;
+}
+
+.footer__list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.footer__link {
+  text-decoration: none;
+  color: white;
+}
