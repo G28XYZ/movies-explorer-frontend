@@ -45,7 +45,6 @@
 
 .underline-p25 {
   position: relative;
-  padding-bottom: 25px;
 }
 
 .underline-p25::after {
@@ -56,11 +55,11 @@
   background-color: rgba(218, 218, 218, 1);
   bottom: 0;
   left: 0;
+  transform: translate(0, 25px);
 }
 
 .underline-p20 {
   position: relative;
-  padding-bottom: 20px;
 }
 
 .underline-p20::after {
@@ -71,4 +70,5 @@
   background-color: rgba(66, 66, 66, 1);
   bottom: 0;
   left: 0;
+  transform: translate(0, 20px);
 }
