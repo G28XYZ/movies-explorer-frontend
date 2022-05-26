@@ -7,18 +7,19 @@ function AboutMe() {
           <h3 className="about__info-title text_title">Александр</h3>
           <p className="about__info-subtitle">Инженер-конструктор, 31 год</p>
           <p className="about__info-description text">
-            Я живу в Новосибирске. Работаю инженером в небольшой производственной компании. Женат,
-            есть кот. Увлекаюсь футболом. Нравится решать задачи по программированию. Учусь в
+            Я живу в Новосибирске. Работаю инженером в небольшой
+            производственной компании. Женат, есть кот. Увлекаюсь футболом.
+            Нравится решать задачи по программированию. Учусь в
             Яндекс.Практикуме на веб-разработчика.
           </p>
           <ul className="about__links text">
             <li>
-              <a href="/#" className="about__link">
+              <a href="/#" className="link">
                 ВКонтакте
               </a>
             </li>
             <li>
-              <a href="/#" className="about__link">
+              <a href="/#" className="link">
                 Github
               </a>
             </li>
@@ -26,7 +27,7 @@ function AboutMe() {
         </div>
         <img
           className="about__info-image"
-          src="https://tinyurl.com/2n9t99p3"
+          src="https://intersec.ae.messefrankfurt.com/content/dam/messefrankfurt-dubai/generic/contacts/placeholder-male.jpg.transform/1920w/image.jpg"
           alt="Фотография студента"
         />
       </div>

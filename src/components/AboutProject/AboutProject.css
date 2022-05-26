@@ -42,3 +42,9 @@
 .project__duration-name {
   padding-top: 14px;
 }
+
+@media screen and (max-width: 768px) {
+  .project {
+    padding: 90px 50px;
+  }
+}

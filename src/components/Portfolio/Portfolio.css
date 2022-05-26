@@ -18,6 +18,10 @@
 .portfolio__link {
   display: flex;
   justify-content: space-between;
-  text-decoration: none;
-  color: white;
+}
+
+@media screen and (max-width: 768px) {
+  .portfolio {
+    padding: 0 50px 90px 50px;
+  }
 }

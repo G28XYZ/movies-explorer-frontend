@@ -1,6 +1,6 @@
 function Footer() {
   return (
-    <section className="footer">
+    <footer className="footer">
       <h3 className="footer__title text color_text underline-p20">
         Учебный проект Яндекс.Практикум х BeatFilm.
       </h3>
@@ -9,24 +9,24 @@ function Footer() {
         <nav>
           <ul className="footer__list text">
             <li>
-              <a href="/#" className="footer__link">
+              <a href="/#" className="link">
                 Яндекс.Практикум
               </a>
             </li>
             <li>
-              <a href="/#" className="footer__link">
+              <a href="/#" className="link">
                 Github
               </a>
             </li>
             <li>
-              <a href="/#" className="footer__link">
+              <a href="/#" className="link">
                 Facebook
               </a>
             </li>
           </ul>
         </nav>
       </div>
-    </section>
+    </footer>
   );
 }
 

@@ -43,6 +43,16 @@
   line-height: calc(50 / 30);
 }
 
+.link {
+  text-decoration: none;
+  color: white;
+  transition: opacity 0.6s;
+}
+
+.link:hover {
+  opacity: 0.6;
+}
+
 .underline-p25 {
   position: relative;
 }

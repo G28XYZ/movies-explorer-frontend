@@ -5,11 +5,14 @@
 .about__info {
   display: flex;
   padding-top: 65px;
+  gap: 50px;
 }
 
 .about__info-image {
-  width: 270px;
-  height: 327px;
+  max-height: 352px;
+  max-width: 292px;
+  width: 40%;
+  border-radius: 10px;
 }
 
 .about__info-description {
@@ -17,6 +20,7 @@
   flex-direction: column;
   align-content: stretch;
 }
+
 .about__info-subtitle {
   margin: 0;
   font-size: 18px;
@@ -35,7 +39,22 @@
   gap: 20px;
 }
 
-.about__link {
-  text-decoration: none;
-  color: white;
+@media screen and (max-width: 768px) {
+  .about {
+    padding: 90px 50px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .about__info {
+    flex-direction: column-reverse;
+  }
+
+  .about__info-image {
+    align-self: center;
+    width: 100%;
+  }
+  .about__links {
+    padding-top: 40px;
+  }
 }

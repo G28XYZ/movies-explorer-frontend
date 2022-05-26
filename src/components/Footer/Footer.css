@@ -1,5 +1,9 @@
 .footer {
   padding: 80px 70px 20px 70px;
+  max-width: 1280px;
+  width: 100%;
+  margin: 0 auto;
+  box-sizing: border-box;
 }
 
 .footer__title {
@@ -20,7 +24,8 @@
   gap: 20px;
 }
 
-.footer__link {
-  text-decoration: none;
-  color: white;
+@media screen and (max-width: 768px) {
+  .footer {
+    padding: 80px 50px 20px 50px;
+  }
 }
