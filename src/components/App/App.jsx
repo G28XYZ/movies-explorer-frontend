@@ -3,21 +3,24 @@ import Main from "../Main";
 import Footer from "../Footer";
 import { useLocation, Routes, Route } from "react-router-dom";
 import { Login, Register } from "../Auth";
+import { useState } from "react";
 
 function App() {
+  const [isAuth, setIsAuth] = useState(true);
+
   const location = useLocation();
   const path = location.pathname;
-  const isAuth = path === "/sign-in" || path === "/sign-up";
+  const onAuth = path === "/sign-in" || path === "/sign-up";
   return (
     <div className="page">
-      {!isAuth && <Header />}
+      {!onAuth && <Header isAuth={isAuth} />}
       <Routes>
         <Route exact path="/" element={<Main />} />
         <Route path="/sign-in" element={<Login />} />
         <Route path="/sign-up" element={<Register />} />
       </Routes>
 
-      {!isAuth && <Footer />}
+      {!onAuth && <Footer />}
     </div>
   );
 }
