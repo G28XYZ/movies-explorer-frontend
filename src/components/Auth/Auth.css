@@ -42,9 +42,8 @@
   background: transparent;
   border: none;
   border-bottom: 1px solid #424242;
-  color: rgba(255, 255, 255, 1);
+  color: white;
   height: 28px;
-  outline-color: transparent;
   outline: none;
 }
 
@@ -69,6 +68,7 @@
 .auth__submit:hover {
   opacity: 0.8;
   transition: opacity 0.6s;
+  cursor: pointer;
 }
 
 .auth__link-container {
@@ -110,18 +110,11 @@
 }
 
 @media screen and (max-width: 375px) {
-  .auth__title {
-    padding-bottom: 40px;
-  }
-}
-
-@media screen and (max-width: 375px) {
-  .auth__form {
-  }
-}
-@media screen and (max-width: 375px) {
   .auth {
     max-width: 260px;
     padding-top: 40px;
+  }
+  .auth__title {
+    padding-bottom: 40px;
   }
 }

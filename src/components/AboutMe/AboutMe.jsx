@@ -1,6 +1,8 @@
-function AboutMe() {
+import { forwardRef } from "react";
+
+const AboutMe = forwardRef((props, ref) => {
   return (
-    <section className="about">
+    <section className="about" id="student" ref={ref}>
       <h2 className="about__header text_subtitle underline-p25">Студент</h2>
       <div className="about__info">
         <div className="about__info-description">
@@ -14,12 +16,22 @@ function AboutMe() {
           </p>
           <ul className="about__links text">
             <li>
-              <a href="/#" className="link">
+              <a
+                href="https://vk.com/"
+                className="link"
+                target="_blank"
+                rel="noreferrer"
+              >
                 ВКонтакте
               </a>
             </li>
             <li>
-              <a href="/#" className="link">
+              <a
+                href="https://github.com/g28xyz"
+                className="link"
+                target="_blank"
+                rel="noreferrer"
+              >
                 Github
               </a>
             </li>
@@ -33,6 +45,6 @@ function AboutMe() {
       </div>
     </section>
   );
-}
+});
 
 export default AboutMe;

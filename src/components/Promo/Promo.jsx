@@ -1,4 +1,4 @@
-function Promo() {
+function Promo({ handleButtonClick }) {
   return (
     <section className="promo color_background">
       <h1 className="promo__title text_title">
@@ -6,9 +6,27 @@ function Promo() {
       </h1>
       <nav>
         <ul className="promo__list">
-          <li className="promo__list-item color_secondary text">О проекте</li>
-          <li className="promo__list-item color_secondary text">Технологии</li>
-          <li className="promo__list-item color_secondary text">Студент</li>
+          <li
+            name="aboutProject"
+            className="promo__list-item color_secondary text"
+            onClick={handleButtonClick}
+          >
+            О проекте
+          </li>
+          <li
+            name="techs"
+            className="promo__list-item color_secondary text"
+            onClick={handleButtonClick}
+          >
+            Технологии
+          </li>
+          <li
+            name="student"
+            className="promo__list-item color_secondary text"
+            onClick={handleButtonClick}
+          >
+            Студент
+          </li>
         </ul>
       </nav>
     </section>

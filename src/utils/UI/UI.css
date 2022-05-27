@@ -15,6 +15,10 @@
   background-color: #272727;
 }
 
+.color_error {
+  color: #ee3465 !important;
+}
+
 .text {
   margin: 0;
   font-weight: 400;

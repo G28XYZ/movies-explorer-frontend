@@ -10,7 +10,7 @@ function Input({ title, onChange, name, type = "text", error }) {
       <input
         name={name}
         type={type}
-        className="auth__input"
+        className={`auth__input ${error && "color_error"}`}
         onChange={onChange}
         {...requiredProps}
       ></input>
