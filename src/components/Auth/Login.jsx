@@ -1,36 +1,50 @@
 import { useState } from "react";
+import { Link } from "react-router-dom";
+import logo from "../../images/logo.svg";
+import Input from "./Input";
 
 function Login() {
+  const [error, setError] = useState({ email: "", password: "" });
   const [formData, setFormData] = useState({ email: "", password: "" });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setError({ ...error, [e.target.name]: e.target.validationMessage });
   };
 
   const handleSubmit = (e) => {
+    e.preventDefault();
     console.log(e);
   };
+
   return (
     <section className="auth">
-      <h2 className="auth__title">Вход</h2>
+      <img src={logo} alt="Логотип" className="auth__logo" />
+      <h2 className="auth__title">Рады видеть!</h2>
       <form className="auth__form" onSubmit={handleSubmit}>
         <div className="auth__input-container">
-          <input
-            name="email"
+          <Input
             type="email"
-            placeholder="Email"
-            className="auth__input"
+            name="email"
+            title="E-mail"
             onChange={handleChange}
-          ></input>
-          <input
-            name="password"
+            error={error.email}
+          />
+          <Input
             type="password"
-            placeholder="Пароль"
-            className="auth__input"
+            name="password"
+            title="Пароль"
             onChange={handleChange}
-          ></input>
+            error={error.password}
+          />
         </div>
-        <button className="auth__submit">Войти</button>
+        <button className="auth__submit text">Войти</button>
+        <div className="auth__link-container">
+          <p className="text color_text">Ещё не зарегистрированы?</p>
+          <Link to="/sign-up" className="auth__link text">
+            Регистрация
+          </Link>
+        </div>
       </form>
     </section>
   );

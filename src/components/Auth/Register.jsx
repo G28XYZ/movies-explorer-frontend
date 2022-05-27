@@ -1,45 +1,64 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
+import logo from "../../images/logo.svg";
+import Input from "./Input";
 
 function Register() {
   const navigate = useNavigate();
 
-  const [formData, setFormData] = useState({ email: "", password: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    password: "",
+  });
+  const [error, setError] = useState({ name: "", email: "", password: "" });
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setError({ ...error, [e.target.name]: e.target.validationMessage });
   };
 
   const handleSubmit = (e) => {
+    e.preventDefault();
     const navigateFunc = () => navigate("/sign-in");
     console.log(e);
   };
 
   return (
     <div className="auth">
-      <h2 className="auth__title">Регистрация</h2>
+      <img src={logo} alt="Логотип" className="auth__logo" />
+      <h2 className="auth__title">Добро пожаловать!</h2>
       <form className="auth__form" onSubmit={handleSubmit}>
         <div className="auth__input-container">
-          <input
-            name="email"
+          <Input
+            name="name"
+            title="Имя"
+            onChange={handleChange}
+            error={error.name}
+          />
+          <Input
             type="email"
-            className="auth__input"
-            placeholder="Email"
+            name="email"
+            title="E-mail"
             onChange={handleChange}
-          ></input>
-          <input
-            name="password"
+            error={error.email}
+          />
+          <Input
             type="password"
-            className="auth__input"
-            placeholder="Пароль"
+            name="password"
+            title="Пароль"
             onChange={handleChange}
-          ></input>
+            error={error.password}
+          />
         </div>
-        <button className="auth__submit">Зарегистрироваться</button>
+        <button className="auth__submit text">Зарегистрироваться</button>
       </form>
-      <Link to="/sign-in" className="auth__link">
-        Уже зарегестрированны? Войти
-      </Link>
+      <div className="auth__link-container">
+        <p className="text color_text">Уже зарегестрированны?</p>
+        <Link to="/sign-in" className="auth__link text">
+          Войти
+        </Link>
+      </div>
     </div>
   );
 }
