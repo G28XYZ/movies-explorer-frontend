@@ -1,5 +1,11 @@
+import SearchForm from "../SearchForm";
+
 function Movies() {
-  return <></>;
+  return (
+    <main className="movies">
+      <SearchForm />
+    </main>
+  );
 }
 
 export default Movies;
