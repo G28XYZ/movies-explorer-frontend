@@ -1,7 +1,7 @@
 function Footer() {
   return (
     <footer className="footer">
-      <h3 className="footer__title text color_text underline-p20">
+      <h3 className="footer__title text color_text underline-pb20">
         Учебный проект Яндекс.Практикум х BeatFilm.
       </h3>
       <div className="footer__row">

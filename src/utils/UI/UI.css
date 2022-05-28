@@ -57,11 +57,11 @@
   opacity: 0.6;
 }
 
-.underline-p25 {
+.underline-pb25 {
   position: relative;
 }
 
-.underline-p25::after {
+.underline-pb25::after {
   position: absolute;
   content: "";
   width: 100%;
@@ -72,11 +72,11 @@
   transform: translate(0, 25px);
 }
 
-.underline-p20 {
+.underline-pb20 {
   position: relative;
 }
 
-.underline-p20::after {
+.underline-pb20::after {
   position: absolute;
   content: "";
   width: 100%;

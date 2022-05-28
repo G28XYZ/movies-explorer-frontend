@@ -5,7 +5,7 @@ function Portfolio() {
     <section className="portfolio">
       <p className="portfolio__title text color_text">Портфолио</p>
       <ul className="portfolio__list">
-        <li className="portfolio__list-item underline-p20">
+        <li className="portfolio__list-item underline-pb20">
           <a
             className="portfolio__link link"
             href="https://g28xyz.github.io/how-to-learn"
@@ -16,7 +16,7 @@ function Portfolio() {
             <img src={arrow} alt="Иконка - ссылочная стрека" />
           </a>
         </li>
-        <li className="portfolio__list-item underline-p20">
+        <li className="portfolio__list-item underline-pb20">
           <a
             className="portfolio__link link"
             href="https://g28xyz.github.io/russian-travel"
@@ -24,7 +24,7 @@ function Portfolio() {
             rel="noreferrer"
           >
             <p className="text_medium">Адаптивный сайт</p>
-            <img src={arrow} alt="Иконка - ссылочная стрека" />
+            <img src={arrow} alt="Иконка - ссылочная стрелка" />
           </a>
         </li>
         <li className="portfolio__list-item">
