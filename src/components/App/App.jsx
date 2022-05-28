@@ -1,5 +1,6 @@
 import Header from "../Header";
 import Main from "../Main";
+import Movies from "../Movies";
 import Footer from "../Footer";
 import { useLocation, Routes, Route } from "react-router-dom";
 import { Login, Register } from "../Auth";
@@ -18,6 +19,7 @@ function App() {
         <Route exact path="/" element={<Main />} />
         <Route path="/sign-in" element={<Login />} />
         <Route path="/sign-up" element={<Register />} />
+        <Route path="/movies" element={<Movies />} />
       </Routes>
 
       {!onAuth && <Footer />}

@@ -11,35 +11,52 @@
   align-items: center;
 }
 
-.header__navigante {
-  display: flex;
-  gap: 30px;
-}
-
-.header__navigante-movies {
-  justify-content: space-between;
+.header__navigate-movies {
   width: 100%;
+  padding-left: 44px;
 }
 
 .header__movies {
   display: flex;
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  width: 100%;
+  gap: 16px;
+  align-items: center;
 }
 
-.header__link {
+.header__auth {
+  display: flex;
+  list-style-type: none;
+  gap: 30px;
+}
+
+.header__auth-item {
   min-width: 76px;
   padding: 8px 0;
   border-radius: 3px;
-  text-decoration: none;
-  color: inherit;
   text-align: center;
   box-sizing: border-box;
 }
 
+.header__link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.header__movies-item:last-child {
+  display: flex;
+  text-align: center;
+  flex: 1;
+  justify-content: end;
+}
+
 .header__link-profile {
   width: 100px;
-  padding: 9px 0;
+  height: 32px;
+  padding: 5px 0;
   border-radius: 20px;
-  text-align: center;
   text-decoration: none;
   color: white;
   box-sizing: border-box;
