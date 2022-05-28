@@ -5,6 +5,7 @@ import Promo from "../Promo";
 import Techs from "../Techs";
 
 import { useRef } from "react";
+import NavBar from "../NavBar";
 
 function Main() {
   const refs = {
@@ -23,7 +24,9 @@ function Main() {
 
   return (
     <main className="content">
-      <Promo handleButtonClick={handleButtonClick} />
+      <Promo>
+        <NavBar handleButtonClick={handleButtonClick} />
+      </Promo>
       <AboutProject ref={refs.aboutProject} />
       <Techs ref={refs.techs} />
       <AboutMe ref={refs.student} />
