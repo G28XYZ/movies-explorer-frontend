@@ -1,0 +1,25 @@
+.cards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 80px 70px;
+}
+
+.cards__list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 24px;
+  justify-content: center;
+  padding-bottom: 50px;
+}
+
+.cards__button {
+  max-width: 320px;
+  max-height: 36px;
+  width: 100%;
+  padding: 8px 0;
+  background-color: transparent;
+  border: 1px solid rgba(64, 64, 64, 1);
+  border-radius: 5px;
+  cursor: pointer;
+}
