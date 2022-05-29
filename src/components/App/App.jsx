@@ -8,6 +8,7 @@ import { useLocation, Routes, Route } from "react-router-dom";
 import { Login, Register } from "../Auth";
 
 import api from "../../utils/api";
+import SavedMovies from "../SavedMovies";
 
 function App() {
   const [isAuth, setIsAuth] = useState(true);
@@ -40,10 +41,7 @@ function App() {
         <Route path="/sign-in" element={<Login />} />
         <Route path="/sign-up" element={<Register />} />
         <Route path="/movies" element={<Movies moviesList={moviesList} loading={loading} />} />
-        <Route
-          path="/saved-movies"
-          element={<Movies moviesList={favoriteMovies} loading={loading} />}
-        />
+        <Route path="/saved-movies" element={<SavedMovies moviesList={favoriteMovies} />} />
       </Routes>
 
       {!onAuth && <Footer />}
