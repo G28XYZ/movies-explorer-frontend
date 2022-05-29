@@ -9,6 +9,7 @@ import { Login, Register } from "../Auth";
 
 import api from "../../utils/api";
 import SavedMovies from "../SavedMovies";
+import Profile from "../Profile/Profile";
 
 function App() {
   const [isAuth, setIsAuth] = useState(true);
@@ -42,6 +43,7 @@ function App() {
         <Route path="/sign-up" element={<Register />} />
         <Route path="/movies" element={<Movies moviesList={moviesList} loading={loading} />} />
         <Route path="/saved-movies" element={<SavedMovies moviesList={favoriteMovies} />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
 
       {!onAuth && <Footer />}
