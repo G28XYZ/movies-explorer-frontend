@@ -12,7 +12,7 @@ class Auth {
     return response.ok ? response.json() : Promise.reject(`Error: ${response.message}`);
   };
 
-  authorization({ email, password }) {
+  login({ email, password }) {
     return fetch(`${this._address}/signin`, {
       method: "POST",
       credentials: "include",
@@ -27,6 +27,22 @@ class Auth {
       credentials: "include",
       headers: this._headers,
       body: JSON.stringify({ name, email, password }),
+    }).then(this._handleResponse);
+  }
+
+  authentication() {
+    return fetch(`${this._address}/users/me`, {
+      method: "GET",
+      credentials: "include",
+      headers: this._headers,
+    }).then(this._handleResponse);
+  }
+
+  logout() {
+    return fetch(`${this._address}/logout`, {
+      method: "GET",
+      credentials: "include",
+      headers: this._headers,
     }).then(this._handleResponse);
   }
 }

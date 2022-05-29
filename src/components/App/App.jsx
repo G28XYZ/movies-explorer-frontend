@@ -13,20 +13,81 @@ import auth from "../../utils/auth";
 import SavedMovies from "../SavedMovies";
 import Profile from "../Profile/Profile";
 import NotFoundPage from "../NotFoundPage";
+import InfoToolTip from "../InfoToolTip/InfoToolTip";
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [favoriteMovies, setFavoriteMOvies] = useState([]);
+  const [user, setUser] = useState({ name: "", email: "" });
 
+  const [favoriteMovies, setFavoriteMOvies] = useState([]);
   const [moviesList, setMoviesList] = useState([]);
 
+  const [infoToolTip, setInfoTooltip] = useState({ message: "", isOpen: false, success: false });
+
+  useEffect(() => {
+    Promise.all([auth.authentication(), api.getMovies()])
+      .then(([userData, movies]) => {
+        setUser({ ...user, ...userData });
+        setIsAuth(true);
+        setMoviesList(movies);
+        setFavoriteMOvies(movies.slice(0, 3));
+        setTimeout(() => setLoading(false), 2000);
+      })
+      .catch((err) => {
+        setInfoTooltip({ message: `Ошибка аутентификации! ${err}`, isOpen: true, success: false });
+      });
+  }, []);
+
+  function onClosePopup() {
+    setInfoTooltip({ ...infoToolTip, isOpen: false });
+  }
+
+  function handleUpdateUser(body) {
+    api
+      .updateUser(body)
+      .then((data) => {
+        setUser({ ...user, ...data });
+        setInfoTooltip({
+          message: `Вы успешно изменили свои данные!`,
+          isOpen: true,
+          success: true,
+        });
+      })
+      .catch((err) => {
+        setInfoTooltip({
+          message: `Ошибка редактирования пользователя! ${err}`,
+          isOpen: true,
+          success: false,
+        });
+      });
+  }
+
   function onLogin(body) {
-    auth.authorization(body).then((token) => console.log(token));
+    return auth
+      .login(body)
+      .then(({ token }) => {
+        setInfoTooltip({ message: "Вы успешно вошли!", isOpen: true, success: true });
+        return true;
+      })
+      .catch((err) => {
+        setInfoTooltip({ message: `Ошибка авторизации! ${err}`, isOpen: true, success: false });
+        return false;
+      });
   }
 
   function onRegister(body) {
-    auth.registration(body).then((user) => console.log(user));
+    return auth
+      .registration(body)
+      .then((data) => {
+        setUser({ ...user, ...data });
+        setInfoTooltip({ message: "Вы успешно зарегистрировались!", isOpen: true, success: true });
+        return true;
+      })
+      .catch((err) => {
+        setInfoTooltip({ message: `Ошибка регистрации! ${err}`, isOpen: true, success: false });
+        return false;
+      });
   }
 
   const Wrap = ({ children, header = true, footer = true }) => {
@@ -38,18 +99,6 @@ function App() {
       </>
     );
   };
-
-  useEffect(() => {
-    setLoading(true);
-    api
-      .getMovies()
-      .then((movies) => {
-        setMoviesList(movies);
-        setFavoriteMOvies(movies.slice(0, 3));
-        setTimeout(() => setLoading(false), 2000);
-      })
-      .catch(console.log);
-  }, []);
 
   return (
     <div className="page">
@@ -83,14 +132,21 @@ function App() {
           path="/profile"
           element={
             <Wrap footer={false}>
-              <Profile />
+              <Profile user={user} handleUpdateUser={handleUpdateUser} />
             </Wrap>
           }
         />
-        <Route path="/sign-in" element={<Login onLogin={onLogin} />} />
-        <Route path="/sign-up" element={<Register onRegister={onRegister} />} />
+        <Route
+          path="/sign-in"
+          element={<Login onLogin={onLogin} success={infoToolTip.success} />}
+        />
+        <Route
+          path="/sign-up"
+          element={<Register onRegister={onRegister} success={infoToolTip.success} />}
+        />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+      <InfoToolTip onClose={onClosePopup} infoToolTip={infoToolTip} />
     </div>
   );
 }

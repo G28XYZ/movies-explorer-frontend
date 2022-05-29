@@ -1,11 +1,29 @@
 import successImage from "../../images/success.png";
 import deniedImage from "../../images/denied.png";
+import { useCallback, useEffect } from "react";
 
-const InfoToolTip = ({ isOpen, infoRegister, onClose }) => {
-  const { isRegister, message } = infoRegister;
+const InfoToolTip = ({ infoToolTip, onClose }) => {
+  const handleCloseByEsc = useCallback(
+    (e) => {
+      if (e.code === "Escape") {
+        onClose();
+      }
+    },
+    [onClose]
+  );
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleCloseByEsc);
+    return () => {
+      document.removeEventListener("keydown", handleCloseByEsc);
+    };
+  }, [handleCloseByEsc]);
+
+  const { success, message, isOpen } = infoToolTip;
+
   return (
     <div className={`popup ${isOpen && "popup_opened"}`}>
-      <div className="popup__container" style={{ textAlign: "center" }}>
+      <div className="popup__container">
         <button
           onClick={onClose}
           aria-label="Закрыть"
@@ -14,13 +32,10 @@ const InfoToolTip = ({ isOpen, infoRegister, onClose }) => {
         ></button>
         <img
           className="popup__icon"
-          src={isRegister ? successImage : deniedImage}
-          alt="Картинка модального окна"
-          style={{ paddingTop: 24, paddingBottom: 32 }}
+          src={success ? successImage : deniedImage}
+          alt="Картинка статуса модального окна"
         />
-        <h3 className="popup__title" style={{ paddingBottom: 25 }}>
-          {message}
-        </h3>
+        <h3 className="popup__title">{message}</h3>
       </div>
     </div>
   );

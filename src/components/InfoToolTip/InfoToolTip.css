@@ -30,6 +30,12 @@
   background-color: #fff;
   border-radius: 10px;
   padding: 36px;
+  text-align: center;
+}
+
+.popup__image {
+  padding-top: 24px;
+  padding-bottom: 32px;
 }
 
 .popup__close {
@@ -40,18 +46,18 @@
   right: 0;
   top: 0;
   background-color: rgba(0, 0, 0, 0);
-  background-image: url(../../../images/close-icon.svg);
+  background-image: url(../../images/close.png);
   background-size: 100%;
   background-repeat: no-repeat;
   background-position: center;
   transform: translate(40px, -40px);
   border: none;
   cursor: pointer;
+  transition: opacity 0.6s;
 }
 
 .popup__close:hover {
   opacity: 0.6;
-  transition: opacity 0.6s;
 }
 
 .popup__title {
@@ -61,6 +67,7 @@
   font-weight: 900;
   padding-bottom: 40px;
   margin: 0;
+  padding-bottom: 25px;
 }
 
 @media screen and (max-width: 768px) {

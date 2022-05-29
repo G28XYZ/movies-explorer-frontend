@@ -1,9 +1,9 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import Input from "./Input";
 
-function Register({ onRegister }) {
+function Register({ onRegister, success }) {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -20,8 +20,9 @@ function Register({ onRegister }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const navigateFunc = () => navigate("/sign-in");
-    onRegister(formData);
+    onRegister(formData).then((isRedirect) => {
+      isRedirect && navigate("/sign-in");
+    });
   };
 
   return (
