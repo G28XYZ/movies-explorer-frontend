@@ -19,6 +19,7 @@ function App() {
   const location = useLocation();
   const path = location.pathname;
   const onAuth = path === "/sign-in" || path === "/sign-up";
+  const onProfile = path === "/profile";
 
   const [moviesList, setMoviesList] = useState([]);
 
@@ -46,7 +47,7 @@ function App() {
         <Route path="/profile" element={<Profile />} />
       </Routes>
 
-      {!onAuth && <Footer />}
+      {!onAuth && !onProfile && <Footer />}
     </div>
   );
 }

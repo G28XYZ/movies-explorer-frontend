@@ -6,6 +6,7 @@
   align-items: center;
   width: 100%;
   margin: 0 auto;
+  padding-top: 74px;
 }
 
 .profile__form {
@@ -48,4 +49,17 @@
 .profile__logout {
   padding-top: 16px;
   color: rgba(238, 52, 101, 1);
+}
+
+@media screen and (max-width: 768px) {
+  .profile {
+    padding-top: 236px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .profile {
+    padding: 70px 30px;
+    box-sizing: border-box;
+  }
 }
