@@ -30,7 +30,7 @@ function Portfolio() {
         <li className="portfolio__list-item">
           <a
             className="portfolio__link link"
-            href="https://mesto.online.nomoredomains.work"
+            href="https://g28xyz.github.io/mesto/"
             target="_blank"
             rel="noreferrer"
           >

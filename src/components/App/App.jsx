@@ -8,16 +8,26 @@ import { Routes, Route } from "react-router-dom";
 import { Login, Register } from "../Auth";
 
 import api from "../../utils/api";
+import auth from "../../utils/auth";
+
 import SavedMovies from "../SavedMovies";
 import Profile from "../Profile/Profile";
 import NotFoundPage from "../NotFoundPage";
 
 function App() {
-  const isAuth = true;
+  const [isAuth, setIsAuth] = useState(false);
   const [loading, setLoading] = useState(false);
   const [favoriteMovies, setFavoriteMOvies] = useState([]);
 
   const [moviesList, setMoviesList] = useState([]);
+
+  function onLogin(body) {
+    auth.authorization(body).then((token) => console.log(token));
+  }
+
+  function onRegister(body) {
+    auth.registration(body).then((user) => console.log(user));
+  }
 
   const Wrap = ({ children, header = true, footer = true }) => {
     return (
@@ -77,8 +87,8 @@ function App() {
             </Wrap>
           }
         />
-        <Route path="/sign-in" element={<Login />} />
-        <Route path="/sign-up" element={<Register />} />
+        <Route path="/sign-in" element={<Login onLogin={onLogin} />} />
+        <Route path="/sign-up" element={<Register onRegister={onRegister} />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </div>

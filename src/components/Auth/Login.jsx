@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import Input from "./Input";
 
-function Login() {
+function Login({ onLogin }) {
   const [error, setError] = useState({ email: "", password: "" });
   const [formData, setFormData] = useState({ email: "", password: "" });
 
@@ -14,7 +14,7 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(e);
+    onLogin(formData);
   };
 
   return (

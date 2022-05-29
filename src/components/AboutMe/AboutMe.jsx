@@ -1,4 +1,5 @@
 import { forwardRef } from "react";
+import foto from "../../images/profile.jpeg";
 
 const AboutMe = forwardRef((props, ref) => {
   return (
@@ -26,11 +27,7 @@ const AboutMe = forwardRef((props, ref) => {
             </li>
           </ul>
         </div>
-        <img
-          className="about__info-image"
-          src="https://intersec.ae.messefrankfurt.com/content/dam/messefrankfurt-dubai/generic/contacts/placeholder-male.jpg.transform/1920w/image.jpg"
-          alt="Фотография студента"
-        />
+        <img className="about__info-image" src={foto} alt="Фотография студента" />
       </div>
     </section>
   );
