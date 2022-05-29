@@ -23,7 +23,7 @@ function Header() {
     <header className="header">
       <img src={logo} alt="Логотип" />
 
-      {path === "/movies" ? (
+      {path === "/movies" || path === "/saved-movies" ? (
         <nav className="header__navigate header__navigate-movies">
           <ul className="header__movies text" ref={menuRef}>
             <button className="header__burger-close" onClick={handleCloseMenu}></button>

@@ -1,6 +1,10 @@
+import { useLocation } from "react-router-dom";
 import { moviesApiAddress } from "../../utils/constants";
 
 function MoviesCard({ movie }) {
+  const location = useLocation();
+  const path = location.pathname;
+  const isFavorite = path === "/saved-movies";
   const imageUrl = movie.image.formats.thumbnail.url;
   const hours = Math.floor(movie.duration / 60);
   const minutes = movie.duration % 60;
@@ -22,7 +26,7 @@ function MoviesCard({ movie }) {
           <p className="card__duration text color_text">{`${hours}ч ${minutes}`}м</p>
         </div>
         <button
-          className="card__favorite color_secondary link"
+          className={`card__favorite color_secondary link ${isFavorite && "card__favorite_active"}`}
           onClick={handleClickFavorite}
         ></button>
       </div>

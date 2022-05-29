@@ -7,7 +7,7 @@ function SearchForm() {
     <div className="search color_background">
       <form className="search__form" onSubmit={handleSubmit}>
         <input type="text" className="search__form-input" placeholder="Фильм" />
-        <button className="search__submit" type="submit"></button>
+        <button className="search__submit link" type="submit"></button>
       </form>
       <div className="search__switch-container">
         <label className="search__switch-label text">
