@@ -1,13 +1,25 @@
 import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
-import { useLocation } from "react-router-dom";
-import React, { useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 
-function Header() {
-  const location = useLocation();
-  const path = location.pathname;
+function Header({ isAuth }) {
+  const [width, setWidth] = useState(window.innerWidth);
 
   const menuRef = useRef();
+
+  useEffect(() => {
+    window.onresize = onSetWidth;
+  }, []);
+
+  useEffect(() => {
+    if (window.innerWidth > 768) {
+      handleCloseMenu();
+    }
+  }, [width]);
+
+  function onSetWidth() {
+    setWidth(window.innerWidth);
+  }
 
   const handleOpenMenu = () => {
     const menu = menuRef.current;
@@ -22,23 +34,26 @@ function Header() {
   return (
     <header className="header">
       <img src={logo} alt="Логотип" />
-
-      {path === "/movies" || path === "/saved-movies" ? (
+      {isAuth ? (
         <nav className="header__navigate header__navigate-movies">
           <ul className="header__movies text" ref={menuRef}>
             <button className="header__burger-close" onClick={handleCloseMenu}></button>
             <li>
-              <Link to="/movies" className="link">
+              <Link to="/movies" className="link" onClick={handleCloseMenu}>
                 Фильмы
               </Link>
             </li>
             <li>
-              <Link to="/saved-movies" className="link">
+              <Link to="/saved-movies" className="link" onClick={handleCloseMenu}>
                 Сохранённые фильмы
               </Link>
             </li>
             <li className="header__movies-item">
-              <Link to="/profile" className="header__link-profile color_secondary link">
+              <Link
+                to="/profile"
+                className="header__link-profile color_secondary link"
+                onClick={handleCloseMenu}
+              >
                 Аккаунт
               </Link>
             </li>

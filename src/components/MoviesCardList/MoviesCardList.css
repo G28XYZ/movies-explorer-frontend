@@ -9,8 +9,8 @@
 .cards__list {
   justify-items: center;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(364px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
   padding-bottom: 50px;
 }
 
@@ -24,4 +24,21 @@
   border-radius: 5px;
   cursor: pointer;
   align-self: center;
+}
+
+@media screen and (max-width: 768px) {
+  .cards {
+    padding: 70px 30px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .cards {
+    padding: 40px 10px;
+  }
+
+  .cards__button {
+    margin-top: 20px;
+    max-width: 240px;
+  }
 }

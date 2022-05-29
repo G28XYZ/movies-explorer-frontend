@@ -153,10 +153,24 @@
   }
 }
 
+@media screen and (max-width: 640px) {
+  .header__movies {
+    width: 100%;
+  }
+  .header__movies:before {
+    display: none;
+  }
+}
+
 @media screen and (max-width: 375px) {
   .header {
     padding: 18px 14px;
   }
+
+  .header__movies {
+    padding: 20px;
+  }
+
   .header__link {
     min-width: 54px;
     padding: 5px 0;
