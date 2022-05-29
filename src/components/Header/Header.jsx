@@ -1,25 +1,9 @@
 import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef, useState } from "react";
 
 function Header({ isAuth }) {
-  const [width, setWidth] = useState(window.innerWidth);
-
   const menuRef = useRef();
-
-  useEffect(() => {
-    window.onresize = onSetWidth;
-  }, []);
-
-  useEffect(() => {
-    if (window.innerWidth > 768) {
-      handleCloseMenu();
-    }
-  }, [width]);
-
-  function onSetWidth() {
-    setWidth(window.innerWidth);
-  }
 
   const handleOpenMenu = () => {
     const menu = menuRef.current;
@@ -33,7 +17,9 @@ function Header({ isAuth }) {
 
   return (
     <header className="header">
-      <img src={logo} alt="Логотип" />
+      <Link to="/">
+        <img src={logo} alt="Логотип" />
+      </Link>
       {isAuth ? (
         <nav className="header__navigate header__navigate-movies">
           <ul className="header__movies text" ref={menuRef}>

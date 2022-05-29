@@ -13,7 +13,7 @@ function Portfolio() {
             rel="noreferrer"
           >
             <p className="text_medium">Статичный сайт</p>
-            <img src={arrow} alt="Иконка - ссылочная стрека" />
+            <img src={arrow} alt="Иконка - ссылочная стрелка" />
           </a>
         </li>
         <li className="portfolio__list-item underline-pb20">
@@ -35,7 +35,7 @@ function Portfolio() {
             rel="noreferrer"
           >
             <p className="text_medium">Одностраничное приложение</p>
-            <img src={arrow} alt="Иконка - ссылочная стрека" />
+            <img src={arrow} alt="Иконка - ссылочная стрелка" />
           </a>
         </li>
       </ul>

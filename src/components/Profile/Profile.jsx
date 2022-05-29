@@ -10,10 +10,10 @@ function Profile() {
       <h1 className="profile__title text_medium">Привет, Александр!</h1>
       <form action="submit" className="profile__form text">
         <label className="profile__label underline-pb20">
-          <input type="text" className="profile__input" value="Александр" />
+          <input type="text" className="profile__input" defaultValue={"Александр"} />
         </label>
         <label className="profile__label">
-          <input type="text" className="profile__input" value="test@test.com" />
+          <input type="text" className="profile__input" defaultValue={"test@test.com"} />
         </label>
         <button type="submit" className="profile__submit link text" onClick={handleSubmit}>
           Редактировать

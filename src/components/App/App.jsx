@@ -4,24 +4,30 @@ import Header from "../Header";
 import Main from "../Main";
 import Movies from "../Movies";
 import Footer from "../Footer";
-import { useLocation, Routes, Route } from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import { Login, Register } from "../Auth";
 
 import api from "../../utils/api";
 import SavedMovies from "../SavedMovies";
 import Profile from "../Profile/Profile";
+import NotFoundPage from "../NotFoundPage";
 
 function App() {
   const [isAuth, setIsAuth] = useState(true);
   const [loading, setLoading] = useState(false);
   const [favoriteMovies, setFavoriteMOvies] = useState([]);
 
-  const location = useLocation();
-  const path = location.pathname;
-  const onAuth = path === "/sign-in" || path === "/sign-up";
-  const onProfile = path === "/profile";
-
   const [moviesList, setMoviesList] = useState([]);
+
+  const Wrap = ({ children, header = true, footer = true }) => {
+    return (
+      <>
+        {header && <Header isAuth={isAuth} />}
+        {children}
+        {footer && <Footer />}
+      </>
+    );
+  };
 
   useEffect(() => {
     setLoading(true);
@@ -37,17 +43,44 @@ function App() {
 
   return (
     <div className="page">
-      {!onAuth && <Header isAuth={isAuth} />}
       <Routes>
-        <Route exact path="/" element={<Main />} />
+        <Route
+          exact
+          path="/"
+          element={
+            <Wrap>
+              <Main />
+            </Wrap>
+          }
+        />
+        <Route
+          path="/movies"
+          element={
+            <Wrap>
+              <Movies moviesList={moviesList} loading={loading} />
+            </Wrap>
+          }
+        />
+        <Route
+          path="/saved-movies"
+          element={
+            <Wrap>
+              <SavedMovies moviesList={favoriteMovies} />
+            </Wrap>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <Wrap footer={false}>
+              <Profile />
+            </Wrap>
+          }
+        />
         <Route path="/sign-in" element={<Login />} />
         <Route path="/sign-up" element={<Register />} />
-        <Route path="/movies" element={<Movies moviesList={moviesList} loading={loading} />} />
-        <Route path="/saved-movies" element={<SavedMovies moviesList={favoriteMovies} />} />
-        <Route path="/profile" element={<Profile />} />
+        <Route path="*" element={<NotFoundPage />} />
       </Routes>
-
-      {!onAuth && !onProfile && <Footer />}
     </div>
   );
 }

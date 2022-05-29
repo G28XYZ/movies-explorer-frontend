@@ -1,0 +1,26 @@
+.error {
+  display: flex;
+  flex-direction: column;
+  margin: auto;
+  max-width: 400px;
+  width: 100%;
+  align-items: center;
+}
+
+.error__title {
+  font-weight: 400;
+  font-size: 140px;
+  line-height: calc(169 / 140);
+  margin: 0;
+}
+
+.error__message {
+  padding-bottom: 184px;
+}
+
+.error__button {
+  background-color: transparent;
+  color: rgba(66, 133, 244, 1);
+  border: none;
+  cursor: pointer;
+}
