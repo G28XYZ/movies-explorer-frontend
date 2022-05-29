@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
-import React, { useRef, useState } from "react";
+import React, { useRef } from "react";
 
 function Header({ isAuth }) {
   const menuRef = useRef();

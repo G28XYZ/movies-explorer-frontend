@@ -25,6 +25,8 @@
 
 @import url(./components/SearchForm/SearchForm.css);
 
+@import url(./components/SearchForm/FilterCheckbox/FilterCheckbox.css);
+
 @import url(./components/Movies/Movies.css);
 
 @import url(./components/MoviesCardList/MoviesCardList.css);

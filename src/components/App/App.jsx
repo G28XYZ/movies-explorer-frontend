@@ -13,7 +13,7 @@ import Profile from "../Profile/Profile";
 import NotFoundPage from "../NotFoundPage";
 
 function App() {
-  const [isAuth, setIsAuth] = useState(true);
+  const isAuth = true;
   const [loading, setLoading] = useState(false);
   const [favoriteMovies, setFavoriteMOvies] = useState([]);
 
