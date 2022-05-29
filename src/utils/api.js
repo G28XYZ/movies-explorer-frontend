@@ -1,3 +1,5 @@
+import { moviesApiAddress } from "./constants";
+
 class Api {
   constructor(address) {
     this._address = address;
@@ -11,12 +13,12 @@ class Api {
   }
 
   getMovies() {
-    return fetch(this._address, {
+    return fetch(`${this._address}/beatfilm-movies`, {
       headers: this._headers,
     }).then(this._handleResponse);
   }
 }
 
-const api = new Api("https://api.nomoreparties.co/beatfilm-movies");
+const api = new Api(moviesApiAddress);
 
 export default api;

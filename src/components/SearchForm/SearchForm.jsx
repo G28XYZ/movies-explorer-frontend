@@ -4,7 +4,7 @@ function SearchForm() {
   }
 
   return (
-    <section className="search color_background">
+    <div className="search color_background">
       <form className="search__form" onSubmit={handleSubmit}>
         <input type="text" className="search__form-input" placeholder="Фильм" />
         <button className="search__submit" type="submit"></button>
@@ -15,7 +15,7 @@ function SearchForm() {
           <span className="search__switch"></span>
         </label>
       </div>
-    </section>
+    </div>
   );
 }
 

@@ -20,7 +20,7 @@ function MoviesCardList() {
   }
 
   return (
-    <section className="cards">
+    <div className="cards">
       <div className="cards__list">
         {moviesList.slice(0, countMovies).map((movie) => (
           <MoviesCard movie={movie} key={movie.id} />
@@ -31,7 +31,7 @@ function MoviesCardList() {
           Ещё
         </button>
       )}
-    </section>
+    </div>
   );
 }
 
