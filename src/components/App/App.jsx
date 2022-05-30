@@ -17,25 +17,32 @@ import InfoToolTip from "../InfoToolTip/InfoToolTip";
 
 function App() {
   const [isAuth, setIsAuth] = useState(false);
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({ name: "", email: "" });
 
   const [favoriteMovies, setFavoriteMOvies] = useState([]);
   const [moviesList, setMoviesList] = useState([]);
 
-  const [infoToolTip, setInfoTooltip] = useState({ message: "", isOpen: false, success: false });
+  const [infoToolTip, setInfoTooltip] = useState({
+    message: "",
+    isOpen: false,
+    success: false,
+  });
 
   useEffect(() => {
-    Promise.all([auth.authentication(), api.getMovies()])
-      .then(([userData, movies]) => {
-        setUser({ ...user, ...userData });
-        setIsAuth(true);
+    api
+      .getMovies()
+      .then((movies) => {
         setMoviesList(movies);
         setFavoriteMOvies(movies.slice(0, 3));
         setTimeout(() => setLoading(false), 2000);
       })
       .catch((err) => {
-        setInfoTooltip({ message: `Ошибка аутентификации! ${err}`, isOpen: true, success: false });
+        setInfoTooltip({
+          message: `Ошибка в запросе фильмов! ${err}`,
+          isOpen: true,
+          success: false,
+        });
       });
   }, []);
 
@@ -67,11 +74,20 @@ function App() {
     return auth
       .login(body)
       .then(({ token }) => {
-        setInfoTooltip({ message: "Вы успешно вошли!", isOpen: true, success: true });
+        setIsAuth(true);
+        setInfoTooltip({
+          message: "Вы успешно вошли!",
+          isOpen: true,
+          success: true,
+        });
         return true;
       })
       .catch((err) => {
-        setInfoTooltip({ message: `Ошибка авторизации! ${err}`, isOpen: true, success: false });
+        setInfoTooltip({
+          message: `Ошибка авторизации! ${err}`,
+          isOpen: true,
+          success: false,
+        });
         return false;
       });
   }
@@ -81,11 +97,19 @@ function App() {
       .registration(body)
       .then((data) => {
         setUser({ ...user, ...data });
-        setInfoTooltip({ message: "Вы успешно зарегистрировались!", isOpen: true, success: true });
+        setInfoTooltip({
+          message: "Вы успешно зарегистрировались!",
+          isOpen: true,
+          success: true,
+        });
         return true;
       })
       .catch((err) => {
-        setInfoTooltip({ message: `Ошибка регистрации! ${err}`, isOpen: true, success: false });
+        setInfoTooltip({
+          message: `Ошибка регистрации! ${err}`,
+          isOpen: true,
+          success: false,
+        });
         return false;
       });
   }
@@ -142,7 +166,9 @@ function App() {
         />
         <Route
           path="/sign-up"
-          element={<Register onRegister={onRegister} success={infoToolTip.success} />}
+          element={
+            <Register onRegister={onRegister} success={infoToolTip.success} />
+          }
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
