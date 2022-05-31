@@ -2,7 +2,7 @@ import { Link, useLocation } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import React, { useRef } from "react";
 
-function Header({ isAuth }) {
+function Header({ loggedIn }) {
   const menuRef = useRef();
   const location = useLocation();
   const path = location.pathname;
@@ -22,7 +22,7 @@ function Header({ isAuth }) {
       <Link to="/">
         <img src={logo} alt="Логотип" />
       </Link>
-      {isAuth ? (
+      {loggedIn ? (
         <nav className="header__navigate header__navigate-movies">
           <ul className="header__movies text" ref={menuRef}>
             <button className="header__burger-close" onClick={handleCloseMenu}></button>
