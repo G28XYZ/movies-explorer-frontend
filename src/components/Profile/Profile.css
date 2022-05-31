@@ -1,0 +1,65 @@
+.profile {
+  display: flex;
+  flex-direction: column;
+  max-width: 410px;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  margin: 0 auto;
+  padding-top: 74px;
+}
+
+.profile__form {
+  padding-top: 123px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.profile__label {
+  position: relative;
+}
+
+.profile__label:first-child:before {
+  position: absolute;
+  content: "Имя";
+}
+
+.profile__label:nth-last-child(2):before {
+  position: absolute;
+  content: "E-mail";
+}
+
+.profile__input {
+  background-color: transparent;
+  border: none;
+  color: white;
+  text-align: end;
+  width: 100%;
+}
+
+.profile__submit {
+  margin-top: 220px;
+  background-color: transparent;
+  border: none;
+  color: white;
+}
+
+.profile__logout {
+  padding-top: 16px;
+  color: rgba(238, 52, 101, 1);
+}
+
+@media screen and (max-width: 768px) {
+  .profile {
+    padding-top: 236px;
+  }
+}
+
+@media screen and (max-width: 640px) {
+  .profile {
+    padding: 70px 30px;
+    box-sizing: border-box;
+  }
+}

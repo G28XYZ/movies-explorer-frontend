@@ -1,0 +1,44 @@
+.cards {
+  display: flex;
+  flex-direction: column;
+  padding: 80px 70px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.cards__list {
+  justify-items: center;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 25px;
+  padding-bottom: 50px;
+}
+
+.cards__button {
+  max-width: 320px;
+  max-height: 36px;
+  width: 100%;
+  padding: 8px 0;
+  background-color: transparent;
+  border: 1px solid rgba(64, 64, 64, 1);
+  border-radius: 5px;
+  cursor: pointer;
+  align-self: center;
+}
+
+@media screen and (max-width: 768px) {
+  .cards {
+    padding: 70px 30px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .cards {
+    padding: 40px 10px;
+  }
+
+  .cards__button {
+    margin-top: 20px;
+    max-width: 240px;
+  }
+}

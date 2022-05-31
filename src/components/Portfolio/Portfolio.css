@@ -1,0 +1,33 @@
+.portfolio {
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+  padding: 0 70px 125px 70px;
+}
+
+.portfolio__list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  align-items: stretch;
+}
+
+.portfolio__link {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 768px) {
+  .portfolio {
+    padding: 0 50px 90px 50px;
+  }
+}
+
+@media screen and (max-width: 375px) {
+  .portfolio {
+    padding: 0 14px 70px 14px;
+  }
+}
