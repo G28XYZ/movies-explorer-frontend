@@ -1,11 +1,15 @@
 import { useState } from "react";
 import { Link } from "react-router-dom";
+import { useStore } from "../../services/StoreProvider";
 
 function Profile({ user, handleUpdateUser }) {
   const [userInfo, setUserInfo] = useState({ name: user.name, email: user.email });
+  const [state, dispatch] = useStore();
 
   function handleChange(e) {
     setUserInfo({ ...userInfo, [e.target.name]: e.target.value });
+    dispatch({ type: "USER", name: userInfo.name });
+    console.log(state);
   }
 
   function handleSubmit(e) {

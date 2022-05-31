@@ -14,10 +14,13 @@ import Profile from "../Profile/Profile";
 import NotFoundPage from "../NotFoundPage";
 import InfoToolTip from "../InfoToolTip/InfoToolTip";
 
-import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import ProtectedRoute from "../ProtectedRoute";
 
+import { useStore } from "../../services/StoreProvider";
+
 function App() {
+  const [state, dispatch] = useStore();
+
   const [loggedIn, setLoggedIn] = useState(true);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({ name: "", email: "" });
@@ -32,6 +35,8 @@ function App() {
   });
 
   useEffect(() => {
+    console.log(state);
+    dispatch({});
     api
       .getMovies()
       .then((movies) => {
@@ -122,55 +127,53 @@ function App() {
   };
 
   return (
-    <CurrentUserContext.Provider value={user}>
-      <div className="page">
-        <Routes>
-          <Route
-            exact
-            path="/"
-            element={
-              <Wrap>
-                <Main />
-              </Wrap>
-            }
-          />
-          <Route
-            path="/movies"
-            element={
-              <ProtectedRoute loggedIn={loggedIn}>
-                <Movies {...MoviesProps} />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/saved-movies"
-            element={
-              <ProtectedRoute loggedIn={loggedIn}>
-                <SavedMovies moviesList={favoriteMovies} />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/profile"
-            element={
-              <ProtectedRoute loggedIn={loggedIn}>
-                <Profile user={user} handleUpdateUser={handleUpdateUser} />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/sign-in"
-            element={<Login onLogin={onLogin} success={infoToolTip.success} />}
-          />
-          <Route
-            path="/sign-up"
-            element={<Register onRegister={onRegister} success={infoToolTip.success} />}
-          />
-          <Route path="*" element={<NotFoundPage />} />
-        </Routes>
-        <InfoToolTip onClose={onClosePopup} infoToolTip={infoToolTip} />
-      </div>
-    </CurrentUserContext.Provider>
+    <div className="page">
+      <Routes>
+        <Route
+          exact
+          path="/"
+          element={
+            <Wrap>
+              <Main />
+            </Wrap>
+          }
+        />
+        <Route
+          path="/movies"
+          element={
+            <ProtectedRoute loggedIn={loggedIn}>
+              <Movies {...MoviesProps} />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/saved-movies"
+          element={
+            <ProtectedRoute loggedIn={loggedIn}>
+              <SavedMovies moviesList={favoriteMovies} />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/profile"
+          element={
+            <ProtectedRoute loggedIn={loggedIn}>
+              <Profile user={user} handleUpdateUser={handleUpdateUser} />
+            </ProtectedRoute>
+          }
+        />
+        <Route
+          path="/sign-in"
+          element={<Login onLogin={onLogin} success={infoToolTip.success} />}
+        />
+        <Route
+          path="/sign-up"
+          element={<Register onRegister={onRegister} success={infoToolTip.success} />}
+        />
+        <Route path="*" element={<NotFoundPage />} />
+      </Routes>
+      <InfoToolTip onClose={onClosePopup} infoToolTip={infoToolTip} />
+    </div>
   );
 }
 
