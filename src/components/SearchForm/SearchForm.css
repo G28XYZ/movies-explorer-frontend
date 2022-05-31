@@ -57,6 +57,10 @@
   color: white;
 }
 
+.search__form-input:focus {
+  border-bottom: 1px solid #4285f4;
+}
+
 .search__submit {
   background: rgba(66, 133, 244, 1);
   border: none;

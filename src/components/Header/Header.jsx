@@ -24,12 +24,17 @@ function Header({ isAuth }) {
         <nav className="header__navigate header__navigate-movies">
           <ul className="header__movies text" ref={menuRef}>
             <button className="header__burger-close" onClick={handleCloseMenu}></button>
-            <li>
+            <li className="header__movies-item">
+              <Link to="/" className="link" onClick={handleCloseMenu}>
+                Главная
+              </Link>
+            </li>
+            <li className="header__movies-item">
               <Link to="/movies" className="link" onClick={handleCloseMenu}>
                 Фильмы
               </Link>
             </li>
-            <li>
+            <li className="header__movies-item">
               <Link to="/saved-movies" className="link" onClick={handleCloseMenu}>
                 Сохранённые фильмы
               </Link>

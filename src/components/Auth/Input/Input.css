@@ -1,0 +1,33 @@
+.input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid #424242;
+  color: white;
+  height: 28px;
+  outline: none;
+}
+
+.input:focus {
+  border-bottom: 1px solid #4285f4;
+}
+
+.input-label {
+  display: flex;
+  flex-direction: column;
+}
+
+.input-error {
+  box-sizing: border-box;
+  color: #ee3465;
+  font-size: 10px;
+  height: 12px;
+  margin-top: 5px;
+  opacity: 0;
+  line-height: 1.2;
+  transition: opacity 0.3s;
+}
+
+.input-error_visible {
+  opacity: 1;
+}

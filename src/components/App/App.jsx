@@ -16,7 +16,7 @@ import NotFoundPage from "../NotFoundPage";
 import InfoToolTip from "../InfoToolTip/InfoToolTip";
 
 function App() {
-  const [isAuth, setIsAuth] = useState(false);
+  const [isAuth, setIsAuth] = useState(true);
   const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({ name: "", email: "" });
 
@@ -166,9 +166,7 @@ function App() {
         />
         <Route
           path="/sign-up"
-          element={
-            <Register onRegister={onRegister} success={infoToolTip.success} />
-          }
+          element={<Register onRegister={onRegister} success={infoToolTip.success} />}
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
