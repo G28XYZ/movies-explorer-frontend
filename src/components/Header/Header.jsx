@@ -1,9 +1,11 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import React, { useRef } from "react";
 
 function Header({ isAuth }) {
   const menuRef = useRef();
+  const location = useLocation();
+  const path = location.pathname;
 
   const handleOpenMenu = () => {
     const menu = menuRef.current;
@@ -24,17 +26,25 @@ function Header({ isAuth }) {
         <nav className="header__navigate header__navigate-movies">
           <ul className="header__movies text" ref={menuRef}>
             <button className="header__burger-close" onClick={handleCloseMenu}></button>
-            <li className="header__movies-item">
+            <li className={`header__movies-item ${path === "/" && "header__movies-item_selected"}`}>
               <Link to="/" className="link" onClick={handleCloseMenu}>
                 Главная
               </Link>
             </li>
-            <li className="header__movies-item">
+            <li
+              className={`header__movies-item ${
+                path === "/movies" && "header__movies-item_selected"
+              }`}
+            >
               <Link to="/movies" className="link" onClick={handleCloseMenu}>
                 Фильмы
               </Link>
             </li>
-            <li className="header__movies-item">
+            <li
+              className={`header__movies-item ${
+                path === "/saved-movies" && "header__movies-item_selected"
+              }`}
+            >
               <Link to="/saved-movies" className="link" onClick={handleCloseMenu}>
                 Сохранённые фильмы
               </Link>

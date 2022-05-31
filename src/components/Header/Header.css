@@ -57,6 +57,10 @@
   justify-content: flex-end;
 }
 
+.header__movies-item_selected {
+  font-weight: 500;
+}
+
 .header__link-profile {
   width: 100px;
   height: 32px;
@@ -130,6 +134,7 @@
     flex-direction: column;
     box-sizing: border-box;
     z-index: 1;
+    gap: 28px;
   }
 
   .header__movies:before {
@@ -161,7 +166,10 @@
 
   .header__movies-item:nth-child(2) {
     display: block;
-    padding-bottom: 28px;
+  }
+
+  .header__movies-item_selected {
+    border-bottom: 1px solid white;
   }
 
   .header__burger {
