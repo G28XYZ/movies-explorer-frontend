@@ -1,9 +1,10 @@
+import { SET_USER, UPDATE_USER } from "../actions/user";
+
 export const userReducer = (state, action) => {
   switch (action.type) {
-    case "USER":
-      console.log("user reducer", action);
-      return { ...state, name: action.name };
+    case UPDATE_USER:
+      return { ...state, user: { ...state.user, ...action.user } };
     default:
-      return false;
+      return state;
   }
 };

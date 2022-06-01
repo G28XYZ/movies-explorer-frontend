@@ -17,16 +17,14 @@ import InfoToolTip from "../InfoToolTip/InfoToolTip";
 import ProtectedRoute from "../ProtectedRoute";
 
 import { useStore } from "../../services/StoreProvider";
+import { getMovies } from "../../services/actions/movie";
 
 function App() {
   const [state, dispatch] = useStore();
-
+  const { loading } = state;
+  const { moviesList, favoriteMovies } = state.movie;
   const [loggedIn, setLoggedIn] = useState(true);
-  const [loading, setLoading] = useState(true);
   const [user, setUser] = useState({ name: "", email: "" });
-
-  const [favoriteMovies, setFavoriteMOvies] = useState([]);
-  const [moviesList, setMoviesList] = useState([]);
 
   const [infoToolTip, setInfoTooltip] = useState({
     message: "",
@@ -35,23 +33,8 @@ function App() {
   });
 
   useEffect(() => {
-    console.log(state);
-    dispatch({});
-    api
-      .getMovies()
-      .then((movies) => {
-        setMoviesList(movies);
-        setFavoriteMOvies(movies.slice(0, 3));
-        setTimeout(() => setLoading(false), 2000);
-      })
-      .catch((err) => {
-        setInfoTooltip({
-          message: `Ошибка в запросе фильмов! ${err}`,
-          isOpen: true,
-          success: false,
-        });
-      });
-  }, []);
+    getMovies(dispatch);
+  }, [dispatch]);
 
   function onClosePopup() {
     setInfoTooltip({ ...infoToolTip, isOpen: false });
@@ -133,7 +116,7 @@ function App() {
           exact
           path="/"
           element={
-            <Wrap>
+            <Wrap loggedIn={loggedIn}>
               <Main />
             </Wrap>
           }
@@ -168,7 +151,9 @@ function App() {
         />
         <Route
           path="/sign-up"
-          element={<Register onRegister={onRegister} success={infoToolTip.success} />}
+          element={
+            <Register onRegister={onRegister} success={infoToolTip.success} />
+          }
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
