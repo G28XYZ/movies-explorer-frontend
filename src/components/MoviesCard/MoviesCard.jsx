@@ -1,20 +1,36 @@
+import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
+import {
+  ADD_TO_SAVED_MOVIE,
+  DELETE_SAVED_MOVIE,
+} from "../../services/actions/movie";
+import { useStore } from "../../services/StoreProvider";
 import { moviesApiAddress } from "../../utils/constants";
 
 function MoviesCard({ movie }) {
+  const [state, dispatch] = useStore();
+  const { savedMovies } = state.movie;
+
   const location = useLocation();
   const path = location.pathname;
-  const isSavedMovies = path === "/saved-movies";
+  const onRouteSavedMovies = path === "/saved-movies";
   const imageUrl = movie.image.formats.thumbnail.url;
   const hours = Math.floor(movie.duration / 60);
   const minutes = movie.duration % 60;
 
+  const movieSaved = savedMovies.some((item) => item.id === movie.id);
+
+  const buttonClassName =
+    (movieSaved && !onRouteSavedMovies && "card__favorite_active") ||
+    (onRouteSavedMovies && "card__favorite_delete");
+
+  useEffect(() => {}, []);
+
   function handleClickFavorite(e) {
-    const button = e.target;
-    if (button.classList.contains("card__favorite_active")) {
-      button.classList.remove("card__favorite_active");
+    if (movieSaved) {
+      dispatch({ type: DELETE_SAVED_MOVIE, movie });
     } else {
-      button.classList.add("card__favorite_active");
+      dispatch({ type: ADD_TO_SAVED_MOVIE, movie });
     }
   }
 
@@ -28,9 +44,7 @@ function MoviesCard({ movie }) {
           } ${minutes}м`}</p>
         </div>
         <button
-          className={`card__favorite color_secondary link ${
-            isSavedMovies && "card__favorite_delete"
-          }`}
+          className={`card__favorite color_secondary link ${buttonClassName}`}
           onClick={handleClickFavorite}
         ></button>
       </div>

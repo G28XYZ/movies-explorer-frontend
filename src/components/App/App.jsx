@@ -23,8 +23,7 @@ import { getUser } from "../../services/actions/user";
 function App() {
   const [state, dispatch] = useStore();
   const { loading, loggedIn } = state;
-  const { moviesList, favoriteMovies } = state.movie;
-  const [user, setUser] = useState({ name: "", email: "" });
+  const { moviesList, savedMovies } = state.movie;
 
   const infoToolTip = state.toolTip;
 
@@ -35,30 +34,6 @@ function App() {
 
   function onClosePopup() {
     dispatch({ type: CLOSE_TOOL_TIP });
-  }
-
-  function onLogin(body) {
-    return auth
-      .login(body)
-      .then(({ token }) => {
-        return true;
-      })
-      .catch((err) => {
-        return false;
-      });
-  }
-
-  function onRegister(body) {
-    return auth
-      .registration(body)
-      .then((data) => {
-        setUser({ ...user, ...data });
-
-        return true;
-      })
-      .catch((err) => {
-        return false;
-      });
   }
 
   const MoviesProps = {
@@ -90,7 +65,7 @@ function App() {
           path="/saved-movies"
           element={
             <ProtectedRoute loggedIn={loggedIn}>
-              <SavedMovies moviesList={favoriteMovies} />
+              <SavedMovies moviesList={savedMovies} />
             </ProtectedRoute>
           }
         />
@@ -104,13 +79,11 @@ function App() {
         />
         <Route
           path="/sign-in"
-          element={<Login onLogin={onLogin} success={infoToolTip.success} />}
+          element={<Login success={infoToolTip.success} />}
         />
         <Route
           path="/sign-up"
-          element={
-            <Register onRegister={onRegister} success={infoToolTip.success} />
-          }
+          element={<Register success={infoToolTip.success} />}
         />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>

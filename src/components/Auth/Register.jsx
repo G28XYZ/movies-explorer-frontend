@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
+import { onRegister } from "../../services/actions/user";
 import Input from "./Input";
 
-function Register({ onRegister, success }) {
+function Register({ success }) {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -31,7 +32,12 @@ function Register({ onRegister, success }) {
       <h2 className="auth__title">Добро пожаловать!</h2>
       <form className="auth__form" onSubmit={handleSubmit}>
         <div className="auth__input-container">
-          <Input name="name" title="Имя" onChange={handleChange} error={error.name} />
+          <Input
+            name="name"
+            title="Имя"
+            onChange={handleChange}
+            error={error.name}
+          />
           <Input
             type="email"
             name="email"

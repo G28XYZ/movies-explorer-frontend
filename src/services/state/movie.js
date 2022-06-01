@@ -1,5 +1,5 @@
 export const movieState = {
   moviesList: [],
-  favoriteMovies: [],
+  savedMovies: [],
   filterShortFilms: false,
 };

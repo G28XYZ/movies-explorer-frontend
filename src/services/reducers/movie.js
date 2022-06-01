@@ -1,6 +1,7 @@
 import {
+  ADD_TO_SAVED_MOVIE,
+  DELETE_SAVED_MOVIE,
   REQUEST_MOVIES_SUCCESS,
-  ADD_FAVORITE_MOVIE,
   REQUEST_MOVIES,
   REQUEST_MOVIES_FAILD,
   CHANGE_FILTER,
@@ -31,16 +32,25 @@ export const movieReducer = (state, action) => {
         loading: false,
       };
 
-    case ADD_FAVORITE_MOVIE:
-      console.log(ADD_FAVORITE_MOVIE);
+    case ADD_TO_SAVED_MOVIE:
+      console.log(ADD_TO_SAVED_MOVIE);
       return {
         ...state,
         movie: {
           ...state.movie,
-          favoriteMovies: [
-            ...state.movie.favoriteMovies,
-            ...action.favoriteMovies,
-          ],
+          savedMovies: [...state.movie.savedMovies, action.movie],
+        },
+      };
+    case DELETE_SAVED_MOVIE:
+      console.log(DELETE_SAVED_MOVIE);
+      const savedMovies = state.movie.savedMovies.filter(
+        (movie) => movie.id !== action.movie.id
+      );
+      return {
+        ...state,
+        movie: {
+          ...state.movie,
+          savedMovies,
         },
       };
 

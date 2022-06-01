@@ -1,6 +1,7 @@
 import api from "../../utils/api";
 
-export const ADD_FAVORITE_MOVIE = "ADD_FAVORITE_MOVIE";
+export const ADD_TO_SAVED_MOVIE = "ADD_TO_SAVED_MOVIE";
+export const DELETE_SAVED_MOVIE = "DELETE_SAVED_MOVIE";
 
 export const REQUEST_MOVIES = "REQUEST_MOVIES";
 export const REQUEST_MOVIES_SUCCESS = "REQUEST_MOVIES_SUCCESS";
