@@ -1,11 +1,14 @@
 import { Link, useLocation } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import React, { useRef } from "react";
+import { useStore } from "../../services/StoreProvider";
 
-function Header({ loggedIn }) {
+function Header() {
   const menuRef = useRef();
   const location = useLocation();
   const path = location.pathname;
+  const [state] = useStore();
+  const { loggedIn } = state;
 
   const handleOpenMenu = () => {
     const menu = menuRef.current;
@@ -25,8 +28,15 @@ function Header({ loggedIn }) {
       {loggedIn ? (
         <nav className="header__navigate header__navigate-movies">
           <ul className="header__movies text" ref={menuRef}>
-            <button className="header__burger-close" onClick={handleCloseMenu}></button>
-            <li className={`header__movies-item ${path === "/" && "header__movies-item_selected"}`}>
+            <button
+              className="header__burger-close"
+              onClick={handleCloseMenu}
+            ></button>
+            <li
+              className={`header__movies-item ${
+                path === "/" && "header__movies-item_selected"
+              }`}
+            >
               <Link to="/" className="link" onClick={handleCloseMenu}>
                 Главная
               </Link>
@@ -45,7 +55,11 @@ function Header({ loggedIn }) {
                 path === "/saved-movies" && "header__movies-item_selected"
               }`}
             >
-              <Link to="/saved-movies" className="link" onClick={handleCloseMenu}>
+              <Link
+                to="/saved-movies"
+                className="link"
+                onClick={handleCloseMenu}
+              >
                 Сохранённые фильмы
               </Link>
             </li>

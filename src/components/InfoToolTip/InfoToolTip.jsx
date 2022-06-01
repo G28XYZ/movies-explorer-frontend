@@ -1,8 +1,18 @@
 import successImage from "../../images/success.png";
 import deniedImage from "../../images/denied.png";
 import { useCallback, useEffect } from "react";
+import { useStore } from "../../services/StoreProvider";
+import { CLOSE_TOOL_TIP } from "../../services/actions/toolTip";
 
-const InfoToolTip = ({ infoToolTip, onClose }) => {
+const InfoToolTip = () => {
+  const [state, dispatch] = useStore();
+
+  const { toolTip } = state;
+
+  const onClose = useCallback(() => {
+    dispatch({ type: CLOSE_TOOL_TIP });
+  }, [dispatch]);
+
   const handleCloseByEsc = useCallback(
     (e) => {
       if (e.code === "Escape") {
@@ -19,7 +29,7 @@ const InfoToolTip = ({ infoToolTip, onClose }) => {
     };
   }, [handleCloseByEsc]);
 
-  const { success, message, isOpen } = infoToolTip;
+  const { success, message, isOpen } = toolTip;
 
   return (
     <div className={`popup ${isOpen && "popup_opened"}`}>
