@@ -1,9 +1,13 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import logo from "../../images/logo.svg";
+import { onLogin } from "../../services/actions/user";
+import { useStore } from "../../services/StoreProvider";
 import Input from "./Input";
 
-function Login({ onLogin, success }) {
+function Login({ success }) {
+  const [state, dispatch] = useStore();
+  const loggedIn = state.loggedIn;
   const [error, setError] = useState({ email: "", password: "" });
   const [formData, setFormData] = useState({ email: "", password: "" });
   const navigate = useNavigate();
@@ -13,11 +17,13 @@ function Login({ onLogin, success }) {
     setError({ ...error, [e.target.name]: e.target.validationMessage });
   };
 
+  useEffect(() => {
+    loggedIn && navigate("/");
+  }, [loggedIn, navigate]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
-    onLogin(formData).then((isRedirect) => {
-      isRedirect && navigate("/");
-    });
+    onLogin(dispatch, formData, state);
   };
 
   return (

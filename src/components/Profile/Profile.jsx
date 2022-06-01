@@ -1,8 +1,10 @@
 import { useEffect } from "react";
 import { Link } from "react-router-dom";
+import { updateUser } from "../../services/actions/user";
+
 import { useStore } from "../../services/StoreProvider";
 
-function Profile({ handleUpdateUser }) {
+function Profile() {
   const [state, dispatch] = useStore();
   const userInfo = state.user;
 
@@ -19,7 +21,7 @@ function Profile({ handleUpdateUser }) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    handleUpdateUser(userInfo);
+    updateUser(dispatch, state.user);
   }
 
   return (

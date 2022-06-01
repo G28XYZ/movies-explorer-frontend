@@ -1,13 +1,19 @@
 import React, { createContext, useReducer, useMemo, useContext } from "react";
+
 import { userState } from "./state/user";
 import { movieState } from "./state/movie";
+import { toolTip } from "./state/toolTip";
+
 import { userReducer } from "./reducers/user";
 import { movieReducer } from "./reducers/movie";
+import { toolTipReducer } from "./reducers/toolTip";
 
 const globalState = {
+  loggedIn: false,
   loading: true,
   user: { ...userState },
   movie: { ...movieState },
+  toolTip,
 };
 
 const GlobalContext = createContext(globalState);
@@ -15,7 +21,7 @@ const GlobalContext = createContext(globalState);
 const reducers = (state, action) => {
   return {
     ...state,
-    ...[userReducer, movieReducer].reduce(
+    ...[userReducer, movieReducer, toolTipReducer].reduce(
       (objState, reducer) => ({ ...objState, ...reducer(objState, action) }),
       state
     ),

@@ -6,7 +6,6 @@ import Movies from "../Movies";
 import { Routes, Route } from "react-router-dom";
 import { Login, Register } from "../Auth";
 
-import api from "../../utils/api";
 import auth from "../../utils/auth";
 
 import SavedMovies from "../SavedMovies";
@@ -18,66 +17,33 @@ import ProtectedRoute from "../ProtectedRoute";
 
 import { useStore } from "../../services/StoreProvider";
 import { getMovies } from "../../services/actions/movie";
+import { CLOSE_TOOL_TIP } from "../../services/actions/toolTip";
+import { getUser } from "../../services/actions/user";
 
 function App() {
   const [state, dispatch] = useStore();
-  const { loading } = state;
+  const { loading, loggedIn } = state;
   const { moviesList, favoriteMovies } = state.movie;
-  const [loggedIn, setLoggedIn] = useState(true);
   const [user, setUser] = useState({ name: "", email: "" });
 
-  const [infoToolTip, setInfoTooltip] = useState({
-    message: "",
-    isOpen: false,
-    success: false,
-  });
+  const infoToolTip = state.toolTip;
 
   useEffect(() => {
     getMovies(dispatch);
+    getUser(dispatch);
   }, [dispatch]);
 
   function onClosePopup() {
-    setInfoTooltip({ ...infoToolTip, isOpen: false });
-  }
-
-  function handleUpdateUser(body) {
-    api
-      .updateUser(body)
-      .then((data) => {
-        setUser({ ...user, ...data });
-        setInfoTooltip({
-          message: `Вы успешно изменили свои данные!`,
-          isOpen: true,
-          success: true,
-        });
-      })
-      .catch((err) => {
-        setInfoTooltip({
-          message: `Ошибка редактирования пользователя! ${err}`,
-          isOpen: true,
-          success: false,
-        });
-      });
+    dispatch({ type: CLOSE_TOOL_TIP });
   }
 
   function onLogin(body) {
     return auth
       .login(body)
       .then(({ token }) => {
-        setLoggedIn(true);
-        setInfoTooltip({
-          message: "Вы успешно вошли!",
-          isOpen: true,
-          success: true,
-        });
         return true;
       })
       .catch((err) => {
-        setInfoTooltip({
-          message: `Ошибка авторизации! ${err}`,
-          isOpen: true,
-          success: false,
-        });
         return false;
       });
   }
@@ -87,19 +53,10 @@ function App() {
       .registration(body)
       .then((data) => {
         setUser({ ...user, ...data });
-        setInfoTooltip({
-          message: "Вы успешно зарегистрировались!",
-          isOpen: true,
-          success: true,
-        });
+
         return true;
       })
       .catch((err) => {
-        setInfoTooltip({
-          message: `Ошибка регистрации! ${err}`,
-          isOpen: true,
-          success: false,
-        });
         return false;
       });
   }
@@ -141,7 +98,7 @@ function App() {
           path="/profile"
           element={
             <ProtectedRoute loggedIn={loggedIn}>
-              <Profile user={user} handleUpdateUser={handleUpdateUser} />
+              <Profile />
             </ProtectedRoute>
           }
         />
