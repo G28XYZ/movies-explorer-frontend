@@ -15,11 +15,13 @@ import ProtectedRoute from "../ProtectedRoute";
 
 import { useStore } from "../../services/StoreProvider";
 import { getUser } from "../../services/actions/user";
+import { getSavedMovies } from "../../services/actions/movie";
 
 function App() {
   const [, dispatch] = useStore();
 
   useEffect(() => {
+    getSavedMovies(dispatch);
     getUser(dispatch);
   }, [dispatch]);
 

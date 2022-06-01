@@ -1,9 +1,5 @@
 import React, { createContext, useReducer, useMemo, useContext } from "react";
 
-import { userState } from "./state/user";
-import { movieState } from "./state/movie";
-import { toolTipState } from "./state/toolTip";
-
 import { userReducer } from "./reducers/user";
 import { movieReducer } from "./reducers/movie";
 import { toolTipReducer } from "./reducers/toolTip";
@@ -11,9 +7,16 @@ import { toolTipReducer } from "./reducers/toolTip";
 const globalState = {
   loggedIn: false,
   loading: false,
-  user: { ...userState },
-  movie: { ...movieState },
-  toolTip: { ...toolTipState },
+  user: { name: "", email: "", _id: "" },
+  movie: {
+    moviesList: [],
+    savedMovies: [],
+    filterShortFilms: false,
+    searchText: "",
+    notFound: "",
+    showedMovies: 0,
+  },
+  toolTip: { message: "", isOpen: false, success: true },
 };
 
 const GlobalContext = createContext(globalState);

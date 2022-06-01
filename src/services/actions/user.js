@@ -82,7 +82,6 @@ export const getUser = (dispatch) => {
   auth
     .authentication()
     .then((user) => {
-      console.log(user);
       dispatch({ type: AUTH_USER, user });
     })
     .catch(console.log);

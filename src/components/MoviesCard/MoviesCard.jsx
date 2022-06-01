@@ -1,9 +1,6 @@
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import {
-  ADD_TO_SAVED_MOVIE,
-  DELETE_SAVED_MOVIE,
-} from "../../services/actions/movie";
+import { saveMovie, deleteMovie } from "../../services/actions/movie";
 import { useStore } from "../../services/StoreProvider";
 import { moviesApiAddress } from "../../utils/constants";
 
@@ -14,7 +11,7 @@ function MoviesCard({ movie }) {
   const location = useLocation();
   const path = location.pathname;
   const onRouteSavedMovies = path === "/saved-movies";
-  const imageUrl = movie.image.formats.thumbnail.url;
+  const imageUrl = movie.image.formats ? moviesApiAddress + movie.image.url : movie.image;
   const hours = Math.floor(movie.duration / 60);
   const minutes = movie.duration % 60;
 
@@ -28,9 +25,9 @@ function MoviesCard({ movie }) {
 
   function handleClickFavorite(e) {
     if (movieSaved) {
-      dispatch({ type: DELETE_SAVED_MOVIE, movie });
+      deleteMovie(dispatch, movie._id);
     } else {
-      dispatch({ type: ADD_TO_SAVED_MOVIE, movie });
+      saveMovie(dispatch, movie);
     }
   }
 
@@ -48,11 +45,7 @@ function MoviesCard({ movie }) {
           onClick={handleClickFavorite}
         ></button>
       </div>
-      <img
-        className="card__image"
-        src={`${moviesApiAddress}${imageUrl}`}
-        alt={movie.nameRU}
-      />
+      <img className="card__image" src={imageUrl} alt={movie.nameRU} />
     </article>
   );
 }
