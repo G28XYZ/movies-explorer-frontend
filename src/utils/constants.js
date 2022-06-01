@@ -1,4 +1,4 @@
 const moviesApiAddress = "https://api.nomoreparties.co";
-const authApiAddress = "https://api-movies.nomoredomains.xyz";
+const backendApiAddress = "https://api-movies.nomoredomains.xyz";
 
-export { moviesApiAddress, authApiAddress };
+export { moviesApiAddress, backendApiAddress };

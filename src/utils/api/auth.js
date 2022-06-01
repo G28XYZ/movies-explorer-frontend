@@ -1,4 +1,4 @@
-import { authApiAddress } from "./constants";
+import { backendApiAddress } from "../constants";
 
 class Auth {
   constructor(address) {
@@ -9,9 +9,7 @@ class Auth {
   }
 
   _handleResponse = (response) => {
-    return response.ok
-      ? response.json()
-      : Promise.reject(`Error: ${response.message}`);
+    return response.ok ? response.json() : Promise.reject(`Error: ${response.message}`);
   };
 
   login({ email, password }) {
@@ -49,6 +47,6 @@ class Auth {
   }
 }
 
-const auth = new Auth(authApiAddress);
+const auth = new Auth(backendApiAddress);
 
 export default auth;

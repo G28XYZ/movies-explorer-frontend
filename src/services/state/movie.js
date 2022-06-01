@@ -3,4 +3,6 @@ export const movieState = {
   savedMovies: [],
   filterShortFilms: false,
   searchText: "",
+  notFound: "",
+  showedMovies: 0,
 };

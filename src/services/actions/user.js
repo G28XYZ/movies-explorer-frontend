@@ -1,13 +1,14 @@
-import api from "../../utils/api";
-import auth from "../../utils/auth";
+import mainApi from "../../utils/api/mainApi";
+import auth from "../../utils/api/auth";
 
 export const AUTH_USER = "SET_USER";
 export const UPDATE_USER = "UPDATE_USER";
 export const LOGIN_USER = "LOGIN_USER";
 export const REGISTER_USER = "REGISTER_USER";
+export const LOGOUT = "LOGOUT";
 
 export const updateUser = (dispatch, body) => {
-  api
+  mainApi
     .updateUser(body)
     .then((data) => {
       dispatch({ type: UPDATE_USER, user: data });
@@ -31,8 +32,6 @@ export const onLogin = (dispatch, body, state) => {
     .login(body)
     .then(({ token }) => {
       dispatch({ type: LOGIN_USER, auth: true });
-      localStorage.setItem("jwt", token);
-      auth.setDevCookie();
       return true;
       // setInfoTooltip({
       //   message: `Вы успешно изменили свои данные!`,
@@ -49,6 +48,12 @@ export const onLogin = (dispatch, body, state) => {
       // });
       return false;
     });
+};
+
+export const logOut = (dispatch) => {
+  auth.logout().then(() => {
+    dispatch({ type: LOGOUT });
+  });
 };
 
 export const onRegister = (dispatch, body) => {

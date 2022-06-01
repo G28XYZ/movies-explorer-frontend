@@ -1,15 +1,21 @@
 import {
   ADD_TO_SAVED_MOVIE,
   DELETE_SAVED_MOVIE,
-  REQUEST_MOVIES_SUCCESS,
   REQUEST_MOVIES,
-  REQUEST_MOVIES_FAILD,
+  REQUEST_MOVIES_SUCCESS,
+  REQUEST_MOVIES_FAILED,
   CHANGE_FILTER,
   SET_SEARCH_TEXT,
+  ADD_SHOWED_MOVIES,
 } from "../actions/movie";
 
 export const movieReducer = (state, action) => {
   switch (action.type) {
+    case ADD_SHOWED_MOVIES:
+      return {
+        ...state,
+        movie: { ...state.movie, showedMovies: state.movie.showedMovies + action.count },
+      };
     case CHANGE_FILTER:
       return {
         ...state,
@@ -17,7 +23,14 @@ export const movieReducer = (state, action) => {
       };
 
     case REQUEST_MOVIES:
-      return { ...state, loading: true };
+      return {
+        ...state,
+        loading: true,
+        movie: {
+          ...state.movie,
+          notFound: "",
+        },
+      };
 
     case REQUEST_MOVIES_SUCCESS:
       const moviesList = action.moviesList.filter((movie) =>
@@ -26,17 +39,26 @@ export const movieReducer = (state, action) => {
       return {
         ...state,
         loading: false,
-        movie: { ...state.movie, moviesList },
+        movie: {
+          ...state.movie,
+          moviesList,
+          notFound: !moviesList.length ? "Ничего не найдено ¯\\_(ツ)_/¯" : "",
+        },
       };
 
-    case REQUEST_MOVIES_FAILD:
+    case REQUEST_MOVIES_FAILED:
       return {
         ...state,
         loading: false,
+        toolTip: {
+          isOpen: true,
+          success: false,
+          message:
+            "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз",
+        },
       };
 
     case ADD_TO_SAVED_MOVIE:
-      console.log(ADD_TO_SAVED_MOVIE);
       return {
         ...state,
         movie: {
@@ -46,10 +68,7 @@ export const movieReducer = (state, action) => {
       };
 
     case DELETE_SAVED_MOVIE:
-      console.log(DELETE_SAVED_MOVIE);
-      const savedMovies = state.movie.savedMovies.filter(
-        (movie) => movie.id !== action.movie.id
-      );
+      const savedMovies = state.movie.savedMovies.filter((movie) => movie.id !== action.movie.id);
       return {
         ...state,
         movie: {
