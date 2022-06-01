@@ -3,6 +3,8 @@ import api from "../../utils/api";
 export const ADD_TO_SAVED_MOVIE = "ADD_TO_SAVED_MOVIE";
 export const DELETE_SAVED_MOVIE = "DELETE_SAVED_MOVIE";
 
+export const SET_SEARCH_TEXT = "SET_SEARCH_TEXT";
+
 export const REQUEST_MOVIES = "REQUEST_MOVIES";
 export const REQUEST_MOVIES_SUCCESS = "REQUEST_MOVIES_SUCCESS";
 export const REQUEST_MOVIES_FAILD = "REQUEST_MOVIES_SUCCESS";

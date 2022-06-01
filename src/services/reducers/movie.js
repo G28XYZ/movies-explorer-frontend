@@ -5,6 +5,7 @@ import {
   REQUEST_MOVIES,
   REQUEST_MOVIES_FAILD,
   CHANGE_FILTER,
+  SET_SEARCH_TEXT,
 } from "../actions/movie";
 
 export const movieReducer = (state, action) => {
@@ -19,11 +20,13 @@ export const movieReducer = (state, action) => {
       return { ...state, loading: true };
 
     case REQUEST_MOVIES_SUCCESS:
-      console.log(REQUEST_MOVIES_SUCCESS, action);
+      const moviesList = action.moviesList.filter((movie) =>
+        `${movie.nameRU} ${movie.nameEN}`.includes(state.movie.searchText)
+      );
       return {
         ...state,
         loading: false,
-        movie: { ...state.movie, moviesList: action.moviesList },
+        movie: { ...state.movie, moviesList },
       };
 
     case REQUEST_MOVIES_FAILD:
@@ -41,6 +44,7 @@ export const movieReducer = (state, action) => {
           savedMovies: [...state.movie.savedMovies, action.movie],
         },
       };
+
     case DELETE_SAVED_MOVIE:
       console.log(DELETE_SAVED_MOVIE);
       const savedMovies = state.movie.savedMovies.filter(
@@ -53,6 +57,9 @@ export const movieReducer = (state, action) => {
           savedMovies,
         },
       };
+
+    case SET_SEARCH_TEXT:
+      return { ...state, movie: { ...state.movie, searchText: action.text } };
 
     default:
       return state;

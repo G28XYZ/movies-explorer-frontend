@@ -1,11 +1,15 @@
+import { useStore } from "../../services/StoreProvider";
 import MoviesCardList from "../MoviesCardList";
 import SearchForm from "../SearchForm";
 
-function Movies({ moviesList, loading }) {
+function Movies() {
+  const [state] = useStore();
+  const { moviesList } = state.movie;
+
   return (
     <main className="movies">
       <SearchForm />
-      <MoviesCardList moviesList={moviesList} loading={loading} />
+      <MoviesCardList moviesList={moviesList} />
     </main>
   );
 }

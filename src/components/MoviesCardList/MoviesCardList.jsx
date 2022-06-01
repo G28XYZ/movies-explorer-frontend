@@ -3,8 +3,9 @@ import { useStore } from "../../services/StoreProvider";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import Preloader from "../Preloader";
 
-function MoviesCardList({ moviesList, loading }) {
+function MoviesCardList({ moviesList }) {
   const [state] = useStore();
+  const { loading } = state;
   const { filterShortFilms } = state.movie;
   const [countMovies, setCountMovies] = useState(12);
   if (filterShortFilms) {
@@ -12,7 +13,7 @@ function MoviesCardList({ moviesList, loading }) {
   }
 
   function handleClickMoreMovies() {
-    setCountMovies(countMovies + 12);
+    setCountMovies(countMovies + 3);
   }
 
   return (

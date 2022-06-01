@@ -10,7 +10,7 @@ import { toolTipReducer } from "./reducers/toolTip";
 
 const globalState = {
   loggedIn: true,
-  loading: true,
+  loading: false,
   user: { ...userState },
   movie: { ...movieState },
   toolTip: { ...toolTipState },
