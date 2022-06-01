@@ -6,6 +6,8 @@ export const REQUEST_MOVIES = "REQUEST_MOVIES";
 export const REQUEST_MOVIES_SUCCESS = "REQUEST_MOVIES_SUCCESS";
 export const REQUEST_MOVIES_FAILD = "REQUEST_MOVIES_SUCCESS";
 
+export const CHANGE_FILTER = "CHANGE_FILTER";
+
 export function getMovies(dispatch) {
   dispatch({ type: REQUEST_MOVIES });
   api

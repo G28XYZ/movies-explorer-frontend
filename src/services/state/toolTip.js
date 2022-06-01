@@ -1,4 +1,4 @@
-export const toolTip = {
+export const toolTipState = {
   message: "",
   isOpen: false,
   success: true,
