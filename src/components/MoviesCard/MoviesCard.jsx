@@ -23,7 +23,9 @@ function MoviesCard({ movie }) {
       <div className="card__header">
         <div>
           <h3 className="card__title text_subtitle">{movie.nameRU}</h3>
-          <p className="card__duration text color_text">{`${hours}ч ${minutes}м`}</p>
+          <p className="card__duration text color_text">{`${
+            hours === 0 ? "" : hours + "ч"
+          } ${minutes}м`}</p>
         </div>
         <button
           className={`card__favorite color_secondary link ${
@@ -32,7 +34,11 @@ function MoviesCard({ movie }) {
           onClick={handleClickFavorite}
         ></button>
       </div>
-      <img className="card__image" src={`${moviesApiAddress}${imageUrl}`} alt={movie.nameRU} />
+      <img
+        className="card__image"
+        src={`${moviesApiAddress}${imageUrl}`}
+        alt={movie.nameRU}
+      />
     </article>
   );
 }
