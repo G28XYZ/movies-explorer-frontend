@@ -4,8 +4,11 @@ import logo from "../../images/logo.svg";
 import { onRegister } from "../../services/actions/user";
 import Input from "./Input";
 import { isName, isPassword, isEmail } from "../../utils/validation";
+import { useStore } from "../../services/StoreProvider";
 
 function Register() {
+  const [state, dispatch] = useStore();
+  const { authMessage } = state;
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -54,8 +57,8 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onRegister(formData).then((isRedirect) => {
-      isRedirect && navigate("/sign-in");
+    onRegister(dispatch, formData).then((success) => {
+      success && navigate("/movies");
     });
   };
 
@@ -86,6 +89,7 @@ function Register() {
             error={error.password}
           />
         </div>
+        <span className="auth__message">{authMessage}</span>
         <button
           className={`${buttonProps.className} text`}
           disabled={buttonProps.disabled}

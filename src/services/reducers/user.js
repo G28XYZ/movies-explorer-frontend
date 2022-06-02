@@ -1,4 +1,10 @@
-import { UPDATE_USER, LOGIN_USER, AUTH_USER, LOGOUT } from "../actions/user";
+import {
+  UPDATE_USER,
+  LOGIN_USER,
+  LOGIN_USER_FAILD,
+  AUTH_USER,
+  LOGOUT,
+} from "../actions/user";
 
 export const userReducer = (state, action) => {
   switch (action.type) {
@@ -12,8 +18,16 @@ export const userReducer = (state, action) => {
     case LOGIN_USER:
       return {
         ...state,
-        loggedIn: action.auth,
+        loggedIn: true,
+        toolTip: {
+          success: true,
+          isOpen: true,
+          message: "Успешно!",
+        },
       };
+
+    case LOGIN_USER_FAILD:
+      return { ...state, authMessage: action.message };
 
     case LOGOUT:
       return {

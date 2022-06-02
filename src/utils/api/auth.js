@@ -9,9 +9,7 @@ class Auth {
   }
 
   _handleResponse = (response) => {
-    return response.ok
-      ? response.json()
-      : Promise.reject(`Error: ${response.message}`);
+    return response.ok ? response.json() : Promise.reject(response.status);
   };
 
   login({ email, password }) {

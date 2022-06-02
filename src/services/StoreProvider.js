@@ -7,6 +7,7 @@ import { toolTipReducer } from "./reducers/toolTip";
 const globalState = {
   loggedIn: false,
   loading: false,
+  authMessage: "",
   user: { name: "", email: "", _id: "" },
   movie: {
     moviesList: [],
@@ -35,7 +36,11 @@ export function StoreProvider({ children }) {
   const [state, dispatch] = useReducer(reducers, globalState);
   const contextValue = useMemo(() => [state, dispatch], [state, dispatch]);
 
-  return <GlobalContext.Provider value={contextValue}>{children}</GlobalContext.Provider>;
+  return (
+    <GlobalContext.Provider value={contextValue}>
+      {children}
+    </GlobalContext.Provider>
+  );
 }
 
 export function useStore() {

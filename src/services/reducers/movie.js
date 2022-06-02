@@ -15,7 +15,10 @@ export const movieReducer = (state, action) => {
     case ADD_SHOWED_MOVIES:
       return {
         ...state,
-        movie: { ...state.movie, showedMovies: state.movie.showedMovies + action.count },
+        movie: {
+          ...state.movie,
+          showedMovies: state.movie.showedMovies + action.count,
+        },
       };
     case CHANGE_FILTER:
       return {
@@ -88,7 +91,7 @@ export const movieReducer = (state, action) => {
           isOpen: true,
           success: false,
           message:
-            "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз",
+            "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.",
         },
       };
 

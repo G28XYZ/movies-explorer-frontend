@@ -48,7 +48,6 @@
   border: none;
   background-color: #4285f4;
   color: white;
-  margin-top: 180px;
 }
 
 .auth__submit_disabled {
@@ -62,8 +61,16 @@
   border: none;
   background-color: #4285f4;
   color: white;
-  margin-top: 180px;
-  opacity: 0.5;
+  opacity: 0.3;
+}
+
+.auth__message {
+  color: #ee3465;
+  font-size: 12px;
+  height: 50px;
+  line-height: 1.2;
+  padding-top: 130px;
+  text-align: center;
 }
 
 .auth__submit:hover {

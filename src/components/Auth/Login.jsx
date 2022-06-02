@@ -8,6 +8,7 @@ import { isPassword, isEmail } from "../../utils/validation";
 
 function Login() {
   const [state, dispatch] = useStore();
+  const { authMessage } = state;
   const { loggedIn } = state;
   const [error, setError] = useState({ email: "", password: "" });
   const [formData, setFormData] = useState({ email: "", password: "" });
@@ -75,6 +76,7 @@ function Login() {
             error={error.password}
           />
         </div>
+        <span className="auth__message">{authMessage}</span>
         <button
           className={`${buttonProps.className} text`}
           disabled={buttonProps.disabled}
