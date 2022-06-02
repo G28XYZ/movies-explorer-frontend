@@ -1,21 +1,35 @@
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import { logOut, updateUser } from "../../services/actions/user";
-
+import { isName, isEmail } from "../../utils/validation";
 import { useStore } from "../../services/StoreProvider";
 
 function Profile() {
   const [state, dispatch] = useStore();
   const userInfo = state.user;
+  const [userData, setUserData] = useState(Object.assign({}, userInfo));
+  const [buttonProps, setButtonProps] = useState({
+    disabled: true,
+    className: "profile__submit_disabled",
+  });
 
   function handleChange(e) {
-    dispatch({
-      type: "UPDATE_USER",
-      user: { [e.target.name]: e.target.value },
-    });
+    setUserData({ [e.target.name]: e.target.value });
+    checkEdit();
+  }
+
+  function checkEdit() {
+    console.log(userData);
+    if (userInfo.name !== userData.name || userInfo.email !== userData.email) {
+      if (!isName(userData.name) && !isEmail(userData.email)) {
+        setButtonProps({ disabled: false, className: "profile__submit" });
+      }
+    }
   }
 
   function handleSubmit(e) {
     e.preventDefault();
+
     updateUser(dispatch, state.user);
   }
 
@@ -32,7 +46,7 @@ function Profile() {
             name="name"
             type="text"
             className="profile__input"
-            value={userInfo.name}
+            value={userData.name}
             onChange={handleChange}
           />
         </label>
@@ -41,14 +55,15 @@ function Profile() {
             name="email"
             type="text"
             className="profile__input"
-            value={userInfo.email}
+            value={userData.email}
             onChange={handleChange}
           />
         </label>
         <button
           type="submit"
-          className="profile__submit link text"
+          className={`${buttonProps.className} text`}
           onClick={handleSubmit}
+          disabled={buttonProps.disabled}
         >
           Редактировать
         </button>

@@ -52,6 +52,17 @@
   cursor: pointer;
 }
 
+.profile__submit:hover {
+  text-shadow: rgb(0, 255, 149) 1px 0 10px;
+}
+
+.profile__submit_disabled {
+  margin-top: 220px;
+  background-color: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
+}
+
 .profile__logout {
   padding-top: 16px;
   color: rgba(238, 52, 101, 1);
