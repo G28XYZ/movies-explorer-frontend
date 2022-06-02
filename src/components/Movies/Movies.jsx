@@ -1,7 +1,9 @@
+import { useCallback } from "react";
 import {
   MOVIES_CHANGE_FILTER,
   searchMovies,
   MOVIES_SEARCH_TEXT,
+  ADD_SHOWED_MOVIES,
 } from "../../services/actions/mainMovies";
 import { useStore } from "../../services/StoreProvider";
 import MoviesCardList from "../MoviesCardList";
@@ -10,7 +12,7 @@ import FilterCheckbox from "../SearchForm/FilterCheckbox";
 
 function Movies() {
   const [state, dispatch] = useStore();
-  const { movies, searchText, filterShortFilms } = state.mainMovie;
+  const { searchText, filterShortFilms } = state.mainMovie;
 
   function onChangeFilter(e) {
     dispatch({ type: MOVIES_CHANGE_FILTER, checked: e.target.checked });
@@ -25,12 +27,19 @@ function Movies() {
     searchMovies(dispatch);
   }
 
+  const handleClickMoreMovies = useCallback(
+    (count) => {
+      dispatch({ type: ADD_SHOWED_MOVIES, count });
+    },
+    [dispatch]
+  );
+
   return (
     <main className="movies">
       <SearchForm searchText={searchText} handleChange={handleChange} handleSubmit={handleSubmit}>
         <FilterCheckbox filterShortFilms={filterShortFilms} onChangeFilter={onChangeFilter} />
       </SearchForm>
-      <MoviesCardList moviesList={movies} />
+      <MoviesCardList {...state.mainMovie} handleClickMoreMovies={handleClickMoreMovies} />
     </main>
   );
 }
