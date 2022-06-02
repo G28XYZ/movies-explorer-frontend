@@ -52,11 +52,22 @@ export function getSavedMovies(dispatch) {
 
 export function saveMovie(
   dispatch,
-  { id, country, director, duration, year, description, image, trailerLink, nameRU, nameEN }
+  {
+    id,
+    country,
+    director,
+    duration,
+    year,
+    description,
+    image,
+    trailerLink,
+    nameRU,
+    nameEN,
+  }
 ) {
   const body = {
     movieId: id,
-    country,
+    country: country || "Unknown",
     director,
     duration,
     year,
@@ -65,7 +76,7 @@ export function saveMovie(
     trailerLink,
     thumbnail: moviesApiAddress + image.formats.thumbnail.url,
     nameRU,
-    nameEN,
+    nameEN: nameEN || nameRU,
   };
   mainApi
     .saveMovie(body)
@@ -83,11 +94,9 @@ export function saveMovie(
 }
 
 export function deleteMovie(dispatch, id) {
-  console.log(id);
   mainApi
     .deleteMovie(id)
     .then((movie) => {
-      console.log(movie);
       dispatch({
         type: DELETE_SAVED_MOVIE,
         movie,

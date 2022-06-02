@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { Link } from "react-router-dom";
 import { updateUser } from "../../services/actions/user";
 
@@ -7,10 +6,6 @@ import { useStore } from "../../services/StoreProvider";
 function Profile() {
   const [state, dispatch] = useStore();
   const userInfo = state.user;
-
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
 
   function handleChange(e) {
     dispatch({

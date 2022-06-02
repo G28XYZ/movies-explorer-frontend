@@ -1,4 +1,3 @@
-import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { saveMovie, deleteMovie } from "../../services/actions/movie";
 import { useStore } from "../../services/StoreProvider";
@@ -11,19 +10,24 @@ function MoviesCard({ movie }) {
   const location = useLocation();
   const path = location.pathname;
   const onRouteSavedMovies = path === "/saved-movies";
-  const imageUrl = movie.image.formats ? moviesApiAddress + movie.image.url : movie.image;
+  const imageUrl = movie.image.formats
+    ? moviesApiAddress + movie.image.url
+    : movie.image;
   const hours = Math.floor(movie.duration / 60);
   const minutes = movie.duration % 60;
 
-  const movieSaved = savedMovies.some((savedMovie) => savedMovie.movieId === movie.id);
+  const movieSaved = savedMovies.find(
+    (savedMovie) => savedMovie.movieId === movie.id || movie.movieId
+  );
 
   const buttonClassName =
     (movieSaved && !onRouteSavedMovies && "card__favorite_active") ||
     (onRouteSavedMovies && "card__favorite_delete");
 
-  function handleClickFavorite(e) {
+  function handleClickFavorite() {
+    console.log(movieSaved);
     if (movieSaved || onRouteSavedMovies) {
-      deleteMovie(dispatch, movie._id);
+      deleteMovie(dispatch, movieSaved._id);
     } else {
       saveMovie(dispatch, movie);
     }

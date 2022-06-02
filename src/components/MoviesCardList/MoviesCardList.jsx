@@ -1,4 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
+import { useLocation } from "react-router-dom";
 import { ADD_SHOWED_MOVIES } from "../../services/actions/movie";
 import { useStore } from "../../services/StoreProvider";
 import MoviesCard from "../MoviesCard/MoviesCard";
@@ -7,6 +8,8 @@ import Preloader from "../Preloader";
 function MoviesCardList({ moviesList }) {
   const [state, dispatch] = useStore();
   const { loading } = state;
+  const location = useLocation();
+  const path = location.pathname;
   const { filterShortFilms, showedMovies, notFound } = state.movie;
 
   const [countShowMore, setCountShowMore] = useState(3);
@@ -49,7 +52,9 @@ function MoviesCardList({ moviesList }) {
         <Preloader />
       ) : (
         <>
-          <p className="cards__message text_subtitle">{notFound}</p>
+          {path === "/movies" && (
+            <p className="cards__message text_subtitle">{notFound}</p>
+          )}
           <div className="cards__list">
             {moviesList.slice(0, showedMovies).map((movie) => (
               <MoviesCard movie={movie} key={movie.id || movie._id} />
@@ -57,7 +62,10 @@ function MoviesCardList({ moviesList }) {
           </div>
 
           {showedMovies < moviesList.length && (
-            <button className="cards__button text link" onClick={handleClickMoreMovies}>
+            <button
+              className="cards__button text link"
+              onClick={handleClickMoreMovies}
+            >
               Ещё
             </button>
           )}
