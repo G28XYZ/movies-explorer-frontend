@@ -1,51 +1,51 @@
 import {
   DELETE_SAVED_MOVIE,
-  REQUEST_MOVIES,
-  GET_MOVIES,
-  REQUEST_MOVIES_FAILED,
-  CHANGE_FILTER,
-  SET_SEARCH_TEXT,
-  ADD_SHOWED_MOVIES,
+  REQUEST_SAVED_MOVIES,
+  SEARCH_SAVED_MOVIES,
+  REQUEST_SAVED_MOVIES_FAILED,
+  SAVED_MOVIES_CHANGE_FILTER,
+  SAVED_MOVIES_SEARCH_TEXT,
+  ADD_SHOWED_SAVED_MOVIES,
   POST_TO_SAVED_MOVIES,
   GET_SAVED_MOVIES,
-} from "../actions/movie";
+} from "../actions/savedMovies";
 
-export const movieReducer = (state, action) => {
+export const savedMovieReducer = (state, action) => {
   switch (action.type) {
-    case ADD_SHOWED_MOVIES:
+    case ADD_SHOWED_SAVED_MOVIES:
       return {
         ...state,
-        movie: {
-          ...state.movie,
-          showedMovies: state.movie.showedMovies + action.count,
+        savedMovie: {
+          ...state.savedMovie,
+          showedMovies: state.savedMovie.showedMovies + action.count,
         },
       };
-    case CHANGE_FILTER:
+    case SAVED_MOVIES_CHANGE_FILTER:
       return {
         ...state,
-        movie: { ...state.movie, filterShortFilms: action.checked },
+        savedMovie: { ...state.savedMovie, filterShortFilms: action.checked },
       };
 
-    case REQUEST_MOVIES:
+    case REQUEST_SAVED_MOVIES:
       return {
         ...state,
         loading: true,
-        movie: {
-          ...state.movie,
+        savedMovie: {
+          ...state.savedMovie,
           notFound: "",
         },
       };
 
-    case GET_MOVIES:
-      const moviesList = action.moviesList.filter((movie) =>
-        `${movie.nameRU} ${movie.nameEN}`.includes(state.movie.searchText)
+    case SEARCH_SAVED_MOVIES:
+      const moviesList = action.movies.filter((movie) =>
+        `${movie.nameRU} ${movie.nameEN}`.includes(state.savedMovie.searchText)
       );
       return {
         ...state,
         loading: false,
-        movie: {
-          ...state.movie,
-          moviesList,
+        savedMovie: {
+          ...state.savedMovie,
+          movies: moviesList,
           notFound: !moviesList.length ? "Ничего не найдено ¯\\_(ツ)_/¯" : "",
         },
       };
@@ -54,9 +54,9 @@ export const movieReducer = (state, action) => {
       return {
         ...state,
         loading: false,
-        movie: {
-          ...state.movie,
-          savedMovies: action.movies,
+        savedMovie: {
+          ...state.savedMovie,
+          movies: action.movies,
         },
       };
 
@@ -64,26 +64,26 @@ export const movieReducer = (state, action) => {
       return {
         ...state,
         loading: false,
-        movie: {
-          ...state.movie,
-          savedMovies: [...state.movie.savedMovies, action.movie],
+        savedMovie: {
+          ...state.savedMovie,
+          savedMovies: [...state.savedMovie.savedMovies, action.movie],
         },
       };
 
     case DELETE_SAVED_MOVIE:
-      const savedMovies = state.movie.savedMovies.filter(
+      const savedMovies = state.savedMovie.savedMovies.filter(
         (movie) => movie.movieId !== action.movie.movieId
       );
       return {
         ...state,
         loading: false,
-        movie: {
-          ...state.movie,
+        savedMovie: {
+          ...state.savedMovie,
           savedMovies,
         },
       };
 
-    case REQUEST_MOVIES_FAILED:
+    case REQUEST_SAVED_MOVIES_FAILED:
       return {
         ...state,
         loading: false,
@@ -95,8 +95,8 @@ export const movieReducer = (state, action) => {
         },
       };
 
-    case SET_SEARCH_TEXT:
-      return { ...state, movie: { ...state.movie, searchText: action.text } };
+    case SAVED_MOVIES_SEARCH_TEXT:
+      return { ...state, savedMovie: { ...state.savedMovie, searchText: action.text } };
 
     default:
       return state;

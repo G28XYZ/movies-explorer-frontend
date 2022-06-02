@@ -15,7 +15,7 @@ import ProtectedRoute from "../ProtectedRoute";
 
 import { useStore } from "../../services/StoreProvider";
 import { getUser } from "../../services/actions/user";
-import { getSavedMovies } from "../../services/actions/movie";
+import { CLOSE_TOOL_TIP } from "../../services/actions/toolTip";
 
 function App() {
   const [state, dispatch] = useStore();
@@ -23,10 +23,12 @@ function App() {
 
   useEffect(() => {
     getUser(dispatch);
-    if (loggedIn) {
-      getSavedMovies(dispatch);
+    if (state.toolTip.isOpen) {
+      setTimeout(() => {
+        dispatch({ type: CLOSE_TOOL_TIP });
+      }, 5000);
     }
-  }, [dispatch, loggedIn]);
+  }, [dispatch, loggedIn, state.toolTip.isOpen]);
 
   return (
     <div className="page">

@@ -1,20 +1,12 @@
-import { useStore } from "../../../services/StoreProvider";
-
-function FilterCheckbox() {
-  const [state, dispatch] = useStore();
-
-  function handleChange(e) {
-    dispatch({ type: "CHANGE_FILTER", checked: e.target.checked });
-  }
-
+function FilterCheckbox({ onChangeFilter, filterShortFilms }) {
   return (
     <div className="filter">
       <label className="filter__label text">
         <input
           type="checkbox"
           className="filter__input"
-          onChange={handleChange}
-          checked={state.movie.filterShortFilms}
+          onChange={onChangeFilter}
+          checked={filterShortFilms}
         />
         <span className="filter__switch"></span>
       </label>

@@ -1,18 +1,16 @@
 import { useLocation } from "react-router-dom";
-import { saveMovie, deleteMovie } from "../../services/actions/movie";
+import { saveMovie, deleteMovie } from "../../services/actions/savedMovies";
 import { useStore } from "../../services/StoreProvider";
 import { moviesApiAddress } from "../../utils/constants";
 
 function MoviesCard({ movie }) {
   const [state, dispatch] = useStore();
-  const { savedMovies } = state.movie;
+  const savedMovies = state.savedMovie.movies;
 
   const location = useLocation();
   const path = location.pathname;
   const onRouteSavedMovies = path === "/saved-movies";
-  const imageUrl = movie.image.formats
-    ? moviesApiAddress + movie.image.url
-    : movie.image;
+  const imageUrl = movie.image.formats ? moviesApiAddress + movie.image.url : movie.image;
   const hours = Math.floor(movie.duration / 60);
   const minutes = movie.duration % 60;
 
@@ -25,7 +23,6 @@ function MoviesCard({ movie }) {
     (onRouteSavedMovies && "card__favorite_delete");
 
   function handleClickFavorite() {
-    console.log(movieSaved);
     if (movieSaved || onRouteSavedMovies) {
       deleteMovie(dispatch, movieSaved._id);
     } else {

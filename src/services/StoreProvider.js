@@ -1,7 +1,8 @@
 import React, { createContext, useReducer, useMemo, useContext } from "react";
 
 import { userReducer } from "./reducers/user";
-import { movieReducer } from "./reducers/movie";
+import { movieReducer } from "./reducers/mainMovies";
+import { savedMovieReducer } from "./reducers/savedMovies";
 import { toolTipReducer } from "./reducers/toolTip";
 
 const globalState = {
@@ -9,9 +10,15 @@ const globalState = {
   loading: false,
   authMessage: "",
   user: { name: "", email: "", _id: "" },
-  movie: {
-    moviesList: [],
-    savedMovies: [],
+  savedMovie: {
+    movies: [],
+    filterShortFilms: false,
+    searchText: "",
+    notFound: "",
+    showedMovies: 0,
+  },
+  mainMovie: {
+    movies: [],
     filterShortFilms: false,
     searchText: "",
     notFound: "",
@@ -25,7 +32,7 @@ const GlobalContext = createContext(globalState);
 const reducers = (state, action) => {
   return {
     ...state,
-    ...[userReducer, movieReducer, toolTipReducer].reduce(
+    ...[userReducer, movieReducer, savedMovieReducer, toolTipReducer].reduce(
       (objState, reducer) => ({ ...objState, ...reducer(objState, action) }),
       state
     ),
@@ -36,11 +43,7 @@ export function StoreProvider({ children }) {
   const [state, dispatch] = useReducer(reducers, globalState);
   const contextValue = useMemo(() => [state, dispatch], [state, dispatch]);
 
-  return (
-    <GlobalContext.Provider value={contextValue}>
-      {children}
-    </GlobalContext.Provider>
-  );
+  return <GlobalContext.Provider value={contextValue}>{children}</GlobalContext.Provider>;
 }
 
 export function useStore() {

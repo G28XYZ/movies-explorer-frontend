@@ -9,7 +9,7 @@ class MainApi {
   }
 
   _handleResponse(response) {
-    return response.ok ? response.json() : Promise.reject("Ошибка - " + response.message);
+    return response.ok ? response.json() : Promise.reject(response.status);
   }
 
   updateUser({ name, email }) {

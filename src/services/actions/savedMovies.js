@@ -1,40 +1,22 @@
 import mainApi from "../../utils/api/mainApi";
-import moviesApi from "../../utils/api/moviesApi";
 import { moviesApiAddress } from "../../utils/constants";
 
-export const SET_SEARCH_TEXT = "SET_SEARCH_TEXT";
+export const SAVED_MOVIES_SEARCH_TEXT = "SAVED_MOVIES_SEARCH_TEXT";
+export const SEARCH_SAVED_MOVIES = "SEARCH_SAVED_MOVIES";
 
-export const REQUEST_MOVIES = "REQUEST_MOVIES";
-export const GET_MOVIES = "GET_MOVIES";
-export const REQUEST_MOVIES_FAILED = "REQUEST_MOVIES_FAILED";
-
+export const REQUEST_SAVED_MOVIES = "SAVED_MOVIES_SEARCH_TEXT";
 export const GET_SAVED_MOVIES = "GET_SAVED_MOVIES";
+export const REQUEST_SAVED_MOVIES_FAILED = "REQUEST_SAVED_MOVIES_FAILED";
+
 export const POST_TO_SAVED_MOVIES = "POST_TO_SAVED_MOVIES";
 export const DELETE_SAVED_MOVIE = "DELETE_SAVED_MOVIE";
 
-export const ADD_SHOWED_MOVIES = "ADD_SHOWED_MOVIES";
+export const ADD_SHOWED_SAVED_MOVIES = "ADD_SHOWED_SAVED_MOVIES";
 
-export const CHANGE_FILTER = "CHANGE_FILTER";
-
-export function getMovies(dispatch) {
-  dispatch({ type: REQUEST_MOVIES });
-  moviesApi
-    .getMovies()
-    .then((movies) => {
-      dispatch({
-        type: GET_MOVIES,
-        moviesList: movies,
-      });
-    })
-    .catch((err) => {
-      dispatch({
-        type: REQUEST_MOVIES_FAILED,
-      });
-    });
-}
+export const SAVED_MOVIES_CHANGE_FILTER = "SAVED_MOVIES_CHANGE_FILTER";
 
 export function getSavedMovies(dispatch) {
-  dispatch({ type: REQUEST_MOVIES });
+  dispatch({ type: REQUEST_SAVED_MOVIES });
   mainApi
     .getSavedMovies()
     .then((movies) => {
@@ -45,25 +27,14 @@ export function getSavedMovies(dispatch) {
     })
     .catch((err) => {
       dispatch({
-        type: REQUEST_MOVIES_FAILED,
+        type: REQUEST_SAVED_MOVIES_FAILED,
       });
     });
 }
 
 export function saveMovie(
   dispatch,
-  {
-    id,
-    country,
-    director,
-    duration,
-    year,
-    description,
-    image,
-    trailerLink,
-    nameRU,
-    nameEN,
-  }
+  { id, country, director, duration, year, description, image, trailerLink, nameRU, nameEN }
 ) {
   const body = {
     movieId: id,
@@ -88,7 +59,7 @@ export function saveMovie(
     })
     .catch((err) => {
       dispatch({
-        type: REQUEST_MOVIES_FAILED,
+        type: REQUEST_SAVED_MOVIES_FAILED,
       });
     });
 }
@@ -104,7 +75,7 @@ export function deleteMovie(dispatch, id) {
     })
     .catch((err) => {
       dispatch({
-        type: REQUEST_MOVIES_FAILED,
+        type: REQUEST_SAVED_MOVIES_FAILED,
       });
     });
 }

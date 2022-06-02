@@ -1,22 +1,24 @@
 import mainApi from "../../utils/api/mainApi";
 import auth from "../../utils/api/auth";
 import { resMessages } from "../../utils/constants";
-import { CLOSE_TOOL_TIP } from "./toolTip";
 
 export const AUTH_USER = "SET_USER";
 export const UPDATE_USER = "UPDATE_USER";
 export const LOGIN_USER = "LOGIN_USER";
-export const LOGIN_USER_FAILD = "LOGIN_USER_FAILD";
+export const LOGIN_USER_FAILED = "LOGIN_USER_FAILED";
 export const REGISTER_USER = "REGISTER_USER";
 export const LOGOUT = "LOGOUT";
 
 export const updateUser = (dispatch, body) => {
-  mainApi
+  return mainApi
     .updateUser(body)
     .then((data) => {
       dispatch({ type: UPDATE_USER, user: data });
+      return { success: true };
     })
-    .catch((err) => {});
+    .catch((statusCode) => {
+      return { success: false, statusCode };
+    });
 };
 
 export const onLogin = (dispatch, body) => {
@@ -24,15 +26,12 @@ export const onLogin = (dispatch, body) => {
     .login(body)
     .then(({ token }) => {
       dispatch({ type: LOGIN_USER });
-      setTimeout(() => {
-        dispatch({ type: CLOSE_TOOL_TIP });
-      }, 5000);
       return true;
     })
     .catch((statusCode) => {
-      dispatch({ type: LOGIN_USER_FAILD, message: resMessages[statusCode] });
+      dispatch({ type: LOGIN_USER_FAILED, message: resMessages[statusCode] });
       setTimeout(() => {
-        dispatch({ type: LOGIN_USER_FAILD, message: "" });
+        dispatch({ type: LOGIN_USER_FAILED, message: "" });
       }, 10000);
       return false;
     });
@@ -41,8 +40,7 @@ export const onLogin = (dispatch, body) => {
 export const logOut = (dispatch) => {
   auth
     .logout()
-    .then((res) => {
-      console.log(res);
+    .then(() => {
       dispatch({ type: LOGOUT });
     })
     .catch(console.log);
@@ -59,9 +57,9 @@ export const onRegister = (dispatch, { name, email, password }) => {
       return true;
     })
     .catch((statusCode) => {
-      dispatch({ type: LOGIN_USER_FAILD, message: resMessages[statusCode] });
+      dispatch({ type: LOGIN_USER_FAILED, message: resMessages[statusCode] });
       setTimeout(() => {
-        dispatch({ type: LOGIN_USER_FAILD, message: "" });
+        dispatch({ type: LOGIN_USER_FAILED, message: "" });
       }, 10000);
       return false;
     });

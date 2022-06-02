@@ -5,7 +5,7 @@ export const toolTipReducer = (state, action) => {
     case CLOSE_TOOL_TIP:
       return {
         ...state,
-        toolTip: { ...state.toolTip, isOpen: false, message: "" },
+        toolTip: { ...state.toolTip, isOpen: false },
       };
     case TOOL_TIP:
       return {
