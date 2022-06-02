@@ -52,7 +52,7 @@ function MoviesCardList({ moviesList }) {
           <p className="cards__message text_subtitle">{notFound}</p>
           <div className="cards__list">
             {moviesList.slice(0, showedMovies).map((movie) => (
-              <MoviesCard movie={movie} key={movie.id} />
+              <MoviesCard movie={movie} key={movie.id || movie._id} />
             ))}
           </div>
 

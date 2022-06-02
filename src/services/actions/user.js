@@ -28,7 +28,7 @@ export const updateUser = (dispatch, body) => {
 };
 
 export const onLogin = (dispatch, body, state) => {
-  auth
+  return auth
     .login(body)
     .then(({ token }) => {
       dispatch({ type: LOGIN_USER, auth: true });
@@ -57,7 +57,7 @@ export const logOut = (dispatch) => {
 };
 
 export const onRegister = (dispatch, body) => {
-  auth
+  return auth
     .registration(body)
     .then((data) => {
       console.log(data);
@@ -75,6 +75,7 @@ export const onRegister = (dispatch, body) => {
       //   isOpen: true,
       //   success: false,
       // });
+      return false;
     });
 };
 

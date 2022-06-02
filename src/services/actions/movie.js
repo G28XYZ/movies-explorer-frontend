@@ -54,7 +54,6 @@ export function saveMovie(
   dispatch,
   { id, country, director, duration, year, description, image, trailerLink, nameRU, nameEN }
 ) {
-  dispatch({ type: REQUEST_MOVIES });
   const body = {
     movieId: id,
     country,
@@ -71,10 +70,10 @@ export function saveMovie(
   mainApi
     .saveMovie(body)
     .then((movie) => {
-      // dispatch({
-      //   type: POST_TO_SAVED_MOVIES,
-      //   movie,
-      // });
+      dispatch({
+        type: POST_TO_SAVED_MOVIES,
+        movie,
+      });
     })
     .catch((err) => {
       dispatch({
@@ -84,15 +83,15 @@ export function saveMovie(
 }
 
 export function deleteMovie(dispatch, id) {
-  dispatch({ type: REQUEST_MOVIES });
+  console.log(id);
   mainApi
-    .deleteMovies(id)
+    .deleteMovie(id)
     .then((movie) => {
       console.log(movie);
-      // dispatch({
-      //   type: POST_TO_SAVED_MOVIES,
-      //   moviesList: movies,
-      // });
+      dispatch({
+        type: DELETE_SAVED_MOVIE,
+        movie,
+      });
     })
     .catch((err) => {
       dispatch({

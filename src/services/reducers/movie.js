@@ -63,12 +63,14 @@ export const movieReducer = (state, action) => {
         loading: false,
         movie: {
           ...state.movie,
-          savedMovies: [...state.movie.savedMovies, ...action.movie],
+          savedMovies: [...state.movie.savedMovies, action.movie],
         },
       };
 
     case DELETE_SAVED_MOVIE:
-      const savedMovies = state.movie.savedMovies.filter((movie) => movie.id !== action.movie.id);
+      const savedMovies = state.movie.savedMovies.filter(
+        (movie) => movie.movieId !== action.movie.movieId
+      );
       return {
         ...state,
         loading: false,

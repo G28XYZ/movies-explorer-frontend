@@ -15,16 +15,14 @@ function MoviesCard({ movie }) {
   const hours = Math.floor(movie.duration / 60);
   const minutes = movie.duration % 60;
 
-  const movieSaved = savedMovies.some((item) => item.id === movie.id);
+  const movieSaved = savedMovies.some((savedMovie) => savedMovie.movieId === movie.id);
 
   const buttonClassName =
     (movieSaved && !onRouteSavedMovies && "card__favorite_active") ||
     (onRouteSavedMovies && "card__favorite_delete");
 
-  useEffect(() => {}, []);
-
   function handleClickFavorite(e) {
-    if (movieSaved) {
+    if (movieSaved || onRouteSavedMovies) {
       deleteMovie(dispatch, movie._id);
     } else {
       saveMovie(dispatch, movie);

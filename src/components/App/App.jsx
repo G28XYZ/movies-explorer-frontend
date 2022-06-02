@@ -18,12 +18,15 @@ import { getUser } from "../../services/actions/user";
 import { getSavedMovies } from "../../services/actions/movie";
 
 function App() {
-  const [, dispatch] = useStore();
+  const [state, dispatch] = useStore();
+  const { loggedIn } = state;
 
   useEffect(() => {
-    getSavedMovies(dispatch);
     getUser(dispatch);
-  }, [dispatch]);
+    if (loggedIn) {
+      getSavedMovies(dispatch);
+    }
+  }, [dispatch, loggedIn]);
 
   return (
     <div className="page">
