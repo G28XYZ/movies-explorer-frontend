@@ -1,7 +1,12 @@
 import "./Input.css";
 
 function Input({ title, onChange, name, type = "text", error }) {
-  const requiredProps = type === "text" ? { minLength: 2, maxLength: 30, required: true } : null;
+  const requiredProps =
+    type === "text"
+      ? { minLength: 2, maxLength: 30 }
+      : type === "password"
+      ? { minLength: 3 }
+      : null;
 
   return (
     <label className="input-label text color_text">
@@ -11,9 +16,12 @@ function Input({ title, onChange, name, type = "text", error }) {
         type={type}
         className={`input ${error && "color_error"}`}
         onChange={onChange}
+        required
         {...requiredProps}
       ></input>
-      <span className={`input-error ${error && "input-error_visible"} text`}>{error}</span>
+      <span className={`input-error ${error && "input-error_visible"} text`}>
+        {error}
+      </span>
     </label>
   );
 }

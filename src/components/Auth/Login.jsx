@@ -4,17 +4,43 @@ import logo from "../../images/logo.svg";
 import { onLogin } from "../../services/actions/user";
 import { useStore } from "../../services/StoreProvider";
 import Input from "./Input";
+import { isPassword, isEmail } from "../../utils/validation";
 
 function Login() {
   const [state, dispatch] = useStore();
   const { loggedIn } = state;
   const [error, setError] = useState({ email: "", password: "" });
   const [formData, setFormData] = useState({ email: "", password: "" });
+  const [buttonProps, setButtonProps] = useState({
+    disabled: true,
+    className: "auth__submit_disabled",
+  });
   const navigate = useNavigate();
 
   const handleChange = (e) => {
+    let errorMessage = e.target.validationMessage;
+    if (e.target.name === "email") {
+      errorMessage = errorMessage || isEmail(e.target.value);
+      setError({
+        ...error,
+        email: errorMessage,
+      });
+    } else {
+      errorMessage = errorMessage || isPassword(e.target.value);
+      setError({
+        ...error,
+        password: errorMessage,
+      });
+    }
+
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    setError({ ...error, [e.target.name]: e.target.validationMessage });
+    const haveSomeError = Object.keys(error).some(
+      (key) => formData[key] === "" || errorMessage
+    );
+    setButtonProps({
+      disabled: haveSomeError,
+      className: haveSomeError ? "auth__submit_disabled" : "auth__submit",
+    });
   };
 
   useEffect(() => {
@@ -23,7 +49,9 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onLogin(dispatch, formData, state).then((success) => success && navigate("/movies"));
+    onLogin(dispatch, formData, state).then(
+      (success) => success && navigate("/movies")
+    );
   };
 
   return (
@@ -47,7 +75,12 @@ function Login() {
             error={error.password}
           />
         </div>
-        <button className="auth__submit text">Войти</button>
+        <button
+          className={`${buttonProps.className} text`}
+          disabled={buttonProps.disabled}
+        >
+          Войти
+        </button>
         <div className="auth__link-container">
           <p className="text color_text">Ещё не зарегистрированы?</p>
           <Link to="/sign-up" className="auth__link text">

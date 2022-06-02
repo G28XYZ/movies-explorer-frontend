@@ -51,9 +51,13 @@ export const onLogin = (dispatch, body, state) => {
 };
 
 export const logOut = (dispatch) => {
-  auth.logout().then(() => {
-    dispatch({ type: LOGOUT });
-  });
+  auth
+    .logout()
+    .then((res) => {
+      console.log(res);
+      dispatch({ type: LOGOUT });
+    })
+    .catch(console.log);
 };
 
 export const onRegister = (dispatch, body) => {
@@ -85,5 +89,5 @@ export const getUser = (dispatch) => {
     .then((user) => {
       dispatch({ type: AUTH_USER, user });
     })
-    .catch(console.log);
+    .catch(() => console.log("Пользователь не авторизован"));
 };

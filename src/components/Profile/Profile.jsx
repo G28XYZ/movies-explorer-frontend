@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { updateUser } from "../../services/actions/user";
+import { logOut, updateUser } from "../../services/actions/user";
 
 import { useStore } from "../../services/StoreProvider";
 
@@ -17,6 +17,10 @@ function Profile() {
   function handleSubmit(e) {
     e.preventDefault();
     updateUser(dispatch, state.user);
+  }
+
+  function handleLogout() {
+    logOut(dispatch);
   }
 
   return (
@@ -49,7 +53,11 @@ function Profile() {
           Редактировать
         </button>
       </form>
-      <Link to="/sign-in" className="profile__logout link text">
+      <Link
+        to="/sign-in"
+        className="profile__logout link text"
+        onClick={handleLogout}
+      >
         Выйти из аккаунта
       </Link>
     </section>

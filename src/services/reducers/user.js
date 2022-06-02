@@ -8,19 +8,23 @@ export const userReducer = (state, action) => {
         user: { ...state.user, ...action.user },
         loggedIn: true,
       };
+
     case LOGIN_USER:
       return {
         ...state,
         loggedIn: action.auth,
       };
+
     case LOGOUT:
       return {
         ...state,
         loggedIn: false,
         user: { _id: "", name: "", email: "" },
       };
+
     case UPDATE_USER:
       return { ...state, user: { ...state.user, ...action.user } };
+
     default:
       return state;
   }

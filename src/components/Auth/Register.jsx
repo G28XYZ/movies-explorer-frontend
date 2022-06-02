@@ -3,8 +3,9 @@ import { useNavigate, Link } from "react-router-dom";
 import logo from "../../images/logo.svg";
 import { onRegister } from "../../services/actions/user";
 import Input from "./Input";
+import { isName, isPassword, isEmail } from "../../utils/validation";
 
-function Register({ success }) {
+function Register() {
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -13,10 +14,42 @@ function Register({ success }) {
     password: "",
   });
   const [error, setError] = useState({ name: "", email: "", password: "" });
+  const [buttonProps, setButtonProps] = useState({
+    disabled: true,
+    className: "auth__submit_disabled",
+  });
 
   const handleChange = (e) => {
+    let errorMessage = e.target.validationMessage;
+    if (e.target.name === "email") {
+      errorMessage = errorMessage || isEmail(e.target.value);
+      setError({
+        ...error,
+        email: errorMessage,
+      });
+    } else if (e.target.name === "name") {
+      errorMessage = errorMessage || isName(e.target.value);
+      setError({
+        ...error,
+        name: errorMessage,
+      });
+    } else {
+      errorMessage = errorMessage || isPassword(e.target.value);
+      setError({
+        ...error,
+        password: errorMessage,
+      });
+    }
+
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    setError({ ...error, [e.target.name]: e.target.validationMessage });
+
+    const haveSomeError = Object.keys(error).some(
+      (key) => formData[key] === "" || errorMessage
+    );
+    setButtonProps({
+      disabled: haveSomeError,
+      className: haveSomeError ? "auth__submit_disabled" : "auth__submit",
+    });
   };
 
   const handleSubmit = (e) => {
@@ -53,7 +86,12 @@ function Register({ success }) {
             error={error.password}
           />
         </div>
-        <button className="auth__submit text">Зарегистрироваться</button>
+        <button
+          className={`${buttonProps.className} text`}
+          disabled={buttonProps.disabled}
+        >
+          Зарегистрироваться
+        </button>
       </form>
       <div className="auth__link-container">
         <p className="text color_text">Уже зарегестрированны?</p>

@@ -9,7 +9,9 @@ class Auth {
   }
 
   _handleResponse = (response) => {
-    return response.ok ? response.json() : Promise.reject(`Error: ${response.message}`);
+    return response.ok
+      ? response.json()
+      : Promise.reject(`Error: ${response.message}`);
   };
 
   login({ email, password }) {
@@ -39,7 +41,7 @@ class Auth {
   }
 
   logout() {
-    return fetch(`${this._address}/logout`, {
+    return fetch(`${this._address}/signout`, {
       method: "GET",
       credentials: "include",
       headers: this._headers,
