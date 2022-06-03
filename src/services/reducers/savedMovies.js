@@ -1,3 +1,4 @@
+import { infoMessages } from "../../utils/constants";
 import {
   DELETE_SAVED_MOVIE,
   REQUEST_SAVED_MOVIES,
@@ -20,7 +21,7 @@ export const savedMovieReducer = (state, action) => {
         savedMovie: {
           ...state.savedMovie,
           notFound: state.savedMovie.filterShortFilms
-            ? "Ничего не найдено ¯\\_(ツ)_/¯"
+            ? infoMessages.notFound
             : "",
         },
       };
@@ -41,7 +42,7 @@ export const savedMovieReducer = (state, action) => {
           notFound:
             !action.checked && state.savedMovie.saved.length
               ? ""
-              : "Ничего не найдено ¯\\_(ツ)_/¯",
+              : infoMessages.notFound,
         },
       };
 
@@ -65,7 +66,7 @@ export const savedMovieReducer = (state, action) => {
         savedMovie: {
           ...state.savedMovie,
           movies: moviesList,
-          notFound: !moviesList.length ? "Ничего не найдено ¯\\_(ツ)_/¯" : "",
+          notFound: !moviesList.length ? infoMessages.notFound : "",
         },
       };
 
@@ -119,8 +120,7 @@ export const savedMovieReducer = (state, action) => {
         toolTip: {
           isOpen: true,
           success: false,
-          message:
-            "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.",
+          message: infoMessages.requestMoviesFaild,
         },
       };
 

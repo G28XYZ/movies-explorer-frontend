@@ -1,9 +1,9 @@
-const moviesApiAddress = "https://api.nomoreparties.co";
-const backendApiAddress = "https://api-movies.nomoredomains.xyz";
+export const moviesApiAddress = "https://api.nomoreparties.co";
+export const backendApiAddress = "https://api-movies.nomoredomains.xyz";
 
-const regForSymbols = /[_~!@#$%^&*()\[\]+`'";:<>\/\\|=]/g;
-const regForName = /[a-z-. а-яё]+/g;
-const regForPassword = /[0-9a-z-а-яё]+/g;
+export const regForSymbols = /[_~!@#$%^&*()\[\]+`'";:<>\/\\|=]/g;
+export const regForName = /[a-z-. а-яё]+/g;
+export const regForPassword = /[0-9a-z-а-яё]+/g;
 
 export const validationMessages = {
   name: "Имя содержит недопустимые символы. Текст может состоять из латиницы, кириллицы, дефиса, пробела.",
@@ -19,10 +19,8 @@ export const resMessages = {
   400: "Введенные данные невалидны проверьте адрес или введите корректные данные.",
 };
 
-export {
-  moviesApiAddress,
-  backendApiAddress,
-  regForPassword,
-  regForName,
-  regForSymbols,
+export const infoMessages = {
+  notFound: "Ничего не найдено ¯\\_(ツ)_/¯",
+  requestMoviesFaild:
+    "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.",
 };

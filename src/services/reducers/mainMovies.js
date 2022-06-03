@@ -1,3 +1,4 @@
+import { infoMessages } from "../../utils/constants";
 import {
   REQUEST_MOVIES,
   SEARCH_MOVIES,
@@ -16,7 +17,7 @@ export const movieReducer = (state, action) => {
         mainMovie: {
           ...state.mainMovie,
           notFound: state.mainMovie.filterShortFilms
-            ? "Ничего не найдено ¯\\_(ツ)_/¯"
+            ? infoMessages.notFound
             : "",
         },
       };
@@ -63,7 +64,7 @@ export const movieReducer = (state, action) => {
         mainMovie: {
           ...state.mainMovie,
           movies: moviesList,
-          notFound: !moviesList.length ? "Ничего не найдено ¯\\_(ツ)_/¯" : "",
+          notFound: !moviesList.length ? infoMessages.notFound : "",
         },
       };
 
@@ -74,8 +75,7 @@ export const movieReducer = (state, action) => {
         toolTip: {
           isOpen: true,
           success: false,
-          message:
-            "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз.",
+          message: infoMessages.requestMoviesFaild,
         },
       };
 
