@@ -1,10 +1,11 @@
-import { useCallback } from "react";
+import { useCallback, useEffect, useState } from "react";
 import {
   searchSavedMovies,
   SAVED_MOVIES_CHANGE_FILTER,
   SAVED_MOVIES_SEARCH_TEXT,
   ADD_SHOWED_SAVED_MOVIES,
   SAVED_MOVIES_NOT_FOUND,
+  getSavedMovies,
 } from "../../services/actions/savedMovies";
 import { useStore } from "../../services/StoreProvider";
 import MoviesCardList from "../MoviesCardList";
@@ -13,7 +14,12 @@ import FilterCheckbox from "../SearchForm/FilterCheckbox";
 
 function SavedMovies() {
   const [state, dispatch] = useStore();
-  const { searchText, filterShortFilms } = state.savedMovie;
+  const [movieCardListProps, setMovieCardListProps] = useState(state.savedMovie)
+
+  useEffect(() => {
+    setMovieCardListProps(state.savedMovie)
+    getSavedMovies(dispatch)
+  },[state.savedMovie])
 
   function onChangeFilter(e) {
     dispatch({ type: SAVED_MOVIES_CHANGE_FILTER, checked: e.target.checked });
@@ -42,17 +48,17 @@ function SavedMovies() {
   return (
     <main className="movies">
       <SearchForm
-        searchText={searchText}
+        searchText={movieCardListProps.searchText}
         handleChange={handleChange}
         handleSubmit={handleSubmit}
       >
         <FilterCheckbox
-          filterShortFilms={filterShortFilms}
+          filterShortFilms={movieCardListProps.filterShortFilms}
           onChangeFilter={onChangeFilter}
         />
       </SearchForm>
       <MoviesCardList
-        {...state.savedMovie}
+        {...movieCardListProps}
         handleClickMoreMovies={handleClickMoreMovies}
         isNotFound={isNotFound}
       />

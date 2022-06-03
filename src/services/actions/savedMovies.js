@@ -92,6 +92,7 @@ export function deleteMovie(dispatch, id) {
   mainApi
     .deleteMovie(id)
     .then((movie) => {
+      console.log(movie)
       dispatch({
         type: DELETE_SAVED_MOVIE,
         movie,

@@ -1,5 +1,6 @@
 import { useState, useEffect, useCallback } from "react";
 import { useStore } from "../../services/StoreProvider";
+import { cardListPT } from "../../utils/propTypes";
 import MovieCard from "../MovieCard";
 import Preloader from "../Preloader";
 
@@ -88,5 +89,7 @@ function MoviesCardList({
     </div>
   );
 }
+
+MoviesCardList.propTypes = cardListPT
 
 export default MoviesCardList;

@@ -72,7 +72,7 @@ export const movieCardPT = {
 };
 
 export const cardListPT = {
-  movies               : PropTypes.array,
+  movies               : PropTypes.arrayOf(PropTypes.oneOfType([savedMovieShape,mainMovieShape]).isRequired).isRequired,
   handleClickMoreMovies: PropTypes.func.isRequired,
   notFound             : PropTypes.string.isRequired,
   showedMovies         : PropTypes.number.isRequired,
