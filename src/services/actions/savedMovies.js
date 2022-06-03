@@ -32,6 +32,23 @@ export function getSavedMovies(dispatch) {
     });
 }
 
+export function searchSavedMovies(dispatch) {
+  dispatch({ type: REQUEST_SAVED_MOVIES });
+  mainApi
+    .getSavedMovies()
+    .then((movies) => {
+      dispatch({
+        type: SEARCH_SAVED_MOVIES,
+        movies,
+      });
+    })
+    .catch((err) => {
+      dispatch({
+        type: REQUEST_SAVED_MOVIES_FAILED,
+      });
+    });
+}
+
 export function saveMovie(
   dispatch,
   { id, country, director, duration, year, description, image, trailerLink, nameRU, nameEN }
