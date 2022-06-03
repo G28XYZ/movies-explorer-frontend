@@ -48,13 +48,20 @@ function MoviesCardList({
   useEffect(() => {
     if (movies.length && filterShortFilms) {
       setMoviesList(movies.filter((movie) => movie.duration <= 40));
-      if (!movies.length) {
+      if (!moviesList.length) {
         isNotFound();
       }
     } else {
       setMoviesList(movies);
     }
-  }, [filterShortFilms, isNotFound, movies, movies.length, setMoviesList]);
+  }, [
+    filterShortFilms,
+    isNotFound,
+    movies,
+    movies.length,
+    moviesList.length,
+    setMoviesList,
+  ]);
 
   function handleClick() {
     handleClickMoreMovies(countShowMore);

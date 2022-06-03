@@ -35,9 +35,11 @@ export const movieReducer = (state, action) => {
           ...state.mainMovie,
           filterShortFilms: action.checked,
           notFound:
-            !action.checked && state.mainMovie.movies.length
+            !action.checked &&
+            state.mainMovie.movies.length &&
+            state.mainMovie.notFound
               ? ""
-              : "Ничего не найдено ¯\\_(ツ)_/¯",
+              : state.mainMovie.notFound,
         },
       };
 
