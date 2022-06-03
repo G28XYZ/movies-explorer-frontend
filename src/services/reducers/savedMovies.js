@@ -15,7 +15,6 @@ import {
 export const savedMovieReducer = (state, action) => {
   switch (action.type) {
     case SAVED_MOVIES_NOT_FOUND:
-      console.log(state.savedMovie.filterShortFilms);
       return {
         ...state,
         savedMovie: {
@@ -40,7 +39,7 @@ export const savedMovieReducer = (state, action) => {
           ...state.savedMovie,
           filterShortFilms: action.checked,
           notFound:
-            !action.checked && state.savedMovie.saved.length
+            !action.checked && state.savedMovie.movies.length
               ? ""
               : infoMessages.notFound,
         },
@@ -103,7 +102,6 @@ export const savedMovieReducer = (state, action) => {
       const savedMovies = state.savedMovie.movies.filter(
         (movie) => movie.movieId !== action.movie.movieId
       );
-      console.log(savedMovies);
       return {
         ...state,
         loading: false,

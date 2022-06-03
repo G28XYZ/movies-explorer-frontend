@@ -41,15 +41,8 @@ function Movies() {
 
   return (
     <main className="movies">
-      <SearchForm
-        searchText={searchText}
-        handleChange={handleChange}
-        handleSubmit={handleSubmit}
-      >
-        <FilterCheckbox
-          filterShortFilms={filterShortFilms}
-          onChangeFilter={onChangeFilter}
-        />
+      <SearchForm searchText={searchText} handleChange={handleChange} handleSubmit={handleSubmit}>
+        <FilterCheckbox filterShortFilms={filterShortFilms} onChangeFilter={onChangeFilter} />
       </SearchForm>
       <MoviesCardList
         {...state.mainMovie}

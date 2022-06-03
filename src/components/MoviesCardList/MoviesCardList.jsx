@@ -1,8 +1,7 @@
 import { useState, useEffect, useCallback } from "react";
 import { useStore } from "../../services/StoreProvider";
-import MoviesCard from "../MoviesCard/MoviesCard";
+import MovieCard from "../MovieCard";
 import Preloader from "../Preloader";
-import PropTypes from "prop-types";
 
 function MoviesCardList({
   movies,
@@ -34,6 +33,16 @@ function MoviesCardList({
     }
   }, [width]);
 
+  const filteredMovies = useCallback(() => {
+    return movies.filter((movie) => movie.duration <= 40);
+  },[movies])
+
+  useEffect(() => {
+    if (movies.length && filterShortFilms) {
+      setMoviesList(filteredMovies());
+    }
+  },[filterShortFilms, filteredMovies, movies])
+
   useEffect(() => {
     if (!showedMovies) {
       handleClickMoreMovies(updateWidth());
@@ -44,21 +53,13 @@ function MoviesCardList({
 
   useEffect(() => {
     if (movies.length && filterShortFilms) {
-      setMoviesList(movies.filter((movie) => movie.duration <= 40));
-      if (!moviesList.length) {
+      if (filteredMovies().length === 0) {
         isNotFound();
       }
     } else {
       setMoviesList(movies);
     }
-  }, [
-    filterShortFilms,
-    isNotFound,
-    movies,
-    movies.length,
-    moviesList.length,
-    setMoviesList,
-  ]);
+  }, [filterShortFilms, filteredMovies, isNotFound, movies, movies.length, moviesList.length, setMoviesList]);
 
   function handleClick() {
     handleClickMoreMovies(countShowMore);
@@ -73,7 +74,7 @@ function MoviesCardList({
           <p className="cards__message text_subtitle">{notFound}</p>
           <div className="cards__list">
             {moviesList.slice(0, showedMovies).map((movie) => (
-              <MoviesCard movie={movie} key={movie.id || movie._id} />
+              <MovieCard movie={movie} key={movie.id || movie._id} />
             ))}
           </div>
 
@@ -87,61 +88,5 @@ function MoviesCardList({
     </div>
   );
 }
-
-const imageShape = PropTypes.shape({
-  alternativeText: PropTypes.string,
-  caption: PropTypes.string,
-  created_at: PropTypes.string,
-  ext: PropTypes.string,
-  formats: PropTypes.shape({
-    thumbnail: PropTypes.shape({
-      ext: PropTypes.string,
-      hash: PropTypes.string,
-      height: PropTypes.number,
-      mime: PropTypes.string,
-      path: PropTypes.object && PropTypes.string,
-      size: PropTypes.number,
-      url: PropTypes.string,
-      width: PropTypes.number,
-    }),
-  }),
-  hash: PropTypes.string,
-  height: PropTypes.number,
-  id: PropTypes.number,
-  mime: PropTypes.string,
-  name: PropTypes.string,
-  previewUrl: PropTypes.object && PropTypes.string,
-  provider: PropTypes.string,
-  provider_metadata: PropTypes.object && PropTypes.string,
-  size: PropTypes.number,
-  updated_at: PropTypes.string,
-  url: PropTypes.string,
-  width: PropTypes.number,
-});
-
-export const moviesPropType = PropTypes.shape({
-  _id: PropTypes.string,
-  country: PropTypes.string,
-  created_at: PropTypes.string,
-  description: PropTypes.string.isRequired,
-  director: PropTypes.string.isRequired,
-  duration: PropTypes.number.isRequired,
-  id: PropTypes.number,
-  image: imageShape.isRequired,
-  nameEN: PropTypes.string.isRequired,
-  nameRU: PropTypes.string.isRequired,
-  trailerLink: PropTypes.string.isRequired,
-  updated_at: PropTypes.string,
-  year: PropTypes.string.isRequired,
-});
-
-MoviesCardList.propTypes = {
-  movies: PropTypes.array,
-  handleClickMoreMovies: PropTypes.func.isRequired,
-  notFound: PropTypes.string.isRequired,
-  showedMovies: PropTypes.number.isRequired,
-  filterShortFilms: PropTypes.bool.isRequired,
-  isNotFound: PropTypes.func.isRequired,
-};
 
 export default MoviesCardList;

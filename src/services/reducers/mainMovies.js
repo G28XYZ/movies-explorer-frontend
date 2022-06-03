@@ -16,9 +16,7 @@ export const movieReducer = (state, action) => {
         ...state,
         mainMovie: {
           ...state.mainMovie,
-          notFound: state.mainMovie.filterShortFilms
-            ? infoMessages.notFound
-            : "",
+          notFound: state.mainMovie.filterShortFilms ? infoMessages.notFound : "",
         },
       };
     case ADD_SHOWED_MOVIES:
@@ -36,9 +34,7 @@ export const movieReducer = (state, action) => {
           ...state.mainMovie,
           filterShortFilms: action.checked,
           notFound:
-            !action.checked &&
-            state.mainMovie.movies.length &&
-            state.mainMovie.notFound
+            !action.checked && state.mainMovie.movies.length && state.mainMovie.notFound
               ? ""
               : state.mainMovie.notFound,
         },
@@ -64,7 +60,7 @@ export const movieReducer = (state, action) => {
         mainMovie: {
           ...state.mainMovie,
           movies: moviesList,
-          notFound: !moviesList.length ? infoMessages.notFound : "",
+          notFound: moviesList.length === 0 ? infoMessages.notFound : "",
         },
       };
 

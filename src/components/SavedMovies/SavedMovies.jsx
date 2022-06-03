@@ -20,7 +20,6 @@ function SavedMovies() {
   }
 
   function handleChange(e) {
-    console.log(SAVED_MOVIES_SEARCH_TEXT);
     dispatch({ type: SAVED_MOVIES_SEARCH_TEXT, text: e.target.value });
   }
 
