@@ -2,6 +2,7 @@ import { useLocation } from "react-router-dom";
 import { saveMovie, deleteMovie } from "../../services/actions/savedMovies";
 import { useStore } from "../../services/StoreProvider";
 import { moviesApiAddress } from "../../utils/constants";
+import PropTypes from "prop-types";
 
 function MoviesCard({ movie }) {
   const [state, dispatch] = useStore();
@@ -52,5 +53,54 @@ function MoviesCard({ movie }) {
     </article>
   );
 }
+
+const imageShape = PropTypes.shape({
+  alternativeText: PropTypes.string,
+  caption: PropTypes.string,
+  created_at: PropTypes.string,
+  ext: PropTypes.string,
+  formats: PropTypes.shape({
+    thumbnail: PropTypes.shape({
+      ext: PropTypes.string,
+      hash: PropTypes.string,
+      height: PropTypes.number,
+      mime: PropTypes.string,
+      path: PropTypes.object && PropTypes.string,
+      size: PropTypes.number,
+      url: PropTypes.string,
+      width: PropTypes.number,
+    }),
+  }),
+  hash: PropTypes.string,
+  height: PropTypes.number,
+  id: PropTypes.number,
+  mime: PropTypes.string,
+  name: PropTypes.string,
+  previewUrl: PropTypes.object && PropTypes.string,
+  provider: PropTypes.string,
+  provider_metadata: PropTypes.object && PropTypes.string,
+  size: PropTypes.number,
+  updated_at: PropTypes.string,
+  url: PropTypes.string,
+  width: PropTypes.number,
+});
+
+MoviesCard.propTypes = {
+  movie: PropTypes.shape({
+    _id: PropTypes.string,
+    country: PropTypes.string.isRequired,
+    created_at: PropTypes.string,
+    description: PropTypes.string.isRequired,
+    director: PropTypes.string.isRequired,
+    duration: PropTypes.number.isRequired,
+    id: PropTypes.number,
+    image: imageShape.isRequired && PropTypes.string,
+    nameEN: PropTypes.string.isRequired,
+    nameRU: PropTypes.string.isRequired,
+    trailerLink: PropTypes.string.isRequired,
+    updated_at: PropTypes.string,
+    year: PropTypes.string.isRequired,
+  }),
+};
 
 export default MoviesCard;

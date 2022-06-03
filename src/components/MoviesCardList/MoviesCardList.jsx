@@ -2,6 +2,7 @@ import { useState, useEffect, useCallback } from "react";
 import { useStore } from "../../services/StoreProvider";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import Preloader from "../Preloader";
+import PropTypes from "prop-types";
 
 function MoviesCardList({
   movies,
@@ -32,10 +33,6 @@ function MoviesCardList({
       return 12;
     }
   }, [width]);
-
-  // if (movies.length && filterShortFilms) {
-  //   movies = movies.filter((movie) => movie.duration <= 40);
-  // }
 
   useEffect(() => {
     if (!showedMovies) {
@@ -90,5 +87,61 @@ function MoviesCardList({
     </div>
   );
 }
+
+const imageShape = PropTypes.shape({
+  alternativeText: PropTypes.string,
+  caption: PropTypes.string,
+  created_at: PropTypes.string,
+  ext: PropTypes.string,
+  formats: PropTypes.shape({
+    thumbnail: PropTypes.shape({
+      ext: PropTypes.string,
+      hash: PropTypes.string,
+      height: PropTypes.number,
+      mime: PropTypes.string,
+      path: PropTypes.object && PropTypes.string,
+      size: PropTypes.number,
+      url: PropTypes.string,
+      width: PropTypes.number,
+    }),
+  }),
+  hash: PropTypes.string,
+  height: PropTypes.number,
+  id: PropTypes.number,
+  mime: PropTypes.string,
+  name: PropTypes.string,
+  previewUrl: PropTypes.object && PropTypes.string,
+  provider: PropTypes.string,
+  provider_metadata: PropTypes.object && PropTypes.string,
+  size: PropTypes.number,
+  updated_at: PropTypes.string,
+  url: PropTypes.string,
+  width: PropTypes.number,
+});
+
+export const moviesPropType = PropTypes.shape({
+  _id: PropTypes.string,
+  country: PropTypes.string,
+  created_at: PropTypes.string,
+  description: PropTypes.string.isRequired,
+  director: PropTypes.string.isRequired,
+  duration: PropTypes.number.isRequired,
+  id: PropTypes.number,
+  image: imageShape.isRequired,
+  nameEN: PropTypes.string.isRequired,
+  nameRU: PropTypes.string.isRequired,
+  trailerLink: PropTypes.string.isRequired,
+  updated_at: PropTypes.string,
+  year: PropTypes.string.isRequired,
+});
+
+MoviesCardList.propTypes = {
+  movies: PropTypes.array,
+  handleClickMoreMovies: PropTypes.func.isRequired,
+  notFound: PropTypes.string.isRequired,
+  showedMovies: PropTypes.number.isRequired,
+  filterShortFilms: PropTypes.bool.isRequired,
+  isNotFound: PropTypes.func.isRequired,
+};
 
 export default MoviesCardList;
