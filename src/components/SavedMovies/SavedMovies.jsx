@@ -1,9 +1,10 @@
 import { useCallback } from "react";
 import {
-  getSavedMovies,
+  searchSavedMovies,
   SAVED_MOVIES_CHANGE_FILTER,
   SAVED_MOVIES_SEARCH_TEXT,
   ADD_SHOWED_SAVED_MOVIES,
+  SAVED_MOVIES_NOT_FOUND,
 } from "../../services/actions/savedMovies";
 import { useStore } from "../../services/StoreProvider";
 import MoviesCardList from "../MoviesCardList";
@@ -19,13 +20,18 @@ function SavedMovies() {
   }
 
   function handleChange(e) {
+    console.log(SAVED_MOVIES_SEARCH_TEXT);
     dispatch({ type: SAVED_MOVIES_SEARCH_TEXT, text: e.target.value });
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    getSavedMovies(dispatch);
+    searchSavedMovies(dispatch);
   }
+
+  const isNotFound = useCallback(() => {
+    dispatch({ type: SAVED_MOVIES_NOT_FOUND });
+  }, [dispatch]);
 
   const handleClickMoreMovies = useCallback(
     (count) => {
@@ -36,10 +42,21 @@ function SavedMovies() {
 
   return (
     <main className="movies">
-      <SearchForm searchText={searchText} handleChange={handleChange} handleSubmit={handleSubmit}>
-        <FilterCheckbox filterShortFilms={filterShortFilms} onChangeFilter={onChangeFilter} />
+      <SearchForm
+        searchText={searchText}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+      >
+        <FilterCheckbox
+          filterShortFilms={filterShortFilms}
+          onChangeFilter={onChangeFilter}
+        />
       </SearchForm>
-      <MoviesCardList {...state.savedMovie} handleClickMoreMovies={handleClickMoreMovies} />
+      <MoviesCardList
+        {...state.savedMovie}
+        handleClickMoreMovies={handleClickMoreMovies}
+        isNotFound={isNotFound}
+      />
     </main>
   );
 }

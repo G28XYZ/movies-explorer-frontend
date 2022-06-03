@@ -19,4 +19,10 @@ export const resMessages = {
   400: "Введенные данные невалидны проверьте адрес или введите корректные данные.",
 };
 
-export { moviesApiAddress, backendApiAddress, regForPassword, regForName, regForSymbols };
+export {
+  moviesApiAddress,
+  backendApiAddress,
+  regForPassword,
+  regForName,
+  regForSymbols,
+};

@@ -30,20 +30,19 @@
 .header__auth {
   display: flex;
   list-style-type: none;
-  gap: 30px;
+  gap: 20px;
 }
 
 .header__auth-item {
-  min-width: 76px;
-  padding: 8px 0;
-  border-radius: 3px;
   text-align: center;
-  box-sizing: border-box;
 }
 
 .header__link {
   text-decoration: none;
   color: inherit;
+  padding: 8px 15px;
+  border-radius: 3px;
+  box-sizing: border-box;
 }
 
 .header__movies-item:nth-child(2) {

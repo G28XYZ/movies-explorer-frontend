@@ -58,13 +58,17 @@ function Register() {
   const handleSubmit = (e) => {
     e.preventDefault();
     onRegister(dispatch, formData).then((success) => {
-      success && navigate("/movies");
+      setTimeout(() => {
+        success && navigate("/movies");
+      }, 1000);
     });
   };
 
   return (
     <div className="auth">
-      <img src={logo} alt="Логотип" className="auth__logo" />
+      <Link to="/" className="auth__logo">
+        <img src={logo} alt="Логотип" />
+      </Link>
       <h2 className="auth__title">Добро пожаловать!</h2>
       <form className="auth__form" onSubmit={handleSubmit}>
         <div className="auth__input-container">

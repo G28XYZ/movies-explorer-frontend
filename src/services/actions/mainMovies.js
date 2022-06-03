@@ -10,6 +10,8 @@ export const ADD_SHOWED_MOVIES = "ADD_SHOWED_MOVIES";
 
 export const MOVIES_CHANGE_FILTER = "MOVIES_CHANGE_FILTER";
 
+export const MOVIES_NOT_FOUND = "MOVIES_NOT_FOUND";
+
 export function searchMovies(dispatch) {
   dispatch({ type: REQUEST_MOVIES });
   moviesApi

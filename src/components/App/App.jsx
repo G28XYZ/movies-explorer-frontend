@@ -27,12 +27,15 @@ function App() {
     if (loggedIn) {
       getSavedMovies(dispatch);
     }
+  }, [dispatch, loggedIn]);
+
+  useEffect(() => {
     if (state.toolTip.isOpen) {
       setTimeout(() => {
         dispatch({ type: CLOSE_TOOL_TIP });
       }, 5000);
     }
-  }, [dispatch, loggedIn, state.toolTip.isOpen]);
+  }, [dispatch, state.toolTip.isOpen]);
 
   return (
     <div className="page">

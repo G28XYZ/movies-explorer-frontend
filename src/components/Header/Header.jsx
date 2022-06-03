@@ -87,8 +87,8 @@ function Header() {
                 Регистрация
               </Link>
             </li>
-            <li className="header__auth-item color_primary link">
-              <Link to="/sign-in" className="header__link">
+            <li className="header__auth-item link">
+              <Link to="/sign-in" className="header__link color_primary">
                 Войти
               </Link>
             </li>

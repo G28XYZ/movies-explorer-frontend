@@ -1,4 +1,10 @@
-import { UPDATE_USER, LOGIN_USER, LOGIN_USER_FAILED, AUTH_USER, LOGOUT } from "../actions/user";
+import {
+  UPDATE_USER,
+  LOGIN_USER,
+  LOGIN_USER_FAILED,
+  AUTH_USER,
+  LOGOUT,
+} from "../actions/user";
 
 export const userReducer = (state, action) => {
   switch (action.type) {
@@ -26,6 +32,7 @@ export const userReducer = (state, action) => {
     case LOGOUT:
       return {
         ...state,
+        loggedIn: false,
         user: { _id: "", name: "", email: "" },
       };
 

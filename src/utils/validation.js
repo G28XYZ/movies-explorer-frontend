@@ -14,8 +14,10 @@ export const isEmail = (email) => {
 export const isName = (string) => {
   const name = String(string).toLowerCase();
   const haveSymbols = regForSymbols.test(name);
-  const singleMatch = name.match(regForName).length;
-  return singleMatch > 1 || haveSymbols ? validationMessages.name : "";
+  const singleMatch = name.match(regForName);
+  return !singleMatch || singleMatch.length > 1 || haveSymbols
+    ? validationMessages.name
+    : "";
 };
 
 export const isPassword = (string) => {

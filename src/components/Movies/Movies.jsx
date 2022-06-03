@@ -4,6 +4,7 @@ import {
   searchMovies,
   MOVIES_SEARCH_TEXT,
   ADD_SHOWED_MOVIES,
+  MOVIES_NOT_FOUND,
 } from "../../services/actions/mainMovies";
 import { useStore } from "../../services/StoreProvider";
 import MoviesCardList from "../MoviesCardList";
@@ -27,6 +28,10 @@ function Movies() {
     searchMovies(dispatch);
   }
 
+  const isNotFound = useCallback(() => {
+    dispatch({ type: MOVIES_NOT_FOUND });
+  }, [dispatch]);
+
   const handleClickMoreMovies = useCallback(
     (count) => {
       dispatch({ type: ADD_SHOWED_MOVIES, count });
@@ -36,10 +41,21 @@ function Movies() {
 
   return (
     <main className="movies">
-      <SearchForm searchText={searchText} handleChange={handleChange} handleSubmit={handleSubmit}>
-        <FilterCheckbox filterShortFilms={filterShortFilms} onChangeFilter={onChangeFilter} />
+      <SearchForm
+        searchText={searchText}
+        handleChange={handleChange}
+        handleSubmit={handleSubmit}
+      >
+        <FilterCheckbox
+          filterShortFilms={filterShortFilms}
+          onChangeFilter={onChangeFilter}
+        />
       </SearchForm>
-      <MoviesCardList {...state.mainMovie} handleClickMoreMovies={handleClickMoreMovies} />
+      <MoviesCardList
+        {...state.mainMovie}
+        handleClickMoreMovies={handleClickMoreMovies}
+        isNotFound={isNotFound}
+      />
     </main>
   );
 }

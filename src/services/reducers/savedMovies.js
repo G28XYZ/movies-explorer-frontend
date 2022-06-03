@@ -8,10 +8,22 @@ import {
   ADD_SHOWED_SAVED_MOVIES,
   POST_TO_SAVED_MOVIES,
   GET_SAVED_MOVIES,
+  SAVED_MOVIES_NOT_FOUND,
 } from "../actions/savedMovies";
 
 export const savedMovieReducer = (state, action) => {
   switch (action.type) {
+    case SAVED_MOVIES_NOT_FOUND:
+      console.log(state.savedMovie.filterShortFilms);
+      return {
+        ...state,
+        savedMovie: {
+          ...state.savedMovie,
+          notFound: state.savedMovie.filterShortFilms
+            ? "Ничего не найдено ¯\\_(ツ)_/¯"
+            : "",
+        },
+      };
     case ADD_SHOWED_SAVED_MOVIES:
       return {
         ...state,
@@ -23,7 +35,14 @@ export const savedMovieReducer = (state, action) => {
     case SAVED_MOVIES_CHANGE_FILTER:
       return {
         ...state,
-        savedMovie: { ...state.savedMovie, filterShortFilms: action.checked },
+        savedMovie: {
+          ...state.savedMovie,
+          filterShortFilms: action.checked,
+          notFound:
+            !action.checked && state.savedMovie.saved.length
+              ? ""
+              : "Ничего не найдено ¯\\_(ツ)_/¯",
+        },
       };
 
     case REQUEST_SAVED_MOVIES:
@@ -57,16 +76,25 @@ export const savedMovieReducer = (state, action) => {
         savedMovie: {
           ...state.savedMovie,
           movies: action.movies,
+          saved: action.movies,
         },
       };
 
     case POST_TO_SAVED_MOVIES:
+      const filtered = `${action.movie.nameRU} ${action.movie.nameEN}`.includes(
+        state.savedMovie.searchText
+      );
       return {
         ...state,
         loading: false,
         savedMovie: {
           ...state.savedMovie,
-          movies: [...state.savedMovie.movies, action.movie],
+
+          movies: filtered
+            ? [...state.savedMovie.movies, action.movie]
+            : [...state.savedMovie.movies],
+
+          saved: [...state.savedMovie.saved, action.movie],
         },
       };
 
@@ -97,7 +125,10 @@ export const savedMovieReducer = (state, action) => {
       };
 
     case SAVED_MOVIES_SEARCH_TEXT:
-      return { ...state, savedMovie: { ...state.savedMovie, searchText: action.text } };
+      return {
+        ...state,
+        savedMovie: { ...state.savedMovie, searchText: action.text },
+      };
 
     default:
       return state;

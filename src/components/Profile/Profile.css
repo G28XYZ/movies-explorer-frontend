@@ -64,8 +64,12 @@
 }
 
 .profile__logout {
-  padding-top: 16px;
+  margin-top: 16px;
+  padding: 0;
   color: rgba(238, 52, 101, 1);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {

@@ -53,7 +53,9 @@ export const onRegister = (dispatch, { name, email, password }) => {
     .registration({ name, email, password })
     .then(() => {
       dispatch({ type: REGISTER_USER });
-      onLogin(dispatch, { name, password });
+      setTimeout(() => {
+        onLogin(dispatch, { email, password });
+      }, 1000);
       return true;
     })
     .catch((statusCode) => {

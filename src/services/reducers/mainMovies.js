@@ -5,10 +5,21 @@ import {
   MOVIES_CHANGE_FILTER,
   MOVIES_SEARCH_TEXT,
   ADD_SHOWED_MOVIES,
+  MOVIES_NOT_FOUND,
 } from "../actions/mainMovies";
 
 export const movieReducer = (state, action) => {
   switch (action.type) {
+    case MOVIES_NOT_FOUND:
+      return {
+        ...state,
+        mainMovie: {
+          ...state.mainMovie,
+          notFound: state.mainMovie.filterShortFilms
+            ? "Ничего не найдено ¯\\_(ツ)_/¯"
+            : "",
+        },
+      };
     case ADD_SHOWED_MOVIES:
       return {
         ...state,
@@ -20,7 +31,14 @@ export const movieReducer = (state, action) => {
     case MOVIES_CHANGE_FILTER:
       return {
         ...state,
-        mainMovie: { ...state.mainMovie, filterShortFilms: action.checked },
+        mainMovie: {
+          ...state.mainMovie,
+          filterShortFilms: action.checked,
+          notFound:
+            !action.checked && state.mainMovie.movies.length
+              ? ""
+              : "Ничего не найдено ¯\\_(ツ)_/¯",
+        },
       };
 
     case REQUEST_MOVIES:
@@ -60,7 +78,10 @@ export const movieReducer = (state, action) => {
       };
 
     case MOVIES_SEARCH_TEXT:
-      return { ...state, mainMovie: { ...state.mainMovie, searchText: action.text } };
+      return {
+        ...state,
+        mainMovie: { ...state.mainMovie, searchText: action.text },
+      };
 
     default:
       return state;

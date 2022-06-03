@@ -12,6 +12,7 @@ const globalState = {
   user: { name: "", email: "", _id: "" },
   savedMovie: {
     movies: [],
+    saved: [],
     filterShortFilms: false,
     searchText: "",
     notFound: "",
@@ -43,7 +44,11 @@ export function StoreProvider({ children }) {
   const [state, dispatch] = useReducer(reducers, globalState);
   const contextValue = useMemo(() => [state, dispatch], [state, dispatch]);
 
-  return <GlobalContext.Provider value={contextValue}>{children}</GlobalContext.Provider>;
+  return (
+    <GlobalContext.Provider value={contextValue}>
+      {children}
+    </GlobalContext.Provider>
+  );
 }
 
 export function useStore() {

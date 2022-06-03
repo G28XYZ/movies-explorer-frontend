@@ -7,7 +7,7 @@ import Wrap from "../Wrap";
 const ProtectedRoute = ({ children }) => {
   const [state] = useStore();
   const { loggedIn } = state;
-  return <Wrap>{loggedIn ? children : <Navigate to="/sign-in" />}</Wrap>;
+  return <Wrap>{loggedIn ? children : <Navigate to="/" />}</Wrap>;
 };
 
 export default ProtectedRoute;

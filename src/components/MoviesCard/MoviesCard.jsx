@@ -8,14 +8,16 @@ function MoviesCard({ movie }) {
   const location = useLocation();
   const path = location.pathname;
 
-  const savedMovies = state.savedMovie.movies;
+  const savedMovies = state.savedMovie.saved;
   const movieSaved = savedMovies.find(
     (savedMovie) => savedMovie.movieId === movie.id || movie.movieId
   );
 
   const onRouteSavedMovies = path === "/saved-movies";
 
-  const imageUrl = movie.image.formats ? moviesApiAddress + movie.image.url : movie.image;
+  const imageUrl = movie.image.formats
+    ? moviesApiAddress + movie.image.url
+    : movie.image;
   const hours = Math.floor(movie.duration / 60);
   const minutes = movie.duration % 60;
 
