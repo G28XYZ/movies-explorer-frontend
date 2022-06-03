@@ -32,7 +32,7 @@ const InfoToolTip = () => {
   const { success, message, isOpen } = toolTip;
 
   return (
-    <div className={`popup ${isOpen && "popup_opened"}`}>
+    <div className={`popup ${isOpen && "popup_opened"}`} onClick={onClose}>
       <div className="popup__container">
         <button
           onClick={onClose}
