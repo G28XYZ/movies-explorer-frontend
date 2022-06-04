@@ -6,4 +6,4 @@
 
 Сервис, в котором можно найти фильмы по запросу и сохранить в личном кабинете.
 
-Ссылка на сайт - https://front-movies.nomoredomains.xyz/
+Ссылка на сайт - <a href="https://front-movies.nomoredomains.xyz" target="_blank">https://front-movies.nomoredomains.xyz/</a>
