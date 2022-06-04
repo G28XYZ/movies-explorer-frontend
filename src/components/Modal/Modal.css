@@ -5,11 +5,8 @@
   25% {
     opacity: 1;
   }
-  50% {
+  80% {
     opacity: 1;
-  }
-  90% {
-    opacity: 0.1;
   }
   100% {
     opacity: 0;
@@ -27,7 +24,7 @@
   right: 0;
   position: fixed;
   visibility: hidden;
-  animation: openCloseModal 5s 1 linear;
+  animation: openCloseModal 5s 1 ease;
 }
 
 .modal_opened {
