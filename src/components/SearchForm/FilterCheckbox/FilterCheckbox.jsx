@@ -1,3 +1,5 @@
+import { filterCheckboxPT } from "../../../utils/propTypes";
+
 function FilterCheckbox({ onChangeFilter, filterShortFilms }) {
   return (
     <div className="filter">
@@ -13,5 +15,7 @@ function FilterCheckbox({ onChangeFilter, filterShortFilms }) {
     </div>
   );
 }
+
+FilterCheckbox.propTypes = filterCheckboxPT;
 
 export default FilterCheckbox;

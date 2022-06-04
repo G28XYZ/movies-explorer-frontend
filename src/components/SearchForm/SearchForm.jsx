@@ -1,3 +1,5 @@
+import { searchFormPT } from "../../utils/propTypes";
+
 function SearchForm({ searchText, handleChange, handleSubmit, children }) {
   return (
     <div className="search color_background">
@@ -16,5 +18,7 @@ function SearchForm({ searchText, handleChange, handleSubmit, children }) {
     </div>
   );
 }
+
+SearchForm.propTypes = searchFormPT
 
 export default SearchForm;

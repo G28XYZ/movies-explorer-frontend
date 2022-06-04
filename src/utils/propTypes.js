@@ -85,3 +85,15 @@ export const wrapPT = {
   header  : PropTypes.bool,
   footer  : PropTypes.bool,
 };
+
+export const searchFormPT = {
+  children    : PropTypes.element,
+  handleChange: PropTypes.func,
+  handleSubmit: PropTypes.func,
+  searchText  : PropTypes.string
+}
+
+export const filterCheckboxPT = {
+  onChangeFilter  : PropTypes.func,
+  filterShortFilms: PropTypes.bool
+}

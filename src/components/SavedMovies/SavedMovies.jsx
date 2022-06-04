@@ -1,11 +1,10 @@
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, } from "react";
 import {
   searchSavedMovies,
   SAVED_MOVIES_CHANGE_FILTER,
   SAVED_MOVIES_SEARCH_TEXT,
   ADD_SHOWED_SAVED_MOVIES,
   SAVED_MOVIES_NOT_FOUND,
-  getSavedMovies,
 } from "../../services/actions/savedMovies";
 import { useStore } from "../../services/StoreProvider";
 import MoviesCardList from "../MoviesCardList";
@@ -14,12 +13,8 @@ import FilterCheckbox from "../SearchForm/FilterCheckbox";
 
 function SavedMovies() {
   const [state, dispatch] = useStore();
-  const [movieCardListProps, setMovieCardListProps] = useState(state.savedMovie)
+  const movieCardListProps = state.savedMovie;
 
-  useEffect(() => {
-    setMovieCardListProps(state.savedMovie)
-    getSavedMovies(dispatch)
-  },[state.savedMovie])
 
   function onChangeFilter(e) {
     dispatch({ type: SAVED_MOVIES_CHANGE_FILTER, checked: e.target.checked });

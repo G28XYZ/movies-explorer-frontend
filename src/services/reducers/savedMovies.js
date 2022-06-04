@@ -41,7 +41,7 @@ export const savedMovieReducer = (state, action) => {
           notFound:
             !action.checked && state.savedMovie.movies.length
               ? ""
-              : infoMessages.notFound,
+              : state.savedMovie.notFound,
         },
       };
 
@@ -95,6 +95,7 @@ export const savedMovieReducer = (state, action) => {
             : [...state.savedMovie.movies],
 
           saved: [...state.savedMovie.saved, action.movie],
+          notFound: filtered ? '' : infoMessages.notFound
         },
       };
 
@@ -107,6 +108,7 @@ export const savedMovieReducer = (state, action) => {
         loading: false,
         savedMovie: {
           ...state.savedMovie,
+          movies: savedMovies,
           saved: savedMovies,
         },
       };

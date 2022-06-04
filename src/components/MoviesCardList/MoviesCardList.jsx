@@ -20,18 +20,18 @@ function MoviesCardList({
   const [width, setWidth] = useState(window.innerWidth);
 
   const updateWidth = useCallback(() => {
-    setWidth(window.innerWidth);
-    if (width <= 480) {
-      setCountShowMore(2);
-      return 5;
-    }
-    if (width <= 768) {
-      setCountShowMore(2);
-      return 8;
-    } else {
-      setCountShowMore(3);
-      return 12;
-    }
+      setWidth(window.innerWidth);
+      if (width <= 480) {
+        setCountShowMore(2);
+        return 5;
+      }
+      if (width <= 768) {
+        setCountShowMore(2);
+        return 8;
+      } else {
+        setCountShowMore(3);
+        return 12;
+      }
   }, [width]);
 
   const filteredMovies = useCallback(() => {
@@ -45,10 +45,12 @@ function MoviesCardList({
   },[filterShortFilms, filteredMovies, movies])
 
   useEffect(() => {
-    if (!showedMovies) {
-      handleClickMoreMovies(updateWidth());
-    }
-    window.addEventListener("resize", updateWidth);
+    setTimeout(() => {
+      if (!showedMovies) {
+        handleClickMoreMovies(updateWidth());
+      }
+      window.addEventListener("resize", updateWidth);
+    },100)
     return () => window.removeEventListener("resize", updateWidth);
   }, [showedMovies, dispatch, handleClickMoreMovies, updateWidth]);
 

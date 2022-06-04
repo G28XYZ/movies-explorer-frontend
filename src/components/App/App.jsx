@@ -9,7 +9,8 @@ import { Login, Register } from "../Auth";
 import SavedMovies from "../SavedMovies";
 import Profile from "../Profile/Profile";
 import NotFoundPage from "../NotFoundPage";
-import InfoToolTip from "../InfoToolTip/InfoToolTip";
+import InfoToolTip from "../Modal/InfoToolTip";
+import Modal from "../Modal";
 
 import ProtectedRoute from "../ProtectedRoute";
 
@@ -77,7 +78,12 @@ function App() {
         <Route path="/sign-up" element={<Register />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-      <InfoToolTip />
+
+      {state.toolTip.isOpen && (
+        <Modal>
+          <InfoToolTip />
+        </Modal>
+      )}
     </div>
   );
 }
