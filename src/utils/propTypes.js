@@ -87,13 +87,13 @@ export const wrapPT = {
 };
 
 export const searchFormPT = {
-  children    : PropTypes.element,
-  handleChange: PropTypes.func,
-  handleSubmit: PropTypes.func,
-  searchText  : PropTypes.string
+  children    : PropTypes.element.isRequired,
+  handleChange: PropTypes.func.isRequired,
+  handleSubmit: PropTypes.func.isRequired,
+  searchText  : PropTypes.string.isRequired
 }
 
 export const filterCheckboxPT = {
-  onChangeFilter  : PropTypes.func,
-  filterShortFilms: PropTypes.bool
+  onChangeFilter  : PropTypes.func.isRequired,
+  filterShortFilms: PropTypes.bool.isRequired
 }
