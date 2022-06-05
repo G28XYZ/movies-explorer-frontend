@@ -1,5 +1,15 @@
 import { useState, useEffect, useCallback } from "react";
 import { useStore } from "../../services/StoreProvider";
+import {
+  THREE_COUNT_MOVIES_FOR_MORE_BUTTON,
+  TWO_COUNT_MOVIES_FOR_MORE_BUTTON,
+  SCREEN_WIDTH_480,
+  SCREEN_WIDTH_768,
+  INITIAL_COUNT_MOVIES_FOR_MOBILE,
+  INITIAL_COUNT_MOVIES_FOR_MIDDLE,
+  INITIAL_COUNT_MOVIES_FOR_DESKTOP,
+  MAX_DURATION_SHORT_MOVIES,
+} from "../../utils/constants";
 import { cardListPT } from "../../utils/propTypes";
 import MovieCard from "../MovieCard";
 import Preloader from "../Preloader";
@@ -15,27 +25,27 @@ function MoviesCardList({
   const [state, dispatch] = useStore();
   const { loading } = state;
 
-  const [countShowMore, setCountShowMore] = useState(3);
+  const [countShowMore, setCountShowMore] = useState(THREE_COUNT_MOVIES_FOR_MORE_BUTTON);
   const [moviesList, setMoviesList] = useState(movies);
   const [width, setWidth] = useState(window.innerWidth);
 
   const updateWidth = useCallback(() => {
     setWidth(window.innerWidth);
-    if (width <= 480) {
-      setCountShowMore(2);
-      return 5;
+    if (width <= SCREEN_WIDTH_480) {
+      setCountShowMore(TWO_COUNT_MOVIES_FOR_MORE_BUTTON);
+      return INITIAL_COUNT_MOVIES_FOR_MOBILE;
     }
-    if (width <= 768) {
-      setCountShowMore(2);
-      return 8;
+    if (width <= SCREEN_WIDTH_768) {
+      setCountShowMore(TWO_COUNT_MOVIES_FOR_MORE_BUTTON);
+      return INITIAL_COUNT_MOVIES_FOR_MIDDLE;
     } else {
-      setCountShowMore(3);
-      return 12;
+      setCountShowMore(THREE_COUNT_MOVIES_FOR_MORE_BUTTON);
+      return INITIAL_COUNT_MOVIES_FOR_DESKTOP;
     }
   }, [width]);
 
   const filteredMovies = useCallback(() => {
-    return movies.filter((movie) => movie.duration <= 40);
+    return movies.filter((movie) => movie.duration <= MAX_DURATION_SHORT_MOVIES);
   }, [movies]);
 
   useEffect(() => {

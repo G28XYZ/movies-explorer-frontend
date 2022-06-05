@@ -9,6 +9,8 @@ import { useStore } from "../../services/StoreProvider";
 function Register() {
   const [state, dispatch] = useStore();
   const { authMessage, loggedIn } = state;
+  const [disabled, setDisabled] = useState(false);
+
   const navigate = useNavigate();
 
   const [formData, setFormData] = useState({
@@ -59,10 +61,13 @@ function Register() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onRegister(dispatch, formData).then((success) => {
+    setDisabled(true);
+    setButtonProps({ disabled: true, className: "auth__submit_disabled" });
+    onRegister(dispatch, formData).then(() => {
       setTimeout(() => {
-        success && navigate("/movies");
-      }, 1000);
+        setDisabled(false);
+        setButtonProps({ disabled: false, className: "auth__submit" });
+      }, 2000);
     });
   };
 
@@ -74,13 +79,21 @@ function Register() {
       <h2 className="auth__title">Добро пожаловать!</h2>
       <form className="auth__form" onSubmit={handleSubmit}>
         <div className="auth__input-container">
-          <Input name="name" title="Имя" onChange={handleChange} error={error.name} />
+          <Input
+            type="text"
+            name="name"
+            title="Имя"
+            onChange={handleChange}
+            error={error.name}
+            disabled={disabled}
+          />
           <Input
             type="email"
             name="email"
             title="E-mail"
             onChange={handleChange}
             error={error.email}
+            disabled={disabled}
           />
           <Input
             type="password"
@@ -88,10 +101,14 @@ function Register() {
             title="Пароль"
             onChange={handleChange}
             error={error.password}
+            disabled={disabled}
           />
         </div>
         <span className="auth__message">{authMessage}</span>
-        <button className={`${buttonProps.className} text`} disabled={buttonProps.disabled}>
+        <button
+          className={`${buttonProps.className} text`}
+          disabled={disabled || buttonProps.disabled}
+        >
           Зарегистрироваться
         </button>
       </form>

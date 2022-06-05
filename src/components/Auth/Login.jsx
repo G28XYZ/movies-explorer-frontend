@@ -10,6 +10,8 @@ function Login() {
   const [state, dispatch] = useStore();
   const { authMessage } = state;
   const { loggedIn } = state;
+  const [disabled, setDisabled] = useState(false);
+
   const [error, setError] = useState({ email: "", password: "" });
   const [formData, setFormData] = useState({ email: "", password: "" });
   const [buttonProps, setButtonProps] = useState({
@@ -48,7 +50,14 @@ function Login() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onLogin(dispatch, formData, state).then((success) => success && navigate("/movies"));
+    setDisabled(true);
+    setButtonProps({ disabled: true, className: "auth__submit_disabled" });
+    onLogin(dispatch, formData, state).then(() => {
+      setTimeout(() => {
+        setDisabled(false);
+        setButtonProps({ disabled: false, className: "auth__submit" });
+      }, 2000);
+    });
   };
 
   return (
@@ -65,6 +74,7 @@ function Login() {
             title="E-mail"
             onChange={handleChange}
             error={error.email}
+            disabled={disabled}
           />
           <Input
             type="password"
@@ -72,10 +82,14 @@ function Login() {
             title="Пароль"
             onChange={handleChange}
             error={error.password}
+            disabled={disabled}
           />
         </div>
         <span className="auth__message">{authMessage}</span>
-        <button className={`${buttonProps.className} text`} disabled={buttonProps.disabled}>
+        <button
+          className={`${buttonProps.className} text`}
+          disabled={disabled || buttonProps.disabled}
+        >
           Войти
         </button>
         <div className="auth__link-container">
