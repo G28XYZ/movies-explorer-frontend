@@ -10,18 +10,29 @@ import {
   POST_TO_SAVED_MOVIES,
   GET_SAVED_MOVIES,
   SAVED_MOVIES_NOT_FOUND,
+  RESET_STATE_SAVED_MOVIES,
 } from "../actions/savedMovies";
 
 export const savedMovieReducer = (state, action) => {
   switch (action.type) {
+    case RESET_STATE_SAVED_MOVIES:
+      return {
+        ...state,
+        savedMovie: {
+          ...state.savedMovie,
+          movies: state.savedMovie.saved,
+          searchText: "",
+          filterShortFilms: false,
+          notFound: "",
+        },
+      };
+
     case SAVED_MOVIES_NOT_FOUND:
       return {
         ...state,
         savedMovie: {
           ...state.savedMovie,
-          notFound: state.savedMovie.filterShortFilms
-            ? infoMessages.notFound
-            : "",
+          notFound: state.savedMovie.filterShortFilms ? infoMessages.notFound : "",
         },
       };
     case ADD_SHOWED_SAVED_MOVIES:
@@ -39,9 +50,7 @@ export const savedMovieReducer = (state, action) => {
           ...state.savedMovie,
           filterShortFilms: action.checked,
           notFound:
-            !action.checked && state.savedMovie.movies.length
-              ? ""
-              : state.savedMovie.notFound,
+            !action.checked && state.savedMovie.movies.length ? "" : state.savedMovie.notFound,
         },
       };
 
@@ -81,9 +90,9 @@ export const savedMovieReducer = (state, action) => {
       };
 
     case POST_TO_SAVED_MOVIES:
-      const filtered = `${action.movie.nameRU} ${action.movie.nameEN}`.toLowerCase().includes(
-        state.savedMovie.searchText
-      );
+      const filtered = `${action.movie.nameRU} ${action.movie.nameEN}`
+        .toLowerCase()
+        .includes(state.savedMovie.searchText);
       return {
         ...state,
         loading: false,
@@ -95,7 +104,7 @@ export const savedMovieReducer = (state, action) => {
             : [...state.savedMovie.movies],
 
           saved: [...state.savedMovie.saved, action.movie],
-          notFound: filtered ? '' : infoMessages.notFound
+          notFound: filtered ? "" : infoMessages.notFound,
         },
       };
 
