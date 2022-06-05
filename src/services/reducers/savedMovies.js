@@ -66,7 +66,9 @@ export const savedMovieReducer = (state, action) => {
 
     case SEARCH_SAVED_MOVIES:
       const moviesList = action.movies.filter((movie) =>
-        `${movie.nameRU} ${movie.nameEN}`.toLowerCase().includes(state.savedMovie.searchText)
+        `${movie.nameRU} ${movie.nameEN}`
+          .toLowerCase()
+          .includes(state.savedMovie.searchText.toLowerCase())
       );
       return {
         ...state,
@@ -136,7 +138,7 @@ export const savedMovieReducer = (state, action) => {
     case SAVED_MOVIES_SEARCH_TEXT:
       return {
         ...state,
-        savedMovie: { ...state.savedMovie, searchText: action.text.toLowerCase() },
+        savedMovie: { ...state.savedMovie, searchText: action.text },
       };
 
     default:

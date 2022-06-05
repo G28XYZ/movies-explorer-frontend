@@ -53,7 +53,9 @@ export const movieReducer = (state, action) => {
 
     case SEARCH_MOVIES:
       const moviesList = action.movies.filter((movie) =>
-        `${movie.nameRU} ${movie.nameEN}`.includes(state.mainMovie.searchText)
+        `${movie.nameRU} ${movie.nameEN}`
+          .toLowerCase()
+          .includes(state.mainMovie.searchText.toLowerCase())
       );
       return {
         ...state,
