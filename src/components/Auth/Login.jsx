@@ -35,9 +35,7 @@ function Login() {
     }
 
     setFormData({ ...formData, [e.target.name]: e.target.value });
-    const haveSomeError = Object.keys(error).some(
-      (key) => formData[key] === "" || errorMessage
-    );
+    const haveSomeError = Object.keys(error).some((key) => formData[key] === "" || errorMessage);
     setButtonProps({
       disabled: haveSomeError,
       className: haveSomeError ? "auth__submit_disabled" : "auth__submit",
@@ -45,14 +43,12 @@ function Login() {
   };
 
   useEffect(() => {
-    loggedIn && navigate(-1);
+    loggedIn && navigate("/movies");
   }, [loggedIn, navigate]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onLogin(dispatch, formData, state).then(
-      (success) => success && navigate("/movies")
-    );
+    onLogin(dispatch, formData, state).then((success) => success && navigate("/movies"));
   };
 
   return (
@@ -79,10 +75,7 @@ function Login() {
           />
         </div>
         <span className="auth__message">{authMessage}</span>
-        <button
-          className={`${buttonProps.className} text`}
-          disabled={buttonProps.disabled}
-        >
+        <button className={`${buttonProps.className} text`} disabled={buttonProps.disabled}>
           Войти
         </button>
         <div className="auth__link-container">

@@ -81,13 +81,14 @@ export const savedMovieReducer = (state, action) => {
       };
 
     case GET_SAVED_MOVIES:
+      const saved = action.movies.filter((movie) => movie.owner === state.user._id);
       return {
         ...state,
         loading: false,
         savedMovie: {
           ...state.savedMovie,
-          movies: action.movies,
-          saved: action.movies,
+          movies: saved,
+          saved,
         },
       };
 
