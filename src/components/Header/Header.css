@@ -200,7 +200,7 @@
 
   .header__link {
     min-width: 54px;
-    padding: 5px 0;
+    padding: 5px 12px;
   }
   .header__links {
     gap: 14px;
