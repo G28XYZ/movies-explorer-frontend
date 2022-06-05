@@ -2,12 +2,12 @@ import mainApi from "../../utils/api/mainApi";
 import auth from "../../utils/api/auth";
 import { resMessages } from "../../utils/constants";
 
-export const AUTH_USER         = "SET_USER";
-export const UPDATE_USER       = "UPDATE_USER";
-export const LOGIN_USER        = "LOGIN_USER";
+export const AUTH_USER = "SET_USER";
+export const UPDATE_USER = "UPDATE_USER";
+export const LOGIN_USER = "LOGIN_USER";
 export const LOGIN_USER_FAILED = "LOGIN_USER_FAILED";
-export const REGISTER_USER     = "REGISTER_USER";
-export const LOGOUT            = "LOGOUT";
+export const REGISTER_USER = "REGISTER_USER";
+export const LOGOUT = "LOGOUT";
 
 export const updateUser = (dispatch, body) => {
   return mainApi
@@ -66,10 +66,14 @@ export const onRegister = (dispatch, { name, email, password }) => {
 };
 
 export const getUser = (dispatch) => {
-  auth
+  return auth
     .authentication()
     .then((user) => {
       dispatch({ type: AUTH_USER, user });
+      return true;
     })
-    .catch(() => console.log("Пользователь не авторизован."));
+    .catch(() => {
+      console.log("Пользователь не авторизован.");
+      return false;
+    });
 };

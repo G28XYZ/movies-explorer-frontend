@@ -20,29 +20,29 @@ function MoviesCardList({
   const [width, setWidth] = useState(window.innerWidth);
 
   const updateWidth = useCallback(() => {
-      setWidth(window.innerWidth);
-      if (width <= 480) {
-        setCountShowMore(2);
-        return 5;
-      }
-      if (width <= 768) {
-        setCountShowMore(2);
-        return 8;
-      } else {
-        setCountShowMore(3);
-        return 12;
-      }
+    setWidth(window.innerWidth);
+    if (width <= 480) {
+      setCountShowMore(2);
+      return 5;
+    }
+    if (width <= 768) {
+      setCountShowMore(2);
+      return 8;
+    } else {
+      setCountShowMore(3);
+      return 12;
+    }
   }, [width]);
 
   const filteredMovies = useCallback(() => {
     return movies.filter((movie) => movie.duration <= 40);
-  },[movies])
+  }, [movies]);
 
   useEffect(() => {
     if (movies.length && filterShortFilms) {
       setMoviesList(filteredMovies());
     }
-  },[filterShortFilms, filteredMovies, movies])
+  }, [filterShortFilms, filteredMovies, movies]);
 
   useEffect(() => {
     setTimeout(() => {
@@ -50,7 +50,7 @@ function MoviesCardList({
         handleClickMoreMovies(updateWidth());
       }
       window.addEventListener("resize", updateWidth);
-    },100)
+    }, 100);
     return () => window.removeEventListener("resize", updateWidth);
   }, [showedMovies, dispatch, handleClickMoreMovies, updateWidth]);
 
@@ -62,7 +62,15 @@ function MoviesCardList({
     } else {
       setMoviesList(movies);
     }
-  }, [filterShortFilms, filteredMovies, isNotFound, movies, movies.length, moviesList.length, setMoviesList]);
+  }, [
+    filterShortFilms,
+    filteredMovies,
+    isNotFound,
+    movies,
+    movies.length,
+    moviesList.length,
+    setMoviesList,
+  ]);
 
   function handleClick() {
     handleClickMoreMovies(countShowMore);
@@ -92,6 +100,6 @@ function MoviesCardList({
   );
 }
 
-MoviesCardList.propTypes = cardListPT
+MoviesCardList.propTypes = cardListPT;
 
 export default MoviesCardList;

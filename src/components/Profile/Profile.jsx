@@ -57,6 +57,9 @@ function Profile() {
 
   function handleLogout() {
     logOut(dispatch);
+    if (localStorage.getItem("moviesLocalState")) {
+      localStorage.removeItem("moviesLocalState");
+    }
   }
 
   return (

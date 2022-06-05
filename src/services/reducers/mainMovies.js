@@ -7,6 +7,7 @@ import {
   MOVIES_SEARCH_TEXT,
   ADD_SHOWED_MOVIES,
   MOVIES_NOT_FOUND,
+  SET_STATE_MAIN_MOVIES,
 } from "../actions/mainMovies";
 
 export const movieReducer = (state, action) => {
@@ -80,6 +81,9 @@ export const movieReducer = (state, action) => {
         ...state,
         mainMovie: { ...state.mainMovie, searchText: action.text },
       };
+
+    case SET_STATE_MAIN_MOVIES:
+      return { ...state, mainMovie: action.mainMovie };
 
     default:
       return state;

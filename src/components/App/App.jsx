@@ -1,9 +1,9 @@
-import { useEffect } from "react";
+import { useEffect, useLayoutEffect } from "react";
 import Wrap from "../Wrap";
 
 import Main from "../Main";
 import Movies from "../Movies";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { Login, Register } from "../Auth";
 
 import SavedMovies from "../SavedMovies";
@@ -18,13 +18,33 @@ import { useStore } from "../../services/StoreProvider";
 import { getUser } from "../../services/actions/user";
 import { CLOSE_TOOL_TIP } from "../../services/actions/toolTip";
 import { getSavedMovies } from "../../services/actions/savedMovies";
+import { SET_STATE_MAIN_MOVIES } from "../../services/actions/mainMovies";
 
 function App() {
   const [state, dispatch] = useStore();
   const { loggedIn } = state;
+  const location = useLocation();
+  const navigate = useNavigate();
+
+  function checkDataInStorage() {
+    const moviesLocalState = JSON.parse(localStorage.getItem("moviesLocalState"));
+    if (moviesLocalState) {
+      dispatch({ type: SET_STATE_MAIN_MOVIES, mainMovie: moviesLocalState });
+    }
+  }
+
+  useLayoutEffect(() => {
+    getUser(dispatch).then((success) => {
+      if (success) {
+        navigate(location.pathname);
+      }
+    });
+    if (loggedIn) {
+      checkDataInStorage();
+    }
+  }, [loggedIn]);
 
   useEffect(() => {
-    getUser(dispatch);
     if (loggedIn) {
       getSavedMovies(dispatch);
     }
@@ -53,7 +73,7 @@ function App() {
         <Route
           path="/movies"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute path="/movies">
               <Movies />
             </ProtectedRoute>
           }
@@ -61,7 +81,7 @@ function App() {
         <Route
           path="/saved-movies"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute path="/saved-movies">
               <SavedMovies />
             </ProtectedRoute>
           }
@@ -69,7 +89,7 @@ function App() {
         <Route
           path="/profile"
           element={
-            <ProtectedRoute>
+            <ProtectedRoute path="/profile">
               <Profile />
             </ProtectedRoute>
           }
@@ -78,7 +98,6 @@ function App() {
         <Route path="/sign-up" element={<Register />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-
       {state.toolTip.isOpen && (
         <Modal>
           <InfoToolTip />
