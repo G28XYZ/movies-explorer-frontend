@@ -14,15 +14,16 @@ function MovieCard({ movie }) {
   const onRouteSavedMovies = path === "/saved-movies";
 
   useEffect(() => {
-    setSavedMovies(state.savedMovie.saved)
-  },[state.savedMovie.saved])
+    setSavedMovies(state.savedMovie.saved);
+  }, [state.savedMovie.saved]);
 
   useEffect(() => {
-    if(savedMovies) {
-      setIsMovieSaved(savedMovies.find(
-        (savedMovie) => savedMovie.movieId === (movie.id || movie.movieId)))
+    if (savedMovies) {
+      setIsMovieSaved(
+        savedMovies.find((savedMovie) => savedMovie.movieId === (movie.id || movie.movieId))
+      );
     }
-  },[movie.id, movie.movieId, savedMovies, state.savedMovie.saved])
+  }, [movie.id, movie.movieId, savedMovies, state.savedMovie.saved]);
 
   const imageUrl = movie.image.formats ? moviesApiAddress + movie.image.url : movie.image;
   const hours = Math.floor(movie.duration / 60);
@@ -54,7 +55,12 @@ function MovieCard({ movie }) {
           onClick={handleClickFavorite}
         ></button>
       </div>
-      <a href={movie.trailerLink} target="_blank" rel="noopener noreferrer">
+      <a
+        href={movie.trailerLink}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="card__trailer-link"
+      >
         <img className="card__image" src={imageUrl} alt={movie.nameRU} />
       </a>
     </article>
