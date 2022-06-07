@@ -33,9 +33,12 @@ const GlobalContext = createContext(globalState);
 const reducers = (state, action) => {
   return {
     ...state,
-    ...[userReducer, movieReducer, savedMovieReducer, toolTipReducer].reduce(
-      (objState, reducer) => ({ ...objState, ...reducer(objState, action) }),
-      state
+    ...Object.assign(
+      state,
+      userReducer(state, action),
+      movieReducer(state, action),
+      savedMovieReducer(state, action),
+      toolTipReducer(state, action)
     ),
   };
 };

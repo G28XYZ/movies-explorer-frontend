@@ -65,7 +65,7 @@ export const savedMovieReducer = (state, action) => {
       };
 
     case SEARCH_SAVED_MOVIES:
-      const moviesList = action.movies.filter((movie) =>
+      const searchMovies = state.savedMovie.saved.filter((movie) =>
         `${movie.nameRU} ${movie.nameEN}`
           .toLowerCase()
           .includes(state.savedMovie.searchText.toLowerCase())
@@ -75,8 +75,8 @@ export const savedMovieReducer = (state, action) => {
         loading: false,
         savedMovie: {
           ...state.savedMovie,
-          movies: moviesList,
-          notFound: !moviesList.length ? infoMessages.notFound : "",
+          movies: searchMovies,
+          notFound: !searchMovies.length ? infoMessages.notFound : "",
         },
       };
 

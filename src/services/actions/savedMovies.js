@@ -1,17 +1,17 @@
 import mainApi from "../../utils/api/mainApi";
 import { moviesApiAddress } from "../../utils/constants";
 
-export const SAVED_MOVIES_SEARCH_TEXT    = "SAVED_MOVIES_SEARCH_TEXT";
-export const SEARCH_SAVED_MOVIES         = "SEARCH_SAVED_MOVIES";
-export const REQUEST_SAVED_MOVIES        = "REQUEST_SAVED_MOVIES";
-export const GET_SAVED_MOVIES            = "GET_SAVED_MOVIES";
+export const SAVED_MOVIES_SEARCH_TEXT = "SAVED_MOVIES_SEARCH_TEXT";
+export const SEARCH_SAVED_MOVIES = "SEARCH_SAVED_MOVIES";
+export const REQUEST_SAVED_MOVIES = "REQUEST_SAVED_MOVIES";
+export const GET_SAVED_MOVIES = "GET_SAVED_MOVIES";
 export const REQUEST_SAVED_MOVIES_FAILED = "REQUEST_SAVED_MOVIES_FAILED";
-export const POST_TO_SAVED_MOVIES        = "POST_TO_SAVED_MOVIES";
-export const DELETE_SAVED_MOVIE          = "DELETE_SAVED_MOVIE";
-export const ADD_SHOWED_SAVED_MOVIES     = "ADD_SHOWED_SAVED_MOVIES";
-export const SAVED_MOVIES_CHANGE_FILTER  = "SAVED_MOVIES_CHANGE_FILTER";
-export const SAVED_MOVIES_NOT_FOUND      = "SAVED_MOVIES_NOT_FOUND";
-export const RESET_STATE_SAVED_MOVIES    = "RESET_STATE_SAVED_MOVIES";
+export const POST_TO_SAVED_MOVIES = "POST_TO_SAVED_MOVIES";
+export const DELETE_SAVED_MOVIE = "DELETE_SAVED_MOVIE";
+export const ADD_SHOWED_SAVED_MOVIES = "ADD_SHOWED_SAVED_MOVIES";
+export const SAVED_MOVIES_CHANGE_FILTER = "SAVED_MOVIES_CHANGE_FILTER";
+export const SAVED_MOVIES_NOT_FOUND = "SAVED_MOVIES_NOT_FOUND";
+export const RESET_STATE_SAVED_MOVIES = "RESET_STATE_SAVED_MOVIES";
 
 export function getSavedMovies(dispatch) {
   mainApi
@@ -19,23 +19,6 @@ export function getSavedMovies(dispatch) {
     .then((movies) => {
       dispatch({
         type: GET_SAVED_MOVIES,
-        movies,
-      });
-    })
-    .catch((err) => {
-      dispatch({
-        type: REQUEST_SAVED_MOVIES_FAILED,
-      });
-    });
-}
-
-export function searchSavedMovies(dispatch) {
-  dispatch({ type: REQUEST_SAVED_MOVIES });
-  mainApi
-    .getSavedMovies()
-    .then((movies) => {
-      dispatch({
-        type: SEARCH_SAVED_MOVIES,
         movies,
       });
     })
