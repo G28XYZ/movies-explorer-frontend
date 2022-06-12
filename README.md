@@ -52,3 +52,5 @@
   </li>
   <li>ESlint <img style="width: 3%" src="https://github.com/github/explore/blob/main/topics/eslint/eslint.png" alt="ESlint"></li>
 </ul>
+
+Ссылка на бекенд - https://github.com/G28XYZ/movies-explorer-api
