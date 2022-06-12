@@ -6,3 +6,45 @@
 
 Сервис, в котором можно найти фильмы по запросу и сохранить в личном кабинете.
 
+## О проекте и технологиях разработки
+
+В разработке проекта использовались следующие веб-технологии:
+
+### Front-end
+
+<ul>
+  <li>Flexbox</li>
+  <li>Grid</li>
+  <li>Адаптивная вёрстка</li>
+  <li>БЭМ</li>
+  <li>JavaScript <img style="width: 3%" src="https://github.com/github/explore/blob/main/topics/javascript/javascript.png" alt="JavaScript">
+    <ul>
+      <li>Редактирование элементов</li>
+      <li>Добавление/удаление элементов</li>
+      <li>Валидация</li>
+      <li>Promise</li>
+    </ul>
+  </li>
+    <li>Объектно-ориентированное программирование (ООП)</li>
+    <li>React <img style="width: 3%" src="https://github.com/github/explore/blob/main/topics/react/react.png" alt="React"></li>
+    <li>API</li>
+    <li>Регистрация и авторизация</li>
+</ul>
+
+### Back-end
+
+<ul>
+  <li>
+  NodeJS <img style="width: 3%" src="https://github.com/github/explore/blob/main/topics/nodejs/nodejs.png" alt="NodeJS">
+  </li>
+  <li>
+  Express <img style="width: 3%" src="https://github.com/github/explore/blob/main/topics/express/express.png" alt="Express">
+  </li>
+  <li>
+  MongoDB <img style="width: 3%" src="https://github.com/github/explore/blob/main/topics/mongodb/mongodb.png" alt="MongoDB">
+  </li>
+  <li>
+  Nginx <img style="width: 3%" src="https://github.com/github/explore/blob/main/topics/nginx/nginx.png" alt="Nginx">
+  </li>
+  <li>ESlint <img style="width: 3%" src="https://github.com/github/explore/blob/main/topics/eslint/eslint.png" alt="ESlint"></li>
+</ul>
