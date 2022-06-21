@@ -11,8 +11,13 @@
 
 .card__image {
   width: 100%;
-  min-height: 203px;
   height: 100%;
+}
+
+.card__trailer-link {
+  min-height: 203px;
+  margin: 0;
+  padding: 0;
 }
 
 .card__header {
@@ -60,12 +65,14 @@
 @media screen and (max-width: 768px) {
   .card {
     max-width: 339px;
+  }
+  .card__trailer-link {
     max-height: 258px;
   }
 }
 
 @media screen and (max-width: 640px) {
-  .card {
+  .card__trailer-link {
     margin-bottom: 30px;
   }
 }
@@ -73,6 +80,8 @@
 @media screen and (max-width: 375px) {
   .card {
     max-width: 300px;
+  }
+  .card__trailer-link {
     max-height: 236px;
   }
 

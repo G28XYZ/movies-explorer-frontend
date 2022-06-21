@@ -1,128 +1,62 @@
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect } from "react";
+import Wrap from "../Wrap";
 
-import Header from "../Header";
 import Main from "../Main";
 import Movies from "../Movies";
-import Footer from "../Footer";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { Login, Register } from "../Auth";
-
-import api from "../../utils/api";
-import auth from "../../utils/auth";
 
 import SavedMovies from "../SavedMovies";
 import Profile from "../Profile/Profile";
 import NotFoundPage from "../NotFoundPage";
-import InfoToolTip from "../InfoToolTip/InfoToolTip";
+import InfoToolTip from "../Modal/InfoToolTip";
+import Modal from "../Modal";
+
+import ProtectedRoute from "../ProtectedRoute";
+
+import { useStore } from "../../services/StoreProvider";
+import { getUser } from "../../services/actions/user";
+import { CLOSE_TOOL_TIP } from "../../services/actions/toolTip";
+import { getSavedMovies } from "../../services/actions/savedMovies";
+import { SET_STATE_MAIN_MOVIES } from "../../services/actions/mainMovies";
 
 function App() {
-  const [isAuth, setIsAuth] = useState(true);
-  const [loading, setLoading] = useState(true);
-  const [user, setUser] = useState({ name: "", email: "" });
+  const [state, dispatch] = useStore();
+  const { loggedIn } = state;
+  const location = useLocation();
+  const navigate = useNavigate();
 
-  const [favoriteMovies, setFavoriteMOvies] = useState([]);
-  const [moviesList, setMoviesList] = useState([]);
+  function checkDataInStorage() {
+    const moviesLocalState = JSON.parse(localStorage.getItem("moviesLocalState"));
+    if (moviesLocalState) {
+      dispatch({ type: SET_STATE_MAIN_MOVIES, mainMovie: moviesLocalState });
+    }
+  }
 
-  const [infoToolTip, setInfoTooltip] = useState({
-    message: "",
-    isOpen: false,
-    success: false,
-  });
+  useLayoutEffect(() => {
+    getUser(dispatch).then((success) => {
+      if (success) {
+        navigate(location.pathname);
+      }
+    });
+    if (loggedIn) {
+      checkDataInStorage();
+    }
+  }, [loggedIn]);
 
   useEffect(() => {
-    api
-      .getMovies()
-      .then((movies) => {
-        setMoviesList(movies);
-        setFavoriteMOvies(movies.slice(0, 3));
-        setTimeout(() => setLoading(false), 2000);
-      })
-      .catch((err) => {
-        setInfoTooltip({
-          message: `Ошибка в запросе фильмов! ${err}`,
-          isOpen: true,
-          success: false,
-        });
-      });
-  }, []);
+    if (loggedIn) {
+      getSavedMovies(dispatch);
+    }
+  }, [dispatch, loggedIn]);
 
-  function onClosePopup() {
-    setInfoTooltip({ ...infoToolTip, isOpen: false });
-  }
-
-  function handleUpdateUser(body) {
-    api
-      .updateUser(body)
-      .then((data) => {
-        setUser({ ...user, ...data });
-        setInfoTooltip({
-          message: `Вы успешно изменили свои данные!`,
-          isOpen: true,
-          success: true,
-        });
-      })
-      .catch((err) => {
-        setInfoTooltip({
-          message: `Ошибка редактирования пользователя! ${err}`,
-          isOpen: true,
-          success: false,
-        });
-      });
-  }
-
-  function onLogin(body) {
-    return auth
-      .login(body)
-      .then(({ token }) => {
-        setIsAuth(true);
-        setInfoTooltip({
-          message: "Вы успешно вошли!",
-          isOpen: true,
-          success: true,
-        });
-        return true;
-      })
-      .catch((err) => {
-        setInfoTooltip({
-          message: `Ошибка авторизации! ${err}`,
-          isOpen: true,
-          success: false,
-        });
-        return false;
-      });
-  }
-
-  function onRegister(body) {
-    return auth
-      .registration(body)
-      .then((data) => {
-        setUser({ ...user, ...data });
-        setInfoTooltip({
-          message: "Вы успешно зарегистрировались!",
-          isOpen: true,
-          success: true,
-        });
-        return true;
-      })
-      .catch((err) => {
-        setInfoTooltip({
-          message: `Ошибка регистрации! ${err}`,
-          isOpen: true,
-          success: false,
-        });
-        return false;
-      });
-  }
-
-  const Wrap = ({ children, header = true, footer = true }) => {
-    return (
-      <>
-        {header && <Header isAuth={isAuth} />}
-        {children}
-        {footer && <Footer />}
-      </>
-    );
-  };
+  useEffect(() => {
+    if (state.toolTip.isOpen) {
+      setTimeout(() => {
+        dispatch({ type: CLOSE_TOOL_TIP });
+      }, 5000);
+    }
+  }, [dispatch, state.toolTip.isOpen]);
 
   return (
     <div className="page">
@@ -139,38 +73,36 @@ function App() {
         <Route
           path="/movies"
           element={
-            <Wrap>
-              <Movies moviesList={moviesList} loading={loading} />
-            </Wrap>
+            <ProtectedRoute path="/movies">
+              <Movies />
+            </ProtectedRoute>
           }
         />
         <Route
           path="/saved-movies"
           element={
-            <Wrap>
-              <SavedMovies moviesList={favoriteMovies} />
-            </Wrap>
+            <ProtectedRoute path="/saved-movies">
+              <SavedMovies />
+            </ProtectedRoute>
           }
         />
         <Route
           path="/profile"
           element={
-            <Wrap footer={false}>
-              <Profile user={user} handleUpdateUser={handleUpdateUser} />
-            </Wrap>
+            <ProtectedRoute path="/profile">
+              <Profile />
+            </ProtectedRoute>
           }
         />
-        <Route
-          path="/sign-in"
-          element={<Login onLogin={onLogin} success={infoToolTip.success} />}
-        />
-        <Route
-          path="/sign-up"
-          element={<Register onRegister={onRegister} success={infoToolTip.success} />}
-        />
+        <Route path="/sign-in" element={<Login />} />
+        <Route path="/sign-up" element={<Register />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-      <InfoToolTip onClose={onClosePopup} infoToolTip={infoToolTip} />
+      {state.toolTip.isOpen && (
+        <Modal>
+          <InfoToolTip />
+        </Modal>
+      )}
     </div>
   );
 }

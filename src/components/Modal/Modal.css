@@ -1,44 +1,64 @@
-.popup {
+@keyframes openCloseModal {
+  0% {
+    opacity: 0;
+  }
+  25% {
+    opacity: 1;
+  }
+  80% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
+.modal {
   display: flex;
   align-items: center;
   justify-content: center;
   font-family: "Inter", "Arial", sans-serif;
-  position: fixed;
-  z-index: 1;
-  background-color: rgba(0, 0, 0, 0.5);
   top: 0;
   bottom: 0;
   left: 0;
   right: 0;
+  position: fixed;
   visibility: hidden;
-  opacity: 0;
-  transition: visibility 0.5s, opacity 0.5s linear;
+  animation: openCloseModal 5s 1 ease;
 }
 
-.popup_opened {
+.modal_opened {
   display: flex;
   visibility: visible;
-  opacity: 1;
+  opacity: 0;
   transition: opacity 0.5s linear;
 }
 
-.popup__container {
+.modal__overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.3);
+}
+
+.modal__container {
   box-sizing: border-box;
   position: relative;
   max-width: 430px;
   width: 100%;
-  background-color: #fff;
+  background-color: rgba(47, 47, 47, 1);
   border-radius: 10px;
   padding: 36px;
   text-align: center;
+  z-index: 1;
 }
 
-.popup__image {
+.modal__image {
   padding-top: 24px;
   padding-bottom: 32px;
 }
 
-.popup__close {
+.modal__close {
   position: absolute;
   padding: 0;
   width: 32px;
@@ -56,12 +76,12 @@
   transition: opacity 0.6s;
 }
 
-.popup__close:hover {
+.modal__close:hover {
   opacity: 0.6;
 }
 
-.popup__title {
-  color: #000;
+.modal__title {
+  color: rgba(139, 139, 139, 1);
   font-size: 24px;
   line-height: calc(29 / 24);
   font-weight: 900;
@@ -71,7 +91,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .popup__title {
+  .modal__title {
     font-size: 18px;
     line-height: calc(22 / 18);
     padding-bottom: 68px;
@@ -79,7 +99,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .popup__close {
+  .modal__close {
     width: 20px;
     height: 20px;
     transform: translate(0, -36px);
@@ -87,7 +107,7 @@
 }
 
 @media screen and (max-width: 768px) {
-  .popup__container {
+  .modal__container {
     padding: 25px 22px;
     max-width: 282px;
   }

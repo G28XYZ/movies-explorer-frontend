@@ -37,6 +37,11 @@
   color: white;
   text-align: end;
   width: 100%;
+  outline: none;
+}
+
+.profile__input:focus {
+  border-bottom: 1px solid #4285f4;
 }
 
 .profile__submit {
@@ -44,11 +49,27 @@
   background-color: transparent;
   border: none;
   color: white;
+  cursor: pointer;
+}
+
+.profile__submit:hover {
+  text-shadow: rgb(0, 255, 149) 1px 0 10px;
+}
+
+.profile__submit_disabled {
+  margin-top: 220px;
+  background-color: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.4);
 }
 
 .profile__logout {
-  padding-top: 16px;
+  margin-top: 16px;
+  padding: 0;
   color: rgba(238, 52, 101, 1);
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
 }
 
 @media screen and (max-width: 768px) {

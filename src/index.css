@@ -31,7 +31,7 @@
 
 @import url(./components/MoviesCardList/MoviesCardList.css);
 
-@import url(./components/MoviesCard/MoviesCard.css);
+@import url(./components/MovieCard/MovieCard.css);
 
 @import url(./components/Preloader/Preloader.css);
 
@@ -39,4 +39,4 @@
 
 @import url(./components/NotFoundPage/NotFoundPage.css);
 
-@import url(./components/InfoToolTip/InfoToolTip.css);
+@import url(./components/Modal/Modal.css);

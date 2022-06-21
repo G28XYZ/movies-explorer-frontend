@@ -26,6 +26,10 @@
   align-self: center;
 }
 
+.cards__message {
+  align-self: center;
+}
+
 @media screen and (max-width: 768px) {
   .cards {
     padding: 70px 30px;

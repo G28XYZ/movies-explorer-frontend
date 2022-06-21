@@ -52,9 +52,10 @@
   background-color: transparent;
   border: none;
   margin-left: 40px;
-  width: 100%;
+  width: 85%;
   outline: none;
   color: white;
+  padding-bottom: 2px;
 }
 
 .search__form-input:focus {

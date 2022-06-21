@@ -1,4 +1,4 @@
-import { authApiAddress } from "./constants";
+import { backendApiAddress } from "../constants";
 
 class Auth {
   constructor(address) {
@@ -9,7 +9,7 @@ class Auth {
   }
 
   _handleResponse = (response) => {
-    return response.ok ? response.json() : Promise.reject(`Error: ${response.message}`);
+    return response.ok ? response.json() : Promise.reject(response.status);
   };
 
   login({ email, password }) {
@@ -39,7 +39,7 @@ class Auth {
   }
 
   logout() {
-    return fetch(`${this._address}/logout`, {
+    return fetch(`${this._address}/signout`, {
       method: "GET",
       credentials: "include",
       headers: this._headers,
@@ -47,6 +47,6 @@ class Auth {
   }
 }
 
-const auth = new Auth(authApiAddress);
+const auth = new Auth(backendApiAddress);
 
 export default auth;
