@@ -70,30 +70,12 @@ function App() {
             </Wrap>
           }
         />
-        <Route
-          path="/movies"
-          element={
-            <ProtectedRoute path="/movies">
-              <Movies />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/saved-movies"
-          element={
-            <ProtectedRoute path="/saved-movies">
-              <SavedMovies />
-            </ProtectedRoute>
-          }
-        />
-        <Route
-          path="/profile"
-          element={
-            <ProtectedRoute path="/profile">
-              <Profile />
-            </ProtectedRoute>
-          }
-        />
+        <Route path="/" element={<ProtectedRoute />}>
+          <Route path="movies" element={<Movies />} />
+          <Route path="saved-movies" element={<SavedMovies />} />
+          <Route path="profile" element={<Profile />} />
+        </Route>
+
         <Route path="/sign-in" element={<Login />} />
         <Route path="/sign-up" element={<Register />} />
         <Route path="*" element={<NotFoundPage />} />
