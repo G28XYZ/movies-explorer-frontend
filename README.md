@@ -29,7 +29,6 @@
       <li>Promise</li>
     </ul>
   </li>
-    <li>Объектно-ориентированное программирование (ООП)</li>
     <li>React <img style="width: 3%" src="https://github.com/github/explore/blob/main/topics/react/react.png" alt="React"></li>
     <li>API</li>
     <li>Регистрация и авторизация</li>
