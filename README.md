@@ -10,6 +10,9 @@
 
 <img src="https://github.com/G28XYZ/G28XYZ/blob/main/images/movies-explorer-demo.gif" alt="movies explorer demo" />
 
+Ссылка - [Movies explorer](https://quiet-bastion-63497.herokuapp.com/)
+(залит на heroku на бесплатном тарифе поэтому возможна задержка в загрузке)
+
 ## О проекте и технологиях разработки
 
 В разработке проекта использовались следующие веб-технологии:
